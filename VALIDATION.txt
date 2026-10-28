@@ -1,6 +1,24 @@
+PDFCreator — CENTRED WATERMARKS AND EXISTING-LAYER EDITING
+Date: 28 October 2026 (Asia/Singapore)
+Standalone HTML SHA256: 696afe517d3de8e36518d15e02749822b159c399940ecf220b2df4f80b3ce831
+
+CURRENT WATERMARK REVISION
+node watermarks-test.mjs: 115 assertions passed with native PDF geometry/pixels
+and controlled DOM interactions.
+- Visible centring at 0/90/180/270 page rotation, nonzero crops and three text angles.
+- Native opacity, tracked metadata, save/reopen identification and layer removal.
+- Legacy app recognition, standard tagged watermark text and imported translucent
+  diagonal text candidates.
+- Overlapping body text retained, including pixel-identical output after removal.
+- Original imported colour defaults, manager replacement/removal and undo/redo.
+A native centred-watermark proof was rendered and visually inspected.
+Affected font/decoration (107), completion (80) and Create (38) workflows pass.
+The Open PDF tile text was updated as requested; no classification workflow was added.
+Live browser layout remains unverified under the earlier file:// tool restriction.
+
 PDFCreator — CREATE AND NATIVE WORD IMPORT
 Date: 28 October 2026 (Asia/Singapore)
-Standalone HTML SHA256: 3f37969d04435b33f3c9edcb7219b2ec49754b0b24c9867372c593f8ba8bf2c8
+Standalone HTML SHA256: 696afe517d3de8e36518d15e02749822b159c399940ecf220b2df4f80b3ce831
 
 CURRENT CREATE REVISION
 node create-interactions-test.mjs: 38 assertions passed with native PDF bytes,
@@ -25,7 +43,7 @@ an optional Windows/Microsoft Word companion workflow approved by the user.
 
 PDFCreator — COMPLETION WORKSPACES
 Date: 28 October 2026 (Asia/Singapore)
-Standalone HTML SHA256: 3f37969d04435b33f3c9edcb7219b2ec49754b0b24c9867372c593f8ba8bf2c8
+Standalone HTML SHA256: 696afe517d3de8e36518d15e02749822b159c399940ecf220b2df4f80b3ce831
 
 CURRENT REVISION
 node completion-interactions-test.mjs: 80 assertions passed with native PDF bytes,
@@ -47,7 +65,7 @@ Affected existing suites were rerun; their historical counts below are retained.
 
 PDFCreator — BRANDING AND BACKWARD COMPATIBILITY
 Date: 28 October 2026 (Asia/Singapore)
-Standalone HTML SHA256: 3f37969d04435b33f3c9edcb7219b2ec49754b0b24c9867372c593f8ba8bf2c8
+Standalone HTML SHA256: 696afe517d3de8e36518d15e02749822b159c399940ecf220b2df4f80b3ce831
 
 RENAME CHECKS
 node branding-compatibility-test.mjs: 30 assertions passed with native PDFs.

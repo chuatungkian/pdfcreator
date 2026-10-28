@@ -1,6 +1,6 @@
 # PDFCreator
 
-An offline PDF workspace packaged as one HTML file. The current `index.html` is **20.58 MB** and includes its PDF engines, English OCR model, Inter font and downloadable source bundle.
+An offline PDF workspace packaged as one HTML file. The current `index.html` is **20.61 MB** and includes its PDF engines, English OCR model, Inter font and downloadable source bundle.
 
 ## Use
 
@@ -30,11 +30,13 @@ For Word import, download [PDFCreator-Word-Companion.zip](PDFCreator-Word-Compan
 
 **Comments** spans all pages, with editing, replies, resolved status, filters and an exportable printable summary. **Organise > Page organiser** stages visual multi-page rearrangement, rotation, duplication, deletion, insertion and replacement from other tabs/uploads. **Find and replace** offers case/whole-word/page-range controls and a selectable replacement preview for supported native paragraphs and tracked text boxes. New edits use the shared undo and local recovery workflows.
 
+**Edit > Watermark** now centres the visible rotated text on each displayed page, including crop/rotation handling, with size, angle, opacity, font and colour controls. Batch watermarks use the same positioning. **Edit > Edit watermarks** identifies tracked and older PDFCreator layers, tagged imported layers and candidate native text watermarks. Preview/select layers, update their text/appearance, or remove them with undo support. Inferred candidates need review; watermarks baked into page images cannot be separated automatically. The watermark revision passes 115 native geometry/pixel and controlled-interaction checks, including preserving overlapping body text.
+
 ## Documentation and verification
 
 - [User guide and limitations](README.txt)
 - [Validation results](VALIDATION.txt): the earlier functional baseline passed 1,270 counted assertions, followed by 576 Direct edit/view-retention checks. Later revisions add 188 paragraph/chunk checks, 30 branding checks, 80 completion-workflow checks and 38 Create checks. The Word companion passes 22 checks against actual Microsoft Word and loopback HTTP using a synthetic document. Both native Word PDF pages were rendered and visually inspected. Affected regressions, actual-package integrity and source export also pass.
-- [Feature audit](FEATURE-AUDIT.txt): all 68 distinct tool actions mapped to regression workflows. Live browser layout, font loading, external navigation, downloads and print-dialogue behaviour remain unverified.
+- [Feature audit](FEATURE-AUDIT.txt): all 69 distinct tool actions mapped to regression workflows. Live browser layout, font loading, external navigation, downloads and print-dialogue behaviour remain unverified.
 - [Checksums](SHA256SUMS.txt)
 
 PDFCreator is an offline PDF toolkit. It does not claim complete Adobe Acrobat feature parity, PDF/A or PDF/UA certification, or certificate identity/trust validation.

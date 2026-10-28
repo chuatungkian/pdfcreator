@@ -1,9 +1,9 @@
 PDFCreator FEATURE AUDIT
 28 October 2026 · Asia/Singapore
-Standalone HTML SHA256: 3f37969d04435b33f3c9edcb7219b2ec49754b0b24c9867372c593f8ba8bf2c8
+Standalone HTML SHA256: 696afe517d3de8e36518d15e02749822b159c399940ecf220b2df4f80b3ce831
 
 RESULT
-68 distinct tool actions are mapped below to passing regression workflows.
+69 distinct tool actions are mapped below to passing regression workflows.
 The functional baseline passed 1,270 counted assertions plus certificate-signing
 and actual-package integrity checks. The later circular-indicator presentation
 update reran 165 targeted workflow/continuous-page/source-export assertions plus
@@ -124,7 +124,10 @@ Add link [link]
   PASS in links-test.mjs
 
 Watermark [watermark]
-  PASS in feature-audit-test.mjs
+  PASS in watermarks-test.mjs, fonts-previews-test.mjs
+
+Edit watermarks [watermarks]
+  PASS in watermarks-test.mjs, fonts-previews-test.mjs
 
 Page numbers [number]
   PASS in feature-audit-test.mjs

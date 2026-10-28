@@ -504,3 +504,27 @@ node annotation-interactions-test.mjs checks comment popups and navigation in
 a test DOM using jsdom and @napi-rs/canvas. These are test-only dependencies;
 PDFPRO_DOM_MODULES can point at a jsdom installation. This DOM check is not
 a browser layout or accessibility certification.
+
+WATERMARK CENTRING AND EDITING (28 OCTOBER 2026)
+Edit > Watermark centres the visible rotated text on each displayed page, using
+its actual painted bounds. Crop origins, page rotation and scale are accounted
+for. Size, angle, opacity, font, colour and page ranges can be chosen. Batch text
+watermarks use the same positioning and retain identification metadata.
+
+Edit > Edit watermarks identifies layers across the document. It supports newly
+tracked PDFCreator layers, older diagonal/translucent PDFCreator image/search
+Forms, explicitly tagged watermark Forms/annotations, and inferred transparent
+or diagonal native text objects. Inferred candidates are labelled for review;
+ordinary body text is never automatically selected or changed.
+Select a listed layer to inspect the outlined page preview and original settings.
+Select matching chooses layers with the same text/source on other pages. Update
+selected replaces each selected layer with the chosen text/font/colour/size/angle
+and centres the result. Imported image/vector layers can be replaced with text;
+Remove selected deletes the chosen layers after a second confirmation click.
+Other page content is retained, including body text that overlaps a native text
+watermark. Updates/removals use one undo step and the normal local recovery path.
+Watermarks baked into scanned/page images, clipping text or complex nested content
+without an identifiable separate layer may not be recognised. Use Select objects
+for other independently selectable artwork. This is not automatic image inpainting.
+The Open PDF tile description also includes the requested wording, “Classify
+documents before loading”; this change adds descriptive text only.
