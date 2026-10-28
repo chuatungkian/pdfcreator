@@ -1,0 +1,282 @@
+PDFCreator FEATURE AUDIT
+28 October 2026 · Asia/Singapore
+Standalone HTML SHA256: c906ce63be4bba64ae2a18f6c3f108ff627061902d6cdd5f4477de8a446afef3
+
+RESULT
+65 distinct tool actions are mapped below to passing regression workflows.
+The functional baseline passed 1,270 counted assertions plus certificate-signing
+and actual-package integrity checks. The later circular-indicator presentation
+update reran 165 targeted workflow/continuous-page/source-export assertions plus
+syntax and package-integrity checks. The visual-signature fix then passed 281
+targeted composition/placement/font/workflow/source-export assertions and a native
+PDF rendering inspection. The Direct edit/view-retention revision adds 576 native and controlled-interaction
+assertions, with original-font glyphs checked against independent PDF renders.
+Existing affected font/placement/scroll/signature/link/persistence/drawing/workflow
+suites were rerun. The paragraph/chunk reflow revision then adds 188 native PDF
+and controlled UI assertions, with affected Direct edit/layout/storage suites rerun.
+The PDFCreator rename then passed 30 branding/workspace/recovery checks, with
+affected PDF/UI suites and release/source integrity checks rerun.
+Live browser dialogue/animation remains unverified.
+This is a scoped automated audit, not a certification that every possible PDF,
+device or browser behaviour is supported.
+
+FIXES
+- The app, canonical package names and source downloads use PDFCreator. Legacy
+  local storage, API/metadata keys, .pdfpro workspace imports and the pdfpro.html
+  compatibility path remain usable. New workspaces use .pdfcreator.
+- Direct edit offers Paragraph (default), Line and dragged Text chunk scopes.
+  Paragraph/chunk text rewraps at the chosen width, closing gaps inside the selected
+  flow. Source font programmes, colours, sizes and unchanged inline styles remain.
+- Inline/tool scope controls, wrapping width, draft protection and remembered scope
+  accompany gap closing, original-width retention, undo/redo and local recovery.
+  Flow stays on one page and avoids unselected text; scanned/outlined text is excluded.
+- Direct edit opens an on-page editor for visible PDF text runs, retaining their
+  source font programme, colour, alpha, size and baseline. New PDFCreator text boxes
+  retain their system-font recipe; compatible embedded fonts load locally for typing.
+- Missing glyphs, overflowing replacements and unsupported encodings are refused.
+  Scanned/outlined text and older image-backed boxes cannot be edited directly.
+- Document rebuilds restore the current page and both scroll offsets after edits,
+  insertions and undo/redo, including simulated browser layout clamping.
+- Typed names and drawn signatures are combined without erasing the drawing, with
+  the typed name underneath. Standalone modes, clear/import, undo/redo and local
+  recovery remain supported.
+- Processing now uses a circular outline: unknown work traces the circumference,
+  while reported progress fills the ring and shows its percentage. Cancel, task
+  details, native progress semantics and reduced-motion preferences are retained.
+- Created and imported PDF links now have clickable areas in the viewer.
+- Add link validates inside its dialogue and accepts website/email destinations
+  or a page in the same PDF. Link bounds survive rotation and nonzero page origins.
+- Done/same-tool deselection enables following links. The link arrow edits/removes
+  the destination; undo/redo and browser-local recovery retain native PDF links.
+- Disallowed imported URI schemes never become browser navigation targets.
+- OCR words on one line share a baseline/size. Plain-text extraction no longer
+  forces font spans onto separate lines; phrase search and text export are checked.
+- Native PDF mutation buffers are released immediately after bytes are copied.
+
+TOOL COVERAGE
+Find text [search]
+  PASS in feature-audit-test.mjs
+
+Bookmarks [bookmarks]
+  PASS in feature-audit-test.mjs
+
+Properties [metadata]
+  PASS in feature-audit-test.mjs
+
+Attachments [attachments]
+  PASS in feature-audit-test.mjs
+
+Rotate 90° [rotate]
+  PASS in feature-audit-test.mjs
+
+Duplicate [duplicate]
+  PASS in feature-audit-test.mjs
+
+Move earlier [moveup]
+  PASS in feature-audit-test.mjs
+
+Move later [movedown]
+  PASS in feature-audit-test.mjs
+
+Delete page [delete]
+  PASS in feature-audit-test.mjs
+
+Insert blank [blank]
+  PASS in feature-audit-test.mjs
+
+Merge files [merge]
+  PASS in feature-audit-test.mjs
+
+Extract pages [extract]
+  PASS in feature-audit-test.mjs
+
+Merge & split [split]
+  PASS in merge-split-test.mjs, merge-split-interactions-test.mjs
+
+Reorder pages [reorder]
+  PASS in feature-audit-test.mjs
+
+Crop area [crop]
+  PASS in feature-audit-test.mjs
+
+Resize page [resize]
+  PASS in feature-audit-test.mjs
+
+Direct edit [directedit]
+  PASS in direct-text-test.mjs, direct-edit-interactions-test.mjs, direct-reflow-test.mjs, direct-reflow-interactions-test.mjs
+
+Add text [text]
+  PASS in feature-audit-test.mjs
+
+Add image [image]
+  PASS in feature-audit-test.mjs
+
+Replace text [replace]
+  PASS in feature-audit-test.mjs
+
+Add link [link]
+  PASS in links-test.mjs
+
+Watermark [watermark]
+  PASS in feature-audit-test.mjs
+
+Page numbers [number]
+  PASS in feature-audit-test.mjs
+
+Bates numbers [bates]
+  PASS in feature-audit-test.mjs
+
+Header / footer [header]
+  PASS in feature-audit-test.mjs
+
+Highlight [highlight]
+  PASS in feature-audit-test.mjs
+
+Underline [underline]
+  PASS in feature-audit-test.mjs
+
+Strikeout [strikeout]
+  PASS in feature-audit-test.mjs
+
+Sticky note [note]
+  PASS in placement-tools-test.mjs, annotations-test.mjs, annotation-interactions-test.mjs
+
+Text comment [freetext]
+  PASS in placement-tools-test.mjs, annotations-test.mjs, annotation-interactions-test.mjs
+
+Draw [ink]
+  PASS in freehand-test.mjs
+
+Rectangle [rectangle]
+  PASS in feature-audit-test.mjs
+
+Ellipse [ellipse]
+  PASS in feature-audit-test.mjs
+
+Line [line]
+  PASS in feature-audit-test.mjs
+
+Arrow [arrow]
+  PASS in feature-audit-test.mjs
+
+Stamp [stamp]
+  PASS in placement-tools-test.mjs, annotations-test.mjs, annotation-interactions-test.mjs
+
+Comments [comments]
+  PASS in feature-audit-test.mjs
+
+Fill form [fill]
+  PASS in feature-audit-test.mjs
+
+Text field [fieldText]
+  PASS in feature-audit-test.mjs
+
+Checkbox [fieldCheck]
+  PASS in feature-audit-test.mjs
+
+Radio group [fieldRadio]
+  PASS in feature-audit-test.mjs
+
+Dropdown [fieldDropdown]
+  PASS in feature-audit-test.mjs
+
+Flatten form [flatten]
+  PASS in feature-audit-test.mjs
+
+Export values [formexport]
+  PASS in feature-audit-test.mjs
+
+Import values [formimport]
+  PASS in feature-audit-test.mjs
+
+Recognise text [ocr]
+  PASS in feature-audit-test.mjs
+
+Compare PDFs [compare]
+  PASS in feature-audit-test.mjs
+
+Extract text [textExport]
+  PASS in feature-audit-test.mjs
+
+Optimise PDF [optimize]
+  PASS in feature-audit-test.mjs
+
+Mark redaction [redact]
+  PASS in feature-audit-test.mjs
+
+Apply redactions [applyredact]
+  PASS in feature-audit-test.mjs
+
+Clear marks [clearmarks]
+  PASS in feature-audit-test.mjs
+
+Sanitise PDF [sanitize]
+  PASS in feature-audit-test.mjs
+
+Encrypt PDF [encrypt]
+  PASS in feature-audit-test.mjs
+
+Visual signature [signature]
+  PASS in visual-signature-test.mjs, placement-tools-test.mjs
+
+Certificate sign [certsign]
+  PASS in feature-audit-test.mjs
+
+Verify signatures [verify]
+  PASS in feature-audit-test.mjs
+
+Save PDF [save]
+  PASS in feature-audit-test.mjs
+
+Page to PNG [png]
+  PASS in feature-audit-test.mjs
+
+Page to JPEG [jpeg]
+  PASS in feature-audit-test.mjs
+
+All pages to PNG [allimages]
+  PASS in feature-audit-test.mjs
+
+Save workspace [project]
+  PASS in feature-audit-test.mjs
+
+Open workspace [restore]
+  PASS in feature-audit-test.mjs
+
+Batch tools [batch]
+  PASS in feature-audit-test.mjs
+
+Print document [print]
+  PASS in feature-audit-test.mjs
+
+OTHER WORKSPACE CHECKS
+- Continuous scrolling, lazy rendering, active-page/toolbar/thumbnail synchronisation,
+  mixed page dimensions/rotations, page jumps, zoom anchoring and gesture ownership.
+- Tabs, Home/Resume, duplicate filenames, font choices/appearances, compact previews,
+  tool persistence, drawer/dock navigation, dark theme and movable page controls.
+- IndexedDB atomic writes, recovery, original/history retention, quota failures,
+  revision conflicts, closed-library copies and invalid stored-document isolation.
+- Embedded PDF worker methods and real English OCR core/model run offline in a
+  controlled Node VM worker transport with native canvas. No network requests occur.
+- Downloaded PDF/text/JSON/image/ZIP contents are inspected. ZIP CRCs and names are
+  independently decoded. Native signatures are checked with synthetic credentials.
+- Actual HTML/bootstrap, source reconstruction, bundled worker/source identity,
+  licences/notices, strict 25,000,000-byte HTML cap and release hashes are verified.
+
+LIMITS OF THIS AUDIT
+- UI actions run in jsdom with native PDF processing, simulated geometry and
+  fake-indexeddb. This is not a live browser layout or actual browser profile.
+- The app's file:// tab was previously blocked by browser-tool URL policy. No
+  alternate browser route was used. User PDFs were never opened as test fixtures.
+- External website/email navigation is represented by correctly targeted native
+  anchors. Actual navigation handlers, browser download/save-picker behaviour and
+  the operating-system print dialogue were not exercised in a live browser.
+- Print builds real rendered page images and sends a print request to a controlled
+  DOM popup. That does not validate pagination in a browser's print implementation.
+- Worker adapters execute real bundled engines but do not prove browser Blob worker
+  startup, process termination, content-security policies or file-origin support.
+- Existing README limitations remain: English OCR and Latin search layer, bounded
+  text replacement, widget flattening before page copying, certificate trust and
+  standards limitations. There is no claim of complete Adobe Acrobat equivalence.
+
+See VALIDATION.txt for individual suite counts and README.txt for usage/retention.
