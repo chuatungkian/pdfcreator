@@ -4,7 +4,8 @@ PDFCreator 3.0.0 — offline PDF workspace
 OPEN
 Open pdfcreator.html (or index.html from the GitHub package) in current desktop
 Chrome, Edge, Firefox, or Safari. No installation, accounts, or network access
-are needed by the application. Chrome and Edge are the browsers tested here.
+are needed for standalone PDF tools. The optional Word import companion requires
+Windows and installed Microsoft Word desktop. Chrome and Edge were tested earlier.
 The app may take a few seconds to unpack its embedded engines on first launch.
 The current link/functionality revision was checked with native PDF processing and a
 controlled test DOM; a fresh live-browser layout check was not available.
@@ -28,8 +29,10 @@ This changes packaging only; PDF operations, OCR and local recovery are retained
 INTERFACE
 White, maroon, navy and black palette. Inter4.1 is embedded in the HTML and
 licensed under SIL Open Font License1.1. Interface copy uses British English.
-The single header keeps Open files and Save PDF close at hand. The three-dot
-menu contains New document, Local library and Print document. Page controls
+Create is the first entry in the left toolbar; Save PDF stays in the header.
+Create offers New PDF,
+Import from Word and Open PDF; the old top Open files button has been removed.
+The three-dot menu contains Create, Local library and Print document. Page controls
 float above a soft navy-tinted canvas. Tool panes use white surfaces and subtle
 shadows; maroon highlights primary actions and selections. Dark theme remains
 available at the top right. Reduced-motion preferences are respected.
@@ -45,6 +48,33 @@ Processing uses a circular outline in place of the horizontal bar. Unknown progr
 traces around the circumference; reported progress fills the ring and shows its
 percentage. Task details and Cancel remain available. Reduced-motion preferences
 disable the tracing animation, and native progress semantics remain accessible.
+
+
+CREATE A NEW DOCUMENT OR IMPORT WORD
+Choose Create in the left toolbar, on Home, or beside the document tabs.
+Its three choices use compact text-only tiles.
+- New PDF: name your document, choose A4/A5/A3/Letter/Legal or a custom size,
+  orientation, 1-200 pages, margins and blank/ruled/squared paper. Dimensions and
+  margins are in millimetres. The PDF opens ready to add text in Edit; use Add image,
+  shapes or form tools to build the document from scratch. Other tabs stay open.
+- Open PDF: select one or more existing PDFs. Password entry and document tabs work
+  as before. Images can still be dragged in to create PDFs or placed using Add image.
+- Import from Word: download/extract PDFCreator-Word-Companion.zip, then run
+  start-word-companion.cmd. In the import dialogue, paste the console's pairing
+  code, choose a .docx/.doc file and select Convert and open. The companion is also
+  included in the GitHub ZIP and downloadable directly from the HTML itself.
+
+Word import uses Microsoft Word's native PDF export on Windows. The HTML does not
+try to recreate Word documents as browser HTML. Visible formatting, pictures,
+tables, headers, footers and page layouts follow Word's rendering; use the source
+fonts and review complex documents. Missing fonts, linked content or unsupported
+Word features can affect fidelity. There is no unconditional guarantee of every
+possible Word layout. Protected files may require manual PDF export from Word.
+No cloud conversion API or account is used by PDFCreator. The companion binds only
+to 127.0.0.1 and requires a fresh pairing code; your browser may ask for local-network
+access. Pairing credentials stay in session memory, not IndexedDB. New/existing
+PDF tools remain usable with the HTML alone. See WORD-COMPANION-README.txt for
+requirements, temporary files, cancellation and process handling details.
 
 QUICK START
 Choose Edit > Direct edit. Paragraph is the default: click an outlined paragraph,
@@ -88,7 +118,8 @@ Direct edit stays selected until another tool, Done or the same button is chosen
 Edits and inserted items keep the current page and scroll offset. Apply or cancel
 before changing scope; changing page/tool or scrolling dismisses an unapplied edit.
 
-Open PDFs with Open files or the + beside the document tabs. Each PDF opens in
+Open PDFs with Create > Open PDF, or use the + beside the document tabs to open
+the Create choices. Each PDF opens in
 its own tab. Click a tab to switch; edits, undo/redo, page position, zoom, search
 and pending redactions stay with that document. Use the x on a tab to close it.
 Unsaved edits or pending redactions prompt before closing. New, sample and
@@ -255,8 +286,91 @@ as a transparent image at up to 288 DPI, with searchable Unicode ActualText for
 page text. Text comments retain complete Contents and a native annotation subtype.
 These appearances are not vector glyph outlines or editable embedded system fonts.
 Select an entire added text box when replacing it; its image and search layer are
-removed together. Replacing native PDF text preserves surrounding graphics and
-does not reflow paragraphs or automatically match the original font.
+removed together. The older Replace text rectangle tool preserves surrounding
+graphics and uses the chosen replacement font. Direct edit and Find and replace
+reuse native source fonts and support paragraph reflow within the selected flow.
+
+
+COMPLETION WORKSPACES (28 OCTOBER 2026)
+
+Edit > Select objects
+Click visible PDF text, an image/signature, a content group, or an annotation.
+Drag its selection outline to move it; drag the bottom-right handle to resize.
+Shift keeps proportions. X/Y/W/H and rotation are in points/degrees. Apply commits
+numeric changes; Duplicate offsets a copy; Delete removes the selected item.
+Align positions against the page; Snap aligns edges/centres against the page and
+other selectable items. Hold Alt while dragging to bypass snapping. Arrow keys
+nudge the focused selection; Shift moves 10 pt. Escape closes the inspector.
+Native text keeps its vector glyphs/source fonts. Images and Form XObjects stay
+native; annotation geometry and appearance move together. Added text retains its
+independent editing recipe through movement, resize, rotation and duplication.
+Inline binary images, arbitrary painted vector paths and locked annotations are
+not independently editable. A nested PDF Form is selected as a content group;
+its text can also be selected as individual editable text lines. Source clipping
+paths still constrain transformed objects. Unsupported text encodings are refused.
+Annotate > Erase drawing removes complete ink strokes touched by the gesture;
+other strokes in the same Ink annotation remain. It does not erase image pixels.
+
+Rich text and live page preview
+Add text, Text comment and Stamp open a compact horizontal editor on the page.
+Enter or paste plain text, then select text to change its font, size, colour,
+bold or italic style. With no text selection, formatting applies to all text.
+Alignment and bullets apply to selected paragraphs; Line and Gap set line and
+paragraph spacing. The selected PDF area shows a live appearance preview.
+Fit to area scales styles together if needed, down to 4 pt. Uncheck it to require
+the requested sizes exactly. Apply commits; Cancel/Escape leaves the PDF unchanged.
+Ctrl/Cmd+Enter applies. Placement stays selected for the next item.
+Direct edit reopens the rich editor for tracked rich text boxes. In Comments,
+Format text opens it for a FreeText comment or stamp, preserving its reply thread.
+Mixed formatting is retained in a run model, never executable HTML. As before,
+device-font appearance is a transparent image with searchable Unicode page text;
+fonts come from the device and can differ on other devices when re-editing.
+
+Text-aware markup
+Highlight, Underline and Strikeout follow the text between pointer endpoints,
+including partial lines and multiple lines. The drag preview shows the selected
+text bounds. The native PDF annotation stores the selection quads and selected
+words. Scans require OCR; unrecognised page images have no selectable text.
+
+All-page comments
+Annotate > Comments lists annotations across the whole document. Search contents,
+replies and authors; filter by type, open/resolved status or the current page.
+Select a comment to edit its text/author, add a reply, resolve/reopen it, or delete
+its thread. Delete requires a second click. Go to page closes the workspace and
+navigates to the comment. Format text handles the appearance of FreeText/stamps.
+Replies use native PDF IRT relationships; resolved status is saved in PDF metadata.
+Other viewers can interpret review status differently. Export summary downloads
+an escaped offline HTML summary with a Print button. It contains all annotations.
+No online collaboration or external messaging is involved.
+
+Visual page organiser
+Organise > Page organiser replaces the old numeric reorder prompt. Tiles have
+lazy native previews. Click selects, Ctrl/Cmd-click toggles, Shift-click selects a
+range. Drag selected tiles before another tile or into empty grid space to move
+them to the end. Earlier/Later provides a keyboard-accessible alternative.
+Stage bulk rotation, duplication, deletion and blank pages. Choose another open
+tab or Upload PDF, enter source page ranges, then Insert pages or Replace selected.
+Insertions follow the last selected tile; replacement uses the first selected
+position and removes all selected tiles. Extract downloads selected staged pages.
+Apply saves the staged arrangement in one undo step; Cancel discards the preview.
+The current original page is followed to its new position when it is retained.
+Flatten live forms before copying/extracting/duplicating pages containing fields.
+Existing page objects/internal destinations are retained when rearranging originals;
+advanced outlines, destinations to deleted pages and imported cross-document links
+may need review after restructuring. Imported certificate-signed sources are refused.
+
+Document-wide Find and replace
+Available in View and Edit, from the Find tool, or Ctrl/Cmd+H. Choose literal search
+text, replacement text, case matching, whole words and page ranges. Preview lists
+before/after paragraphs and occurrence counts. Select individual results or all
+supported results, then Replace selected. Replacements are one atomic undo step.
+Native paragraphs reuse their source styles/fonts and wrap at the original width;
+tracked device-font/rich text boxes update both appearance and searchable content.
+Missing glyphs, overflows and collisions with unrelated native text are refused;
+a failure preserves the entire working PDF. Search is for editable page text,
+not comment bodies, image pixels, field values or every possible legacy encoding.
+OCR can add search text to scans, but invisible OCR text cannot be directly edited.
+Only the selected paragraph/box reflows; unrelated content is not moved.
 
 INCLUDED
 Viewing, selection/copy/search, page organisation, PDF/image merging, blank
@@ -307,8 +421,9 @@ This is an implemented offline toolkit, not complete Adobe Acrobat equivalence.
 No Office round-trip conversion, live shared reviews/signature collection,
 scanner/OS printer drivers, AI assistant, dynamic XFA, rich media/3D/CAD,
 professional colour preflight or PDF/A, PDF/X, PDF/UA conformance certification.
-Text replacement is bounded by a selected rectangle; it does not automatically
-match original font subsets or reflow paragraphs. OCR includes English
+The older Replace text tool is bounded by a selected rectangle. Direct edit and
+Find and replace reuse compatible native fonts and reflow within paragraph bounds;
+they do not move unrelated paragraphs or flow onto another page. OCR includes English
 only; confidence is approximate and recognition can be wrong. OCR search text
 uses a Latin character set. Comparison aligns pages at the top-left and is
 not semantic equivalence. Browser print creates a local raster print view.

@@ -1,9 +1,9 @@
 PDFCreator FEATURE AUDIT
 28 October 2026 · Asia/Singapore
-Standalone HTML SHA256: c906ce63be4bba64ae2a18f6c3f108ff627061902d6cdd5f4477de8a446afef3
+Standalone HTML SHA256: 3f37969d04435b33f3c9edcb7219b2ec49754b0b24c9867372c593f8ba8bf2c8
 
 RESULT
-65 distinct tool actions are mapped below to passing regression workflows.
+68 distinct tool actions are mapped below to passing regression workflows.
 The functional baseline passed 1,270 counted assertions plus certificate-signing
 and actual-package integrity checks. The later circular-indicator presentation
 update reran 165 targeted workflow/continuous-page/source-export assertions plus
@@ -16,7 +16,7 @@ suites were rerun. The paragraph/chunk reflow revision then adds 188 native PDF
 and controlled UI assertions, with affected Direct edit/layout/storage suites rerun.
 The PDFCreator rename then passed 30 branding/workspace/recovery checks, with
 affected PDF/UI suites and release/source integrity checks rerun.
-Live browser dialogue/animation remains unverified.
+The completion revision adds object transforms, rich text, text-aware markup, all-page comments, a visual organiser and document-wide find/replace. See VALIDATION.txt for current counts. Live browser dialogue/animation remains unverified.
 This is a scoped automated audit, not a certification that every possible PDF,
 device or browser behaviour is supported.
 
@@ -57,6 +57,9 @@ TOOL COVERAGE
 Find text [search]
   PASS in feature-audit-test.mjs
 
+Find and replace [findreplace]
+  PASS in completion-interactions-test.mjs, annotation-interactions-test.mjs, placement-tools-test.mjs
+
 Bookmarks [bookmarks]
   PASS in feature-audit-test.mjs
 
@@ -93,8 +96,8 @@ Extract pages [extract]
 Merge & split [split]
   PASS in merge-split-test.mjs, merge-split-interactions-test.mjs
 
-Reorder pages [reorder]
-  PASS in feature-audit-test.mjs
+Page organiser [reorder]
+  PASS in completion-interactions-test.mjs, annotation-interactions-test.mjs, placement-tools-test.mjs
 
 Crop area [crop]
   PASS in feature-audit-test.mjs
@@ -102,11 +105,14 @@ Crop area [crop]
 Resize page [resize]
   PASS in feature-audit-test.mjs
 
+Select objects [objects]
+  PASS in completion-interactions-test.mjs, annotation-interactions-test.mjs, placement-tools-test.mjs
+
 Direct edit [directedit]
   PASS in direct-text-test.mjs, direct-edit-interactions-test.mjs, direct-reflow-test.mjs, direct-reflow-interactions-test.mjs
 
 Add text [text]
-  PASS in feature-audit-test.mjs
+  PASS in completion-interactions-test.mjs, annotation-interactions-test.mjs, placement-tools-test.mjs
 
 Add image [image]
   PASS in feature-audit-test.mjs
@@ -130,22 +136,25 @@ Header / footer [header]
   PASS in feature-audit-test.mjs
 
 Highlight [highlight]
-  PASS in feature-audit-test.mjs
+  PASS in completion-interactions-test.mjs, annotation-interactions-test.mjs, placement-tools-test.mjs
 
 Underline [underline]
-  PASS in feature-audit-test.mjs
+  PASS in completion-interactions-test.mjs, annotation-interactions-test.mjs, placement-tools-test.mjs
 
 Strikeout [strikeout]
-  PASS in feature-audit-test.mjs
+  PASS in completion-interactions-test.mjs, annotation-interactions-test.mjs, placement-tools-test.mjs
 
 Sticky note [note]
   PASS in placement-tools-test.mjs, annotations-test.mjs, annotation-interactions-test.mjs
 
 Text comment [freetext]
-  PASS in placement-tools-test.mjs, annotations-test.mjs, annotation-interactions-test.mjs
+  PASS in completion-interactions-test.mjs, annotation-interactions-test.mjs, placement-tools-test.mjs
 
 Draw [ink]
   PASS in freehand-test.mjs
+
+Erase drawing [eraser]
+  PASS in completion-interactions-test.mjs, annotation-interactions-test.mjs, placement-tools-test.mjs
 
 Rectangle [rectangle]
   PASS in feature-audit-test.mjs
@@ -160,10 +169,10 @@ Arrow [arrow]
   PASS in feature-audit-test.mjs
 
 Stamp [stamp]
-  PASS in placement-tools-test.mjs, annotations-test.mjs, annotation-interactions-test.mjs
+  PASS in completion-interactions-test.mjs, annotation-interactions-test.mjs, placement-tools-test.mjs
 
 Comments [comments]
-  PASS in feature-audit-test.mjs
+  PASS in completion-interactions-test.mjs, annotation-interactions-test.mjs, placement-tools-test.mjs
 
 Fill form [fill]
   PASS in feature-audit-test.mjs
@@ -250,6 +259,8 @@ Print document [print]
   PASS in feature-audit-test.mjs
 
 OTHER WORKSPACE CHECKS
+- Create: configured blank PDFs, existing PDF tabs and optional native Microsoft Word imports.
+  See create-interactions-test.mjs and word-companion-test.mjs for current checks.
 - Continuous scrolling, lazy rendering, active-page/toolbar/thumbnail synchronisation,
   mixed page dimensions/rotations, page jumps, zoom anchoring and gesture ownership.
 - Tabs, Home/Resume, duplicate filenames, font choices/appearances, compact previews,

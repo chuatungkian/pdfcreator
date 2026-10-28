@@ -1,6 +1,53 @@
+PDFCreator — CREATE AND NATIVE WORD IMPORT
+Date: 28 October 2026 (Asia/Singapore)
+Standalone HTML SHA256: 3f37969d04435b33f3c9edcb7219b2ec49754b0b24c9867372c593f8ba8bf2c8
+
+CURRENT CREATE REVISION
+node create-interactions-test.mjs: 38 assertions passed with native PDF bytes,
+a controlled DOM, fake-indexeddb and controlled Word protocol responses.
+- Create sits in the left toolbar; all three compact text-only choices work.
+- Page sizes/orientation, margins, page count, guide styles and validation.
+- New PDFs can be authored and keep other tabs; existing PDFs retain their contents.
+- Word pairing, import into a new tab, unchanged returned PDF bytes, page geometry,
+  safe failures, credentials excluded from IndexedDB and async-modal cancellation.
+node word-companion-test.mjs: 22 assertions passed against the actual installed
+Microsoft Word desktop engine through the companion's real loopback HTTP server.
+- Authentication, file-origin CORS, local-network preflight and invalid input refusal.
+- A synthetic DOCX retained both portrait/landscape section sizes and page count,
+  styled text/colour/size, embedded picture, table, headers and footers.
+- Both resulting PDF pages were rendered and visually inspected.
+No user Word files or PDFs were opened as fixtures. This verifies the generated
+sample, not every possible Word feature/font, browser or protected document.
+Live browser local-network prompts/transport and native browser layout remain
+unverified. The browser tool's earlier blocked file:// resource was not accessed.
+The standalone package retains all offline engines. Word import is explicitly
+an optional Windows/Microsoft Word companion workflow approved by the user.
+
+PDFCreator — COMPLETION WORKSPACES
+Date: 28 October 2026 (Asia/Singapore)
+Standalone HTML SHA256: 3f37969d04435b33f3c9edcb7219b2ec49754b0b24c9867372c593f8ba8bf2c8
+
+CURRENT REVISION
+node completion-interactions-test.mjs: 80 assertions passed with native PDF bytes,
+controlled DOM geometry/canvas and fake-indexeddb.
+- Native text/image/annotation transforms, rotation/crop origins, duplication/removal.
+- Correct content token parsing; vector text/source fonts and image content retained.
+- Mixed rich styles, on-page editor, searchable appearances and editable recipes.
+- Rich box rotation/duplication, native comment formatting and retained reply threads.
+- Multi-line glyph selection/preview, persistent markup and crossing-stroke erasure.
+- All-page comments, search/edit/replies/resolved status and thread deletion.
+- Organiser staging, bulk rotate/duplicate/blank, independent duplicate rotation,
+  insertion/replacement from open tabs, cancellation and one-step undo.
+- Case/whole-word/page-range native replacement; rich-box replacement; atomic failure.
+- IndexedDB recovery of changed PDF bytes, rich recipes, replies and resolved state.
+A native PDF page proof was rendered and visually inspected. Live browser layout
+remains unverified under the browser-tool restriction described below.
+
+Affected existing suites were rerun; their historical counts below are retained.
+
 PDFCreator — BRANDING AND BACKWARD COMPATIBILITY
 Date: 28 October 2026 (Asia/Singapore)
-Standalone HTML SHA256: c906ce63be4bba64ae2a18f6c3f108ff627061902d6cdd5f4477de8a446afef3
+Standalone HTML SHA256: 3f37969d04435b33f3c9edcb7219b2ec49754b0b24c9867372c593f8ba8bf2c8
 
 RENAME CHECKS
 node branding-compatibility-test.mjs: 30 assertions passed with native PDFs.
