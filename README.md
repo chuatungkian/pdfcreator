@@ -1,6 +1,6 @@
 # PDFCreator
 
-An offline PDF workspace packaged as one HTML file. The current `index.html` is **20.72 MB** and includes its PDF engines, English OCR model, Inter font and downloadable source bundle.
+An offline PDF workspace packaged as one HTML file. The current `index.html` is **20.76 MB** and includes its PDF engines, English OCR model, Inter font and downloadable source bundle.
 
 ## Use
 
@@ -28,6 +28,8 @@ IndexedDB retains documents and edits when permitted by the browser. Its availab
 
 For Word import, download [PDFCreator-Word-Companion.zip](PDFCreator-Word-Companion.zip), extract it and run `start-word-companion.cmd`. Paste its pairing code into **Create > Import from Word**. The companion uses the installed Microsoft Word PDF exporter over an authenticated loopback connection. No cloud conversion service is used. Word renders formatting, pictures, tables, headers, footers and page layout; source fonts and document restrictions can affect fidelity. The same companion ZIP is downloadable from the standalone HTML.
 
+**Edit > Edit images** lets you click existing images directly and crop, move, resize, delete, or adjust opacity, brightness, contrast, saturation, hue and warm/cool tone. Add image opens the same compact inspector after placement. A crop preview and position fields support precise adjustments; undo/redo and local recovery retain them. Shared/nested image instances are isolated. Original pixels are retained for readjustment, so crop/delete are not secure redaction. Inline/stencil images and colour adjustments above 20 million pixels are excluded. Clicking grey space outside the PDF deactivates the selected function; controls remain usable. This revision passes 40 native image checks and 58 interaction checks.
+
 **Edit > Select objects** moves, resizes, rotates, duplicates and removes supported text, image/signature, Form and annotation objects, with alignment and snapping. **Annotate > Erase drawing** removes touched ink strokes. Rich text supports mixed fonts, bold/italic, colour, bullets, spacing and live page preview. Text-aware highlight/underline/strikeout follows multiple lines.
 
 **Comments** spans all pages, with editing, replies, resolved status, filters and an exportable printable summary. **Organise > Page organiser** stages visual multi-page rearrangement, rotation, duplication, deletion, insertion and replacement from other tabs/uploads. **Find and replace** offers case/whole-word/page-range controls and a selectable replacement preview for supported native paragraphs and tracked text boxes. New edits use the shared undo and local recovery workflows.
@@ -40,13 +42,13 @@ The bottom page previews support Ctrl/Cmd-click and Shift-click selection, group
 
 **Save PDF** offers unchanged bytes, lossless cleanup, High/Balanced/Small image compression, or a target maximum in MB/kB. Target mode tries progressively smaller image settings within chosen quality limits and shows actual byte counts and whether the target was reached before download. It retains PDF text, vectors, forms, links and annotations; unsupported/protected images keep their pixels. Target size is best effort, and lower image quality can soften detail. Compressed downloads leave the open PDF at its current quality; the Optimise tool applies compression in one undo step.
 
-The header **magnifying glass** searches all 72 distinct tools and five app actions, including common aliases. Ctrl/Cmd+K opens it, arrow keys navigate, Enter opens a result and Escape closes it. Tools requiring a PDF are disabled on empty Home. The header **question mark** opens About & source, including authorship/contact and source/licence links.
+The header **magnifying glass** searches all 73 distinct tools and five app actions, including common aliases. Ctrl/Cmd+K opens it, arrow keys navigate, Enter opens a result and Escape closes it. Tools requiring a PDF are disabled on empty Home. The header **question mark** opens About & source, including authorship/contact and source/licence links.
 
 ## Documentation and verification
 
 - [User guide and limitations](README.txt)
 - [Validation results](VALIDATION.txt): the earlier functional baseline passed 1,270 counted assertions, followed by 576 Direct edit/view-retention checks. Later revisions add 188 paragraph/chunk checks, 30 branding checks, 80 completion-workflow checks and 57 Create checks. Later targeted revisions add 100 page-feature checks, 74 thumbnail-organiser checks, 75 compression checks, 63 navigation-toggle checks and 61 function-search checks. The Word companion passes 22 checks against actual Microsoft Word and loopback HTTP using a synthetic document. Both native Word PDF pages were rendered and visually inspected. Affected regressions, actual-package integrity and source export also pass.
-- [Feature audit](FEATURE-AUDIT.txt): all 72 distinct tool actions mapped to regression workflows. Live browser layout, font loading, external navigation, downloads and print-dialogue behaviour remain unverified.
+- [Feature audit](FEATURE-AUDIT.txt): all 73 distinct tool actions mapped to regression workflows. Live browser layout, font loading, external navigation, downloads and print-dialogue behaviour remain unverified.
 - [Checksums](SHA256SUMS.txt)
 
 PDFCreator is an offline PDF toolkit. It does not claim complete Adobe Acrobat feature parity, PDF/A or PDF/UA certification, or certificate identity/trust validation.

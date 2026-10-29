@@ -7,7 +7,7 @@ Chrome, Edge, Firefox, or Safari. No installation, accounts, or network access
 are needed for standalone PDF tools. The optional Word import companion requires
 Windows and installed Microsoft Word desktop. Chrome and Edge were tested earlier.
 The app may take a few seconds to unpack its embedded engines on first launch.
-The current link/functionality revision was checked with native PDF processing and a
+The current image-editing revision was checked with native PDF processing and a
 controlled test DOM; a fresh live-browser layout check was not available.
 
 NAME AND COMPATIBILITY
@@ -299,6 +299,30 @@ reuse native source fonts and support paragraph reflow within the selected flow.
 
 
 COMPLETION WORKSPACES (28 OCTOBER 2026)
+
+Edit > Edit images
+Click an image directly in the normal viewer, or choose Edit > Edit images first.
+The Image inspector provides a crop preview, edge percentages, position/size in
+points, a keep-proportions option, opacity, brightness, contrast, saturation,
+colour hue and warm/cool tone. Drag the selected image to move it; drag its corner
+to resize it. Preview crop changes by dragging a box in the small image preview.
+Apply changes commits the inspector settings as one undo step. Delete image
+removes the selected occurrence. Arrow keys move it (Shift moves 10 pt), Delete
+removes it, and Escape deselects. The inspector can minimise or close.
+Add image opens the same inspector after placement. Select objects retains its
+rotation, duplication, alignment and snapping controls, with Image adjustments
+opening the new inspector. Edits retain page position, undo/redo and local recovery.
+Shared image resources and images inside content groups are isolated so editing
+one occurrence does not change its other uses. Original pixels are retained for
+readjustment: cropping and deleting are not secure redaction. Use Redact for
+permanent removal. Colour preview/adjustment supports images up to 20 million
+pixels; larger images retain move, resize, crop and opacity controls. Inline binary
+images and stencil masks are unsupported. A picture baked into a larger scan
+cannot be selected separately, and original PDF clipping can constrain movement.
+
+Click the grey space around a PDF page or blank non-working workspace to deactivate
+the selected function. Clicking within the page keeps the function ready for
+repeated use; tool settings, image properties and navigation remain usable.
 
 Edit > Select objects
 Click visible PDF text, an image/signature, a content group, or an annotation.
