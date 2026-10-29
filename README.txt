@@ -741,3 +741,23 @@ Header/footer rules follow the text while continuing across the full visible wid
 Keep footer and page-number distances different to avoid placing them on the same
 row. Negative distances, margins that leave no text area and off-page placements
 are refused. Current documents keep their existing decorations until updated.
+
+FIELD EDITOR BOUNDS
+Form-field popups stay inside the intersection of the current PDF page and the
+visible working area, with an inset from its edges. They move inward near the
+bottom or right edge and shrink for narrow/short views. The middle section scrolls
+internally while Close and Apply stay outside that scrolling region. Resizing the
+textarea, window or workspace recalculates the bounds; draft text is retained.
+
+REMOVE DIGITAL SIGNATURES
+Protect & sign > Remove digital signatures asks for confirmation before creating
+an unsigned working copy. It removes populated certificate-signature fields and
+widgets, their appearances and signing dictionaries, certification/usage-rights
+signature policies and obsolete validation data. Full rewriting discards the old
+incremental signature revisions. Ordinary fields, other page content and separate
+visual signatures remain. Empty signature fields are retained. Save PDF downloads
+the unsigned result; undo restores the exact signed bytes, and local recovery
+retains the edited copy. The source file is not overwritten. A signature flattened
+into page text or a picture has no certificate field to clear; remove it using
+Select objects or Edit images. This tool does not make a signed original editable
+while preserving its digital signature or establish certificate identity/trust.

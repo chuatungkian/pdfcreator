@@ -1,9 +1,9 @@
 PDFCreator FEATURE AUDIT
 29 October 2026 · Asia/Singapore
-Standalone HTML SHA256: 9edf7e5d34df7459a3b63ee3ea38346fa07f8c1f5b245b8e3c9a22a190cdba3f
+Standalone HTML SHA256: 9425185f9935116852d6c3c64e80c797a4304dc00438489cd8413168a9db3b76
 
 RESULT
-74 distinct tool actions are mapped below to passing regression workflows.
+75 distinct tool actions are mapped below to passing regression workflows.
 The functional baseline passed 1,270 counted assertions plus certificate-signing
 and actual-package integrity checks. The later circular-indicator presentation
 update reran 165 targeted workflow/continuous-page/source-export assertions plus
@@ -16,6 +16,7 @@ suites were rerun. The paragraph/chunk reflow revision then adds 188 native PDF
 and controlled UI assertions, with affected Direct edit/layout/storage suites rerun.
 The PDFCreator rename then passed 30 branding/workspace/recovery checks, with
 affected PDF/UI suites and release/source integrity checks rerun.
+Field editors are bounded within the visible PDF page, with internal scrolling. Protect & sign can remove certificate signatures into an unsigned working copy; see page-popup-test.mjs and remove-signatures-test.mjs.
 Native form widgets are directly editable with multiline text/formatting, shared field values and appearances retained. See form-fields-test.mjs and form-fields-interactions-test.mjs. Large-image soft-mask memory growth no longer invalidates image colour buffers; see image-memory-test.mjs. Independent cm page decoration offsets are checked in page-placement-test.mjs.
 Existing and added images have crop, position/size and appearance controls with instance-local native editing. Clicking grey non-working space deselects the active tool. See image-edit-test.mjs and image-interactions-test.mjs.
 Home project cards now have a confirmation-protected dustbin; serialised deletion prevents autosave resurrection. See home-deletion-test.mjs.
@@ -129,7 +130,7 @@ Edit images [images]
   PASS in image-edit-test.mjs, image-interactions-test.mjs, image-memory-test.mjs
 
 Edit form fields [editfields]
-  PASS in form-fields-test.mjs, form-fields-interactions-test.mjs, feature-audit-test.mjs
+  PASS in form-fields-test.mjs, form-fields-interactions-test.mjs, page-popup-test.mjs, feature-audit-test.mjs
 
 Direct edit [directedit]
   PASS in direct-text-test.mjs, direct-edit-interactions-test.mjs, direct-reflow-test.mjs, direct-reflow-interactions-test.mjs
@@ -201,7 +202,7 @@ Comments [comments]
   PASS in completion-interactions-test.mjs, annotation-interactions-test.mjs, placement-tools-test.mjs
 
 Fill form [fill]
-  PASS in form-fields-test.mjs, form-fields-interactions-test.mjs, feature-audit-test.mjs
+  PASS in form-fields-test.mjs, form-fields-interactions-test.mjs, page-popup-test.mjs, feature-audit-test.mjs
 
 Text field [fieldText]
   PASS in feature-audit-test.mjs
@@ -259,6 +260,9 @@ Certificate sign [certsign]
 
 Verify signatures [verify]
   PASS in feature-audit-test.mjs
+
+Remove digital signatures [removesignatures]
+  PASS in remove-signatures-test.mjs, remove-signatures-interactions-test.mjs, signing-test.mjs
 
 Save PDF [save]
   PASS in compression-test.mjs, compression-interactions-test.mjs, feature-audit-test.mjs, tabs-interactions-test.mjs
