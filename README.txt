@@ -662,3 +662,18 @@ name, source/licence links and authorship/contact information.
 node function-search-test.mjs checks catalogue coverage, aliases, disabled states,
 keyboard/dismissal behaviour, actual PDF actions, confirmations and About/theme.
 These are controlled DOM/native PDF checks; live browser layout is unverified.
+
+DELETE A PROJECT FROM HOME
+Each recent project card has a dustbin beside Resume. Click it to see a warning
+and choose Delete project or Cancel. Escape also cancels. Confirmed deletion
+removes the project's locally saved PDF, original copy, edits, undo/redo history
+and catalogue/view data. An open project is closed only after storage deletion
+succeeds. Other projects and downloaded files are kept. Deletion cannot be undone.
+Deleting the last project returns Home to its empty state. Invalid archived PDFs
+can also be deleted without opening them. Storage errors leave an open project
+and its edits intact; existing conflicting-window protection remains in effect.
+Autosave serialises deletion with pending saves and excludes deleted IDs from
+later captures, so stale queued state cannot recreate an explicitly deleted copy.
+node home-deletion-test.mjs uses synthetic PDFs and simulated IndexedDB to check
+confirmation/cancellation, failure retention, open/closed/last-project deletion,
+in-flight saves, stale captures, local recovery and invalid archived copies.

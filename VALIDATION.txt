@@ -1,6 +1,24 @@
+PDFCreator — HOME PROJECT DELETION
+Date: 29 October 2026 (Asia/Singapore)
+Standalone HTML SHA256: d1104f8a8cbee6a9c530c4bc500a8f84766731a6092b556d4eab0c7df74009f2
+
+CURRENT HOME DELETION REVISION
+node home-deletion-test.mjs: 50 assertions passed with native synthetic PDFs
+and simulated IndexedDB transactions. Document-specific dustbin labels/icons,
+escaped filenames, warning content, Cancel/Escape, open and closed deletion,
+other-project preservation, storage-failure retention, pending-save ordering,
+no autosave resurrection, active-tab selection, last-project cleanup, catalogue/
+session updates, fresh-instance recovery and invalid archived-PDF deletion.
+No real browser storage or user documents were deleted during testing.
+Affected local store 52, UI refresh 75, persistence/navigation 64, tabs 115 and
+function search 61 assertions passed. Release archives/source export, HTML size
+and checksums verified after rebuilding. Live browser layout remains unverified.
+
+PREVIOUS REVISION VALIDATION
+
 PDFCreator — APP FUNCTION SEARCH AND HEADER ICONS
 Date: 29 October 2026 (Asia/Singapore)
-Standalone HTML SHA256: e478759263f68f060dea985ecd2bca8df5ca0c7002dd6990373b730945698a70
+Standalone HTML SHA256: d1104f8a8cbee6a9c530c4bc500a8f84766731a6092b556d4eab0c7df74009f2
 
 CURRENT FUNCTION SEARCH REVISION
 node function-search-test.mjs: 61 assertions passed in a controlled DOM using
@@ -18,7 +36,7 @@ PREVIOUS REVISION VALIDATION
 
 PDFCreator — CREATE IN THE SHARED TOOL PANE
 Date: 29 October 2026 (Asia/Singapore)
-Standalone HTML SHA256: e478759263f68f060dea985ecd2bca8df5ca0c7002dd6990373b730945698a70
+Standalone HTML SHA256: d1104f8a8cbee6a9c530c4bc500a8f84766731a6092b556d4eab0c7df74009f2
 
 CURRENT CREATE PANE REVISION
 node navigation-toggle-test.mjs: 63 assertions passed for every left navigation
@@ -38,7 +56,7 @@ PREVIOUS REVISION VALIDATION
 
 PDFCreator — SIZE-AWARE SAVE AND PDF COMPRESSION
 Date: 29 October 2026 (Asia/Singapore)
-Standalone HTML SHA256: e478759263f68f060dea985ecd2bca8df5ca0c7002dd6990373b730945698a70
+Standalone HTML SHA256: d1104f8a8cbee6a9c530c4bc500a8f84766731a6092b556d4eab0c7df74009f2
 
 CURRENT COMPRESSION REVISION
 node compression-test.mjs: 33 assertions passed using native PDFs and encoded
@@ -63,7 +81,7 @@ PREVIOUS REVISION VALIDATION
 
 PDFCreator — PAGE TOOLS, LINKS AND THUMBNAIL ORGANISATION
 Date: 29 October 2026 (Asia/Singapore)
-Standalone HTML SHA256: e478759263f68f060dea985ecd2bca8df5ca0c7002dd6990373b730945698a70
+Standalone HTML SHA256: d1104f8a8cbee6a9c530c4bc500a8f84766731a6092b556d4eab0c7df74009f2
 
 CURRENT REVISION
 node page-features-test.mjs: 100 assertions passed with native PDF pixels and a
@@ -87,7 +105,7 @@ PREVIOUS RELEASE VALIDATION (historical results below)
 
 PDFCreator — CENTRED WATERMARKS AND EXISTING-LAYER EDITING
 Date: 28 October 2026 (Asia/Singapore)
-Standalone HTML SHA256: e478759263f68f060dea985ecd2bca8df5ca0c7002dd6990373b730945698a70
+Standalone HTML SHA256: d1104f8a8cbee6a9c530c4bc500a8f84766731a6092b556d4eab0c7df74009f2
 
 CURRENT WATERMARK REVISION
 node watermarks-test.mjs: 115 assertions passed with native PDF geometry/pixels
@@ -105,7 +123,7 @@ Live browser layout remains unverified under the earlier file:// tool restrictio
 
 PDFCreator — CREATE AND NATIVE WORD IMPORT
 Date: 28 October 2026 (Asia/Singapore)
-Standalone HTML SHA256: e478759263f68f060dea985ecd2bca8df5ca0c7002dd6990373b730945698a70
+Standalone HTML SHA256: d1104f8a8cbee6a9c530c4bc500a8f84766731a6092b556d4eab0c7df74009f2
 
 CURRENT CREATE REVISION
 node create-interactions-test.mjs: 38 assertions passed with native PDF bytes,
@@ -130,7 +148,7 @@ an optional Windows/Microsoft Word companion workflow approved by the user.
 
 PDFCreator — COMPLETION WORKSPACES
 Date: 28 October 2026 (Asia/Singapore)
-Standalone HTML SHA256: e478759263f68f060dea985ecd2bca8df5ca0c7002dd6990373b730945698a70
+Standalone HTML SHA256: d1104f8a8cbee6a9c530c4bc500a8f84766731a6092b556d4eab0c7df74009f2
 
 CURRENT REVISION
 node completion-interactions-test.mjs: 80 assertions passed with native PDF bytes,
@@ -152,7 +170,7 @@ Affected existing suites were rerun; their historical counts below are retained.
 
 PDFCreator — BRANDING AND BACKWARD COMPATIBILITY
 Date: 28 October 2026 (Asia/Singapore)
-Standalone HTML SHA256: e478759263f68f060dea985ecd2bca8df5ca0c7002dd6990373b730945698a70
+Standalone HTML SHA256: d1104f8a8cbee6a9c530c4bc500a8f84766731a6092b556d4eab0c7df74009f2
 
 RENAME CHECKS
 node branding-compatibility-test.mjs: 30 assertions passed with native PDFs.

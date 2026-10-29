@@ -1,6 +1,6 @@
 # PDFCreator
 
-An offline PDF workspace packaged as one HTML file. The current `index.html` is **20.71 MB** and includes its PDF engines, English OCR model, Inter font and downloadable source bundle.
+An offline PDF workspace packaged as one HTML file. The current `index.html` is **20.72 MB** and includes its PDF engines, English OCR model, Inter font and downloadable source bundle.
 
 ## Use
 
@@ -19,6 +19,8 @@ Edits and inserted items retain the current page and both scroll offsets. Visual
 **Edit > Add link** supports websites, email addresses and pages in the same PDF. Click existing text, an image or a shape; draw an area; or place new visible linked text with a chosen font, size and colour. Text and its link form one undo step. Choose Done to follow links. The small arrow edits or removes a link. Native PDF links survive undo/redo, exports and local recovery. OCR phrase search and plain-text line grouping are also checked in this revision.
 
 IndexedDB retains documents and edits when permitted by the browser. Its availability for local files depends on the browser; check the save indicator. Local recovery may include unlocked copies, originals and undo history. Download important work and use Library to remove closed stored copies when needed.
+
+**Home project cards have a dustbin beside Resume.** A warning asks for confirmation before deleting a locally saved project, its original copy, edits and history. Confirming also closes that project if it is open; cancelling keeps it intact. Downloaded files and other projects are retained. Storage deletion completes before an open tab closes, and queued/stale autosaves cannot recreate a deleted project. This revision passes 50 deletion checks covering cancellation, failures, concurrent saves and recovery.
 
 ## Create and expanded editing tools
 

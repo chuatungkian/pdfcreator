@@ -1,6 +1,6 @@
 PDFCreator FEATURE AUDIT
 29 October 2026 · Asia/Singapore
-Standalone HTML SHA256: e478759263f68f060dea985ecd2bca8df5ca0c7002dd6990373b730945698a70
+Standalone HTML SHA256: d1104f8a8cbee6a9c530c4bc500a8f84766731a6092b556d4eab0c7df74009f2
 
 RESULT
 72 distinct tool actions are mapped below to passing regression workflows.
@@ -16,6 +16,7 @@ suites were rerun. The paragraph/chunk reflow revision then adds 188 native PDF
 and controlled UI assertions, with affected Direct edit/layout/storage suites rerun.
 The PDFCreator rename then passed 30 branding/workspace/recovery checks, with
 affected PDF/UI suites and release/source integrity checks rerun.
+Home project cards now have a confirmation-protected dustbin; serialised deletion prevents autosave resurrection. See home-deletion-test.mjs.
 The magnifying-glass app search indexes all tools and opens their existing workflows. See function-search-test.mjs.
 Navigation functions toggle their popups on repeated clicks; see navigation-toggle-test.mjs.
 Create now uses the shared side tool pane with three actions; there is no central Create choice dialogue. Its document/import checks are in create-interactions-test.mjs.
