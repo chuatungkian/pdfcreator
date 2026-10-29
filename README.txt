@@ -300,6 +300,29 @@ reuse native source fonts and support paragraph reflow within the selected flow.
 
 COMPLETION WORKSPACES (28 OCTOBER 2026)
 
+Edit > Edit form fields (also under Forms)
+Standard AcroForm fields are clickable in the normal viewer. Click a text field to
+edit directly, including multiline paragraphs, or use Edit > Edit form fields to
+keep selecting fields. Add text, Direct edit and Replace text also route clicks or
+regions inside a text field to this native editor; text is not painted underneath
+the widget. Apply/Ctrl+Enter saves one undo step. Cancel/Escape or clicking grey
+space cancels a draft. The current page and local recovery are retained.
+
+Text fields offer Original font or standard PDF Helvetica/Times/Courier variants,
+size (0 for automatic sizing), colour, left/centre/right alignment and multiline.
+The original font is retained unless changed. Text wraps within the original
+field; reduce the font size if long content is clipped. Checkboxes, radio options,
+dropdowns and list selections have appropriate on-page controls. Read-only/locked
+fields stay protected. Field names, maximum lengths, choice export values and
+shared widgets are respected. Distinct fields with duplicate names are isolated.
+The logical field values and visible appearances update together; fields remain
+interactive after Save PDF. Forms > Fill form retains a bulk editor and now uses
+multiline textareas instead of single-line boxes where appropriate.
+XFA, push-button scripts, signature fields and document JavaScript/calculations
+are not executed by this editor. Flat/scanned forms have no native fields: use
+Add text or create text fields in the blank areas. Existing form boxes do not grow
+or move other page content automatically. Lists use a local native appearance.
+
 Edit > Edit images
 Click an image directly in the normal viewer, or choose Edit > Edit images first.
 The Image inspector provides a crop preview, edge percentages, position/size in
@@ -319,6 +342,12 @@ permanent removal. Colour preview/adjustment supports images up to 20 million
 pixels; larger images retain move, resize, crop and opacity controls. Inline binary
 images and stencil masks are unsupported. A picture baked into a larger scan
 cannot be selected separately, and original PDF clipping can constrain movement.
+
+Large-image appearance fix: pixel views are acquired after native transparency
+mask decoding, which can resize WASM memory. This prevents stale colour/alpha
+buffers from turning adjusted images blank or discoloured. If an earlier edit
+looks white, open Image properties, Reset appearance and Apply changes to restore
+its retained source pixels, then adjust it again in this updated app.
 
 Click the grey space around a PDF page or blank non-working workspace to deactivate
 the selected function. Clicking within the page keeps the function ready for
@@ -701,3 +730,14 @@ later captures, so stale queued state cannot recreate an explicitly deleted copy
 node home-deletion-test.mjs uses synthetic PDFs and simulated IndexedDB to check
 confirmation/cancellation, failure retention, open/closed/last-project deletion,
 in-flight saves, stale captures, local recovery and invalid archived copies.
+
+CENTIMETRE POSITIONING FOR PAGE DECORATIONS
+Headers, footers, page numbers and Bates numbers each have independent position
+controls. Choose Top edge or Bottom edge and enter the distance in centimetres.
+The distance is measured to the nearest visible text edge. Left and Right margin
+(cm) position left/right-aligned text; Centre uses the space between those margins.
+Distances follow the visible cropped/rotated page, using 72 / 2.54 points per cm.
+Header/footer rules follow the text while continuing across the full visible width.
+Keep footer and page-number distances different to avoid placing them on the same
+row. Negative distances, margins that leave no text area and off-page placements
+are refused. Current documents keep their existing decorations until updated.
