@@ -1,6 +1,6 @@
 # PDFCreator
 
-An offline PDF workspace packaged as one HTML file. The current `index.html` is **20.82 MB** and includes its PDF engines, English OCR model, Inter font and downloadable source bundle.
+An offline PDF workspace packaged as one HTML file. The current `index.html` is **20.84 MB** and includes its PDF engines, English OCR model, Inter font and downloadable source bundle.
 
 ## Use
 
@@ -30,6 +30,8 @@ For Word import, download [PDFCreator-Word-Companion.zip](PDFCreator-Word-Compan
 
 Field popups stay inside the visible PDF page and workspace, move inward near edges and use a scrolling body with separate Close/Apply controls. Bounds update for resized content and narrow views; 32 geometry checks pass.
 
+**Protect & sign > Remove security** downloads a password-free copy of the current document or a selected protected PDF. Enter a valid password when required. Wrong-password errors stay in the dialogue; passwords are not stored. Output is verified to be unencrypted, with live fields, page content, layout and attachments retained. Already-unprotected copies retain exact bytes. The original/current tab and undo history are unchanged. Encrypted signed inputs require a decision because rewriting invalidates certificate signatures. The native checks pass 65 assertions across RC4/AES; 28 interaction checks exercise the actual local worker, downloads and cancellation.
+
 **Protect & sign > Remove digital signatures** confirms removal before making an unsigned working copy. Signed fields/widgets and their appearances, signing dictionaries, certification/usage-rights signature policies, obsolete validation data and old incremental signature revisions are removed. Ordinary fields, other page content, empty signature fields and separate visual signatures are retained. Undo restores exact signed bytes. This revision passes 25 native/cryptographic checks and 18 interaction checks; original signing tests also pass. Signatures flattened into text/images can be removed with Select objects or Edit images.
 
 **Edit > Edit form fields** (also in Forms) makes standard AcroForm fields directly clickable. Enter multiline paragraphs, retain the original font or choose a standard PDF font, and adjust size, colour and alignment. Choices, checkboxes and radio/list selections stay interactive. Add text, Direct edit and Replace route field clicks to this editor. Shared widgets, canonical values/appearances, lock/max-length rules, undo/redo, page position and local recovery are retained. Bulk Fill form now uses multiline textareas where appropriate. This revision passes 38 synthetic native checks, six local supplied-form checks and 50 interaction checks. No user PDF is packaged or uploaded.
@@ -48,13 +50,13 @@ The bottom page previews support Ctrl/Cmd-click and Shift-click selection, group
 
 **Save PDF** offers unchanged bytes, lossless cleanup, High/Balanced/Small image compression, or a target maximum in MB/kB. Target mode tries progressively smaller image settings within chosen quality limits and shows actual byte counts and whether the target was reached before download. It retains PDF text, vectors, forms, links and annotations; unsupported/protected images keep their pixels. Target size is best effort, and lower image quality can soften detail. Compressed downloads leave the open PDF at its current quality; the Optimise tool applies compression in one undo step.
 
-The header **magnifying glass** searches all 75 distinct tools and five app actions, including common aliases. Ctrl/Cmd+K opens it, arrow keys navigate, Enter opens a result and Escape closes it. Tools requiring a PDF are disabled on empty Home. The header **question mark** opens About & source, including authorship/contact and source/licence links.
+The header **magnifying glass** searches all 76 distinct tools and five app actions, including common aliases. Ctrl/Cmd+K opens it, arrow keys navigate, Enter opens a result and Escape closes it. Tools requiring a PDF are disabled on empty Home. The header **question mark** opens About & source, including authorship/contact and source/licence links.
 
 ## Documentation and verification
 
 - [User guide and limitations](README.txt)
 - [Validation results](VALIDATION.txt): the earlier functional baseline passed 1,270 counted assertions, followed by 576 Direct edit/view-retention checks. Later revisions add 188 paragraph/chunk checks, 30 branding checks, 80 completion-workflow checks and 57 Create checks. Later targeted revisions add 100 page-feature checks, 74 thumbnail-organiser checks, 75 compression checks, 63 navigation-toggle checks and 61 function-search checks. The Word companion passes 22 checks against actual Microsoft Word and loopback HTTP using a synthetic document. Both native Word PDF pages were rendered and visually inspected. Affected regressions, actual-package integrity and source export also pass.
-- [Feature audit](FEATURE-AUDIT.txt): all 75 distinct tool actions mapped to regression workflows. Live browser layout, font loading, external navigation, downloads and print-dialogue behaviour remain unverified.
+- [Feature audit](FEATURE-AUDIT.txt): all 76 distinct tool actions mapped to regression workflows. Live browser layout, font loading, external navigation, downloads and print-dialogue behaviour remain unverified.
 - [Checksums](SHA256SUMS.txt)
 
 PDFCreator is an offline PDF toolkit. It does not claim complete Adobe Acrobat feature parity, PDF/A or PDF/UA certification, or certificate identity/trust validation.

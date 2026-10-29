@@ -761,3 +761,21 @@ retains the edited copy. The source file is not overwritten. A signature flatten
 into page text or a picture has no certificate field to clear; remove it using
 Select objects or Edit images. This tool does not make a signed original editable
 while preserving its digital signature or establish certificate identity/trust.
+
+REMOVE PASSWORD SECURITY
+Protect & sign > Remove security downloads a copy without an open password or
+password-based permission restrictions. Choose Current document (which may already
+be unlocked for editing), or Choose a protected PDF and select another local file.
+Enter its valid password if required, choose a download name and click Remove
+security & download. Wrong passwords and invalid names are shown in the dialogue
+without producing a file. The original file, working tabs, page, edits and undo
+history are unchanged. Passwords stay transient and are not stored in projects.
+
+The exported PDF is verified to have no encryption and to open without a password.
+Already-unprotected files are copied byte-for-byte. Encrypted files are rewritten
+with text, images, vectors, live forms, attachments and page layout retained; pages
+are not flattened. Encrypted PDFs with certificate signatures require a decision
+because rewriting invalidates those signatures in the export. Use Remove digital
+signatures separately if you need an unsigned file. Pending redaction marks must
+be applied or cleared before exporting the current document. Processing runs in a
+local worker with cancellation. No password guessing or remote service is used.
