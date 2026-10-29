@@ -1,9 +1,9 @@
 PDFCreator FEATURE AUDIT
-28 October 2026 · Asia/Singapore
-Standalone HTML SHA256: 696afe517d3de8e36518d15e02749822b159c399940ecf220b2df4f80b3ce831
+29 October 2026 · Asia/Singapore
+Standalone HTML SHA256: e478759263f68f060dea985ecd2bca8df5ca0c7002dd6990373b730945698a70
 
 RESULT
-69 distinct tool actions are mapped below to passing regression workflows.
+72 distinct tool actions are mapped below to passing regression workflows.
 The functional baseline passed 1,270 counted assertions plus certificate-signing
 and actual-package integrity checks. The later circular-indicator presentation
 update reran 165 targeted workflow/continuous-page/source-export assertions plus
@@ -16,6 +16,11 @@ suites were rerun. The paragraph/chunk reflow revision then adds 188 native PDF
 and controlled UI assertions, with affected Direct edit/layout/storage suites rerun.
 The PDFCreator rename then passed 30 branding/workspace/recovery checks, with
 affected PDF/UI suites and release/source integrity checks rerun.
+The magnifying-glass app search indexes all tools and opens their existing workflows. See function-search-test.mjs.
+Navigation functions toggle their popups on repeated clicks; see navigation-toggle-test.mjs.
+Create now uses the shared side tool pane with three actions; there is no central Create choice dialogue. Its document/import checks are in create-interactions-test.mjs.
+The compression revision adds size-aware Save PDF and non-flattening image recompression with target-size search, result confirmation and undo. See compression-test.mjs and compression-interactions-test.mjs.
+The current revision adds independent page-band alignment/rules/timestamps, object/new-text links, compact tool popups and direct thumbnail organisation. See page-features-test.mjs and page-strip-test.mjs.
 The completion revision adds object transforms, rich text, text-aware markup, all-page comments, a visual organiser and document-wide find/replace. See VALIDATION.txt for current counts. Live browser dialogue/animation remains unverified.
 This is a scoped automated audit, not a certification that every possible PDF,
 device or browser behaviour is supported.
@@ -54,6 +59,15 @@ FIXES
 - Native PDF mutation buffers are released immediately after bytes are copied.
 
 TOOL COVERAGE
+New PDF [createNew]
+  PASS in create-interactions-test.mjs
+
+Import from Word [createWord]
+  PASS in create-interactions-test.mjs
+
+Open PDF [createPDF]
+  PASS in create-interactions-test.mjs
+
 Find text [search]
   PASS in feature-audit-test.mjs
 
@@ -97,7 +111,7 @@ Merge & split [split]
   PASS in merge-split-test.mjs, merge-split-interactions-test.mjs
 
 Page organiser [reorder]
-  PASS in completion-interactions-test.mjs, annotation-interactions-test.mjs, placement-tools-test.mjs
+  PASS in page-features-test.mjs, page-strip-test.mjs, completion-interactions-test.mjs
 
 Crop area [crop]
   PASS in feature-audit-test.mjs
@@ -121,7 +135,7 @@ Replace text [replace]
   PASS in feature-audit-test.mjs
 
 Add link [link]
-  PASS in links-test.mjs
+  PASS in page-features-test.mjs, links-test.mjs, fonts-previews-test.mjs
 
 Watermark [watermark]
   PASS in watermarks-test.mjs, fonts-previews-test.mjs
@@ -130,13 +144,13 @@ Edit watermarks [watermarks]
   PASS in watermarks-test.mjs, fonts-previews-test.mjs
 
 Page numbers [number]
-  PASS in feature-audit-test.mjs
+  PASS in page-features-test.mjs, links-test.mjs, fonts-previews-test.mjs
 
 Bates numbers [bates]
-  PASS in feature-audit-test.mjs
+  PASS in page-features-test.mjs, links-test.mjs, fonts-previews-test.mjs
 
 Header / footer [header]
-  PASS in feature-audit-test.mjs
+  PASS in page-features-test.mjs, links-test.mjs, fonts-previews-test.mjs
 
 Highlight [highlight]
   PASS in completion-interactions-test.mjs, annotation-interactions-test.mjs, placement-tools-test.mjs
@@ -211,7 +225,7 @@ Extract text [textExport]
   PASS in feature-audit-test.mjs
 
 Optimise PDF [optimize]
-  PASS in feature-audit-test.mjs
+  PASS in compression-test.mjs, compression-interactions-test.mjs, feature-audit-test.mjs, tabs-interactions-test.mjs
 
 Mark redaction [redact]
   PASS in feature-audit-test.mjs
@@ -238,7 +252,7 @@ Verify signatures [verify]
   PASS in feature-audit-test.mjs
 
 Save PDF [save]
-  PASS in feature-audit-test.mjs
+  PASS in compression-test.mjs, compression-interactions-test.mjs, feature-audit-test.mjs, tabs-interactions-test.mjs
 
 Page to PNG [png]
   PASS in feature-audit-test.mjs

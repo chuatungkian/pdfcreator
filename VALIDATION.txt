@@ -1,6 +1,93 @@
+PDFCreator — APP FUNCTION SEARCH AND HEADER ICONS
+Date: 29 October 2026 (Asia/Singapore)
+Standalone HTML SHA256: e478759263f68f060dea985ecd2bca8df5ca0c7002dd6990373b730945698a70
+
+CURRENT FUNCTION SEARCH REVISION
+node function-search-test.mjs: 61 assertions passed in a controlled DOM using
+real PDF actions. All 72 distinct tools plus five app actions indexed, duplicate
+removal, name/category/alias matching, British/American spelling, disabled tools
+on empty Home, query escaping, keyboard navigation, Ctrl+K/Enter/Escape, outside
+dismissal, focus restoration, Create/new/open routes, placement-tool activation,
+page/tab retention, active-tool preservation, native rotation/undo, destructive
+confirmation, theme and question-mark About.
+Affected branding 30, UI refresh 75, navigation toggles 63 and Create 57 assertions
+passed. Source export/release bytes, assets, strict HTML size and hashes checked
+after rebuilding. No live-browser layout or native download UI was exercised.
+
+PREVIOUS REVISION VALIDATION
+
+PDFCreator — CREATE IN THE SHARED TOOL PANE
+Date: 29 October 2026 (Asia/Singapore)
+Standalone HTML SHA256: e478759263f68f060dea985ecd2bca8df5ca0c7002dd6990373b730945698a70
+
+CURRENT CREATE PANE REVISION
+node navigation-toggle-test.mjs: 63 assertions passed for every left navigation
+group, Create on Home, reopen/switch behaviour, collapsed navigation, pinned
+settings dismissal, accessible states and PDF/page/tab/history retention.
+node create-interactions-test.mjs: 57 assertions passed with native PDF bytes
+and controlled DOM/Word companion responses. Create opens the shared side pane
+on Home and active PDFs, with three compact action buttons and no central
+choice dialogue. Outside dismissal, navigation collapse, docking/icons, focus
+restoration, switching tool groups, new-PDF settings, existing-PDF selection,
+Word import/searchable content, pairing errors and cancelled asynchronous work.
+Affected UI refresh 75, tabs 115, persistence/navigation 64 and branding 30
+assertions passed. Package/source exports and checksums were checked after build.
+Live browser layout remains unverified.
+
+PREVIOUS REVISION VALIDATION
+
+PDFCreator — SIZE-AWARE SAVE AND PDF COMPRESSION
+Date: 29 October 2026 (Asia/Singapore)
+Standalone HTML SHA256: e478759263f68f060dea985ecd2bca8df5ca0c7002dd6990373b730945698a70
+
+CURRENT COMPRESSION REVISION
+node compression-test.mjs: 33 assertions passed using native PDFs and encoded
+images. Shared-image recompression, DPI/quality presets and target search,
+fixed-DPI quality floors, exact bytes when already below target, unattainable
+target reporting, anti-growth selection, lossless pixel equality, text, forms,
+links, metadata, attachments, rotation/crop geometry and protected transparency.
+A native compressed-page rendering was visually inspected.
+node compression-interactions-test.mjs: 42 assertions passed with the actual
+embedded worker in a Node VM and controlled DOM. Modes, target presets/units,
+size validation, actual result confirmation, original-byte export, compressed
+downloads, target success/failure, non-mutating exports, page/tab/history
+retention, applied compression/undo/redo, cancellation, filenames, simulated
+signed-source and pending-redaction decisions. No network requests were made.
+Affected tabs: 115, feature audit: 82, embedded PDF/OCR workers: 13 assertions
+passed. Release/source reconstruction, byte identity, strict HTML size limit
+and checksums were verified after rebuilding.
+No live browser layout, native download/save picker or Blob worker startup
+was checked; see the retained limitations below.
+
+PREVIOUS REVISION VALIDATION
+
+PDFCreator — PAGE TOOLS, LINKS AND THUMBNAIL ORGANISATION
+Date: 29 October 2026 (Asia/Singapore)
+Standalone HTML SHA256: e478759263f68f060dea985ecd2bca8df5ca0c7002dd6990373b730945698a70
+
+CURRENT REVISION
+node page-features-test.mjs: 100 assertions passed with native PDF pixels and a
+controlled DOM. Rotated/cropped page geometry, full-width rules/thickness,
+independent header/footer/page-number slots, timestamps, searchable text, native
+links, linked-text undo, watermark controls, About authorship/removals, diskette
+icon, compact tool CSS and cross-tab organiser switching/staged-change decisions.
+A native page-band rendering and linked-text rendering were visually inspected.
+node page-strip-test.mjs: 74 assertions passed with native PDFs and controlled
+selection/drag/context events. Multi-selection, contiguous/disjoint reordering,
+active-page retention, internal destinations, blank insertion, rotation, copying,
+delete confirmation, extraction, import/replace from tabs, compact previews,
+full organiser, form-copy refusal, undo/redo and local recovery.
+Affected suites rerun: completion 80, branding 30, UI refresh 75, watermarks 115,
+links 68, fonts/previews 107, tabs 115, continuous pages 66, persistence 64,
+Create 38 and feature audit 82. Embedded source export: 17 checks passed after
+rebuilding; release archives, runtime assets, source bytes and hashes verified.
+No live-browser layout, context-menu position or native drag gestures were tested.
+
+PREVIOUS RELEASE VALIDATION (historical results below)
+
 PDFCreator — CENTRED WATERMARKS AND EXISTING-LAYER EDITING
 Date: 28 October 2026 (Asia/Singapore)
-Standalone HTML SHA256: 696afe517d3de8e36518d15e02749822b159c399940ecf220b2df4f80b3ce831
+Standalone HTML SHA256: e478759263f68f060dea985ecd2bca8df5ca0c7002dd6990373b730945698a70
 
 CURRENT WATERMARK REVISION
 node watermarks-test.mjs: 115 assertions passed with native PDF geometry/pixels
@@ -18,7 +105,7 @@ Live browser layout remains unverified under the earlier file:// tool restrictio
 
 PDFCreator — CREATE AND NATIVE WORD IMPORT
 Date: 28 October 2026 (Asia/Singapore)
-Standalone HTML SHA256: 696afe517d3de8e36518d15e02749822b159c399940ecf220b2df4f80b3ce831
+Standalone HTML SHA256: e478759263f68f060dea985ecd2bca8df5ca0c7002dd6990373b730945698a70
 
 CURRENT CREATE REVISION
 node create-interactions-test.mjs: 38 assertions passed with native PDF bytes,
@@ -43,7 +130,7 @@ an optional Windows/Microsoft Word companion workflow approved by the user.
 
 PDFCreator — COMPLETION WORKSPACES
 Date: 28 October 2026 (Asia/Singapore)
-Standalone HTML SHA256: 696afe517d3de8e36518d15e02749822b159c399940ecf220b2df4f80b3ce831
+Standalone HTML SHA256: e478759263f68f060dea985ecd2bca8df5ca0c7002dd6990373b730945698a70
 
 CURRENT REVISION
 node completion-interactions-test.mjs: 80 assertions passed with native PDF bytes,
@@ -65,7 +152,7 @@ Affected existing suites were rerun; their historical counts below are retained.
 
 PDFCreator — BRANDING AND BACKWARD COMPATIBILITY
 Date: 28 October 2026 (Asia/Singapore)
-Standalone HTML SHA256: 696afe517d3de8e36518d15e02749822b159c399940ecf220b2df4f80b3ce831
+Standalone HTML SHA256: e478759263f68f060dea985ecd2bca8df5ca0c7002dd6990373b730945698a70
 
 RENAME CHECKS
 node branding-compatibility-test.mjs: 30 assertions passed with native PDFs.
@@ -209,7 +296,7 @@ CHANGES
 - A strict build-time cap keeps the HTML below 25,000,000 bytes (decimal 25 MB).
 - Shared PDF/OCR/font/model/source bytes are stored once. Identical source files
   share compressed chunks. Engines, model, font, PDF tools and storage are retained.
-- About > Download source bundle reconstructs every source path and file locally.
+- The embedded downloadSource API reconstructs every source path/file locally.
   Existing compressed chunks are copied directly. Shared assets use native browser
   compression when available, with a valid stored-ZIP fallback when unavailable.
 - Source export requires no network or new ZIP decoder. Licences/notices remain.
@@ -239,7 +326,7 @@ CHANGES
   Collapsed groups retain accessible names and tooltips; the choice is restored.
 - Theme, right docking, preview mode and document font are also recovered.
 - Local copies can include unlocked source bytes and pre-redaction undo history;
-  this retention is explained in Library/About/README. Downloads remain separate.
+  this retention is explained in Library/README. Downloads remain separate.
 
 CURRENT REVISION CHECKS
 The signature update passed 35 composition checks and reran persistent placement
@@ -371,7 +458,7 @@ node source-package-test.mjs: 34 assertions passed using native ZIP/DEFLATE deco
 
 node source-export-ui-test.mjs: 17 assertions passed in a controlled test DOM
 using the actual release payload, real source ZIPs and synthetic PDF bytes.
-- About > Download source bundle exports all files with correct nested paths.
+- The embedded source API exports all files with correct nested paths.
 - Duplicate clicks produce one download; progress and completion state are clear.
 - Licence/notices downloads are unchanged. Source exports leave PDF/history intact.
 - A damaged shared asset reports an error, restores the button and permits retry.

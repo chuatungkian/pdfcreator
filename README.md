@@ -1,6 +1,6 @@
 # PDFCreator
 
-An offline PDF workspace packaged as one HTML file. The current `index.html` is **20.61 MB** and includes its PDF engines, English OCR model, Inter font and downloadable source bundle.
+An offline PDF workspace packaged as one HTML file. The current `index.html` is **20.71 MB** and includes its PDF engines, English OCR model, Inter font and downloadable source bundle.
 
 ## Use
 
@@ -16,13 +16,13 @@ Edits and inserted items retain the current page and both scroll offsets. Visual
 
 **Organise > Merge & split** combines current edited PDFs from open tabs, the local library or uploads. Reorder sources, add visual split points or grouped page ranges, preview filenames, download grouped PDFs as a ZIP, or create a merged working tab. Plans recover locally and detect changed or missing sources.
 
-**Edit > Add link** supports websites, email addresses and pages in the same PDF. Draw the link area, set the destination, then choose Done to follow links. The small arrow edits or removes a link. Native PDF links survive undo/redo, exports and local recovery. OCR phrase search and plain-text line grouping are also checked in this revision.
+**Edit > Add link** supports websites, email addresses and pages in the same PDF. Click existing text, an image or a shape; draw an area; or place new visible linked text with a chosen font, size and colour. Text and its link form one undo step. Choose Done to follow links. The small arrow edits or removes a link. Native PDF links survive undo/redo, exports and local recovery. OCR phrase search and plain-text line grouping are also checked in this revision.
 
 IndexedDB retains documents and edits when permitted by the browser. Its availability for local files depends on the browser; check the save indicator. Local recovery may include unlocked copies, originals and undo history. Download important work and use Library to remove closed stored copies when needed.
 
 ## Create and expanded editing tools
 
-**Create** is the first entry in the left toolbar. Its compact text-only choices are **New PDF**, **Import from Word** and **Open PDF**. New documents support named files, standard/custom page sizes, orientation, margins, multiple pages and blank/ruled/squared paper. Existing PDFs open in separate tabs.
+**Create** is the first entry in the left toolbar. It opens the same side tool pane as the other navigation functions, with **New PDF**, **Import from Word** and **Open PDF** actions. Clicking the same navigation group again closes its popup; another group switches the content. New documents support named files, standard/custom page sizes, orientation, margins, multiple pages and blank/ruled/squared paper. Existing PDFs open in separate tabs.
 
 For Word import, download [PDFCreator-Word-Companion.zip](PDFCreator-Word-Companion.zip), extract it and run `start-word-companion.cmd`. Paste its pairing code into **Create > Import from Word**. The companion uses the installed Microsoft Word PDF exporter over an authenticated loopback connection. No cloud conversion service is used. Word renders formatting, pictures, tables, headers, footers and page layout; source fonts and document restrictions can affect fidelity. The same companion ZIP is downloadable from the standalone HTML.
 
@@ -30,13 +30,21 @@ For Word import, download [PDFCreator-Word-Companion.zip](PDFCreator-Word-Compan
 
 **Comments** spans all pages, with editing, replies, resolved status, filters and an exportable printable summary. **Organise > Page organiser** stages visual multi-page rearrangement, rotation, duplication, deletion, insertion and replacement from other tabs/uploads. **Find and replace** offers case/whole-word/page-range controls and a selectable replacement preview for supported native paragraphs and tracked text boxes. New edits use the shared undo and local recovery workflows.
 
-**Edit > Watermark** now centres the visible rotated text on each displayed page, including crop/rotation handling, with size, angle, opacity, font and colour controls. Batch watermarks use the same positioning. **Edit > Edit watermarks** identifies tracked and older PDFCreator layers, tagged imported layers and candidate native text watermarks. Preview/select layers, update their text/appearance, or remove them with undo support. Inferred candidates need review; watermarks baked into page images cannot be separated automatically. The watermark revision passes 115 native geometry/pixel and controlled-interaction checks, including preserving overlapping body text.
+**Edit > Watermark** now centres the visible rotated text on each displayed page, including crop/rotation handling, with size, angle, opacity, font and colour controls. Batch watermarks use the same positioning. **Edit > Edit watermarks** identifies tracked and older PDFCreator layers, tagged imported layers and candidate native text watermarks. Preview/select layers, update their text/appearance, or remove them with undo support. Inferred candidates need review; watermarks baked into page images cannot be separated automatically. The watermark revision passes 115 native geometry/pixel and controlled-interaction checks, including preserving overlapping body text. Rotation accepts -360 to 360 degrees in 0.1 degree steps.
+
+**Headers, footers and page/Bates numbers** support independent left/centre/right alignment. Add full-width header/footer rules with adjustable thickness and static date/time stamps. Footer text and page numbers use separate rows and can appear together. Later updates replace the corresponding tracked decoration while retaining the other rows.
+
+The bottom page previews support Ctrl/Cmd-click and Shift-click selection, group dragging, and a right-click menu for rotation, duplication, deletion, extraction, moving, blank insertion and importing/replacing from other PDFs. The full Page organiser also has a document dropdown listing every open tab, defaults to the active PDF and switches it with staged-change protection.
+
+**Save PDF** offers unchanged bytes, lossless cleanup, High/Balanced/Small image compression, or a target maximum in MB/kB. Target mode tries progressively smaller image settings within chosen quality limits and shows actual byte counts and whether the target was reached before download. It retains PDF text, vectors, forms, links and annotations; unsupported/protected images keep their pixels. Target size is best effort, and lower image quality can soften detail. Compressed downloads leave the open PDF at its current quality; the Optimise tool applies compression in one undo step.
+
+The header **magnifying glass** searches all 72 distinct tools and five app actions, including common aliases. Ctrl/Cmd+K opens it, arrow keys navigate, Enter opens a result and Escape closes it. Tools requiring a PDF are disabled on empty Home. The header **question mark** opens About & source, including authorship/contact and source/licence links.
 
 ## Documentation and verification
 
 - [User guide and limitations](README.txt)
-- [Validation results](VALIDATION.txt): the earlier functional baseline passed 1,270 counted assertions, followed by 576 Direct edit/view-retention checks. Later revisions add 188 paragraph/chunk checks, 30 branding checks, 80 completion-workflow checks and 38 Create checks. The Word companion passes 22 checks against actual Microsoft Word and loopback HTTP using a synthetic document. Both native Word PDF pages were rendered and visually inspected. Affected regressions, actual-package integrity and source export also pass.
-- [Feature audit](FEATURE-AUDIT.txt): all 69 distinct tool actions mapped to regression workflows. Live browser layout, font loading, external navigation, downloads and print-dialogue behaviour remain unverified.
+- [Validation results](VALIDATION.txt): the earlier functional baseline passed 1,270 counted assertions, followed by 576 Direct edit/view-retention checks. Later revisions add 188 paragraph/chunk checks, 30 branding checks, 80 completion-workflow checks and 57 Create checks. Later targeted revisions add 100 page-feature checks, 74 thumbnail-organiser checks, 75 compression checks, 63 navigation-toggle checks and 61 function-search checks. The Word companion passes 22 checks against actual Microsoft Word and loopback HTTP using a synthetic document. Both native Word PDF pages were rendered and visually inspected. Affected regressions, actual-package integrity and source export also pass.
+- [Feature audit](FEATURE-AUDIT.txt): all 72 distinct tool actions mapped to regression workflows. Live browser layout, font loading, external navigation, downloads and print-dialogue behaviour remain unverified.
 - [Checksums](SHA256SUMS.txt)
 
 PDFCreator is an offline PDF toolkit. It does not claim complete Adobe Acrobat feature parity, PDF/A or PDF/UA certification, or certificate identity/trust validation.
@@ -47,7 +55,7 @@ Earlier commits remain available in [the original pdfpro repository](https://git
 
 ## Source and rebuild
 
-The complete application source kit is available in [pdfcreator-3.0-app-source.zip](pdfcreator-3.0-app-source.zip). The same file contents can be exported offline using **About & source > Download source bundle**.
+The complete application source kit is available in [pdfcreator-3.0-app-source.zip](pdfcreator-3.0-app-source.zip). The same file contents remain embedded and can be exported offline with `window.PDFCreator.downloadSource()`. About links to this repository; the former source/notice download buttons have been removed.
 
 Extract the source kit, enter its `source` folder and install the locked dependencies with `pnpm install --frozen-lockfile`. From the repository root, run `python upstream/assemble-mupdf-source.py` to reconstruct the [complete MuPDF source archive](upstream/README.md) from its three verified parts. Copy the resulting `upstream/mupdf-1.28.1-source.tar.gz` beside `build.mjs`, then run `node build.mjs`. See README.txt for the exact runtime versions, test dependencies and build details. No user PDFs, browser storage, credentials or signing keys are included in this repository.
 

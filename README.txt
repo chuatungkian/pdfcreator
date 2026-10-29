@@ -21,15 +21,18 @@ The build enforces a strict limit of 25,000,000 bytes for the HTML. PDF/OCR
 engines, English recognition data, Inter and source files are retained locally.
 Identical files share their stored bytes; source copies of runtime assets refer
 to the existing embedded assets. No CDN or first-run download is required.
-About & source > Download source bundle assembles the complete source ZIP on
-demand. Its paths and file contents match the separate app-source ZIP. When
+The complete source/build ZIP accompanies the release. The embedded source is
+also available through window.PDFCreator.downloadSource(), which assembles it
+locally. Its paths and file contents match the separate app-source ZIP. When
 browser compression is unavailable, a valid larger ZIP preserves the same files.
 This changes packaging only; PDF operations, OCR and local recovery are retained.
 
 INTERFACE
 White, maroon, navy and black palette. Inter4.1 is embedded in the HTML and
 licensed under SIL Open Font License1.1. Interface copy uses British English.
-Create is the first entry in the left toolbar; Save PDF stays in the header.
+Create is the first entry in the left toolbar; Save PDF has a diskette icon in
+the header. Tool popups are 260 px wide with compact 36 px minimum-height tiles,
+15 px icons and content-sized height, scrolling within the available workspace.
 Create offers New PDF,
 Import from Word and Open PDF; the old top Open files button has been removed.
 The three-dot menu contains Create, Local library and Print document. Page controls
@@ -52,7 +55,11 @@ disable the tracing animation, and native progress semantics remain accessible.
 
 CREATE A NEW DOCUMENT OR IMPORT WORD
 Choose Create in the left toolbar, on Home, or beside the document tabs.
-Its three choices use compact text-only tiles.
+It opens the same compact side tool pane as the other navigation functions.
+New PDF opens page settings; Import from Word opens companion controls; Open PDF
+goes directly to the file picker. There is no central Create choice dialogue.
+The pane supports outside-click dismissal, collapsed navigation and icon-only
+docking. It is also available on Home before a PDF has been opened.
 - New PDF: name your document, choose A4/A5/A3/Letter/Legal or a custom size,
   orientation, 1-200 pages, margins and blank/ruled/squared paper. Dimensions and
   margins are in millimetres. The PDF opens ready to add text in Edit; use Add image,
@@ -348,8 +355,12 @@ Organise > Page organiser replaces the old numeric reorder prompt. Tiles have
 lazy native previews. Click selects, Ctrl/Cmd-click toggles, Shift-click selects a
 range. Drag selected tiles before another tile or into empty grid space to move
 them to the end. Earlier/Later provides a keyboard-accessible alternative.
-Stage bulk rotation, duplication, deletion and blank pages. Choose another open
-tab or Upload PDF, enter source page ranges, then Insert pages or Replace selected.
+The Document dropdown lists every open PDF, defaults to the active tab and switches
+the active PDF and organiser together. If changes are staged, choose Apply and
+switch, Discard and switch, or Stay here. Cancel also cancels a pending switch.
+Stage bulk rotation, duplication, deletion and blank pages. Use the separate
+Insert from selector to choose another tab or Upload PDF, enter source page
+ranges, then Insert pages or Replace selected.
 Insertions follow the last selected tile; replacement uses the first selected
 position and removes all selected tiles. Extract downloads selected staged pages.
 Apply saves the staged arrangement in one undo step; Cancel discards the preview.
@@ -378,7 +389,7 @@ pages, extraction/splitting, annotation/comments/drawing/stamps, added text and
 images, links, bookmarks, watermarks, numbering/Bates/header/footer, metadata,
 attachments, AcroForm fill/create/import/export/flatten, visual signatures,
 English OCR with invisible searchable text, visual/text comparison and heatmaps,
-lossless optimisation, page image/text exports, batch processing, AES-256
+lossless and image-aware compression, page image/text exports, batch processing, AES-256
 password encryption, permanent region removal, full raster sanitation,
 bounded existing-text replacement, and RSA PKCS12 certificate signing/verification.
 
@@ -442,7 +453,9 @@ reopening download index.html and open it locally. There is no service worker.
 User documents are processed locally and are not committed or uploaded.
 
 SOURCE AND BUILD
-The About dialogue exports the application source/build kit embedded in the HTML.
+About & source shows authorship/contact and links to source/build instructions
+and component licences. The complete source/build kit remains embedded and can
+be exported with window.PDFCreator.downloadSource().
 The GitHub ZIP additionally includes the complete official MuPDF1.28.1 source
 tarball, including third-party sources. Its platform/wasm/BUILDING.md describes
 the upstream engine build (Emscripten4.0.8 and Node22).
@@ -478,8 +491,8 @@ checks, safe paths and the compression fallback. After building, node
 packaging-release-test.mjs verifies the strict size cap, all source-file bytes,
 runtime assets, both ZIP export paths, release archives and checksums.
 node source-export-ui-test.mjs uses the actual release assets in a controlled DOM
-to check About > Download source bundle, notices, duplicate clicks and error/retry
-behaviour without changing the working PDF.
+to check the embedded source API, retained notices, concurrent requests and
+error/retry behaviour without changing the working PDF.
 node placement-tools-test.mjs checks repeated placements, toggle-off controls,
 compact text settings, preserved placement coordinates and per-document selection.
 node freehand-test.mjs checks live pen samples, native Ink paths and rendered pixels,
@@ -528,3 +541,124 @@ without an identifiable separate layer may not be recognised. Use Select objects
 for other independently selectable artwork. This is not automatic image inpainting.
 The Open PDF tile description also includes the requested wording, “Classify
 documents before loading”; this change adds descriptive text only.
+
+PAGE DECORATIONS AND LINK PLACEMENT (29 October 2026)
+Watermark rotation accepts -360 to 360 degrees in 0.1 degree steps; placement
+remains centred on the displayed page, including rotation and crop offsets.
+Headers and footers have independent Left/Centre/Right alignment and timestamp
+choices: date, time, both or none. Optional full-width rules sit below the header
+and above the footer, with independent 0.25–12 pt thickness. Timestamps capture
+the device's local date/time once per operation, using British date formatting.
+Page numbers and Bates numbers have their own alignment. Add them alongside
+header/footer text, or add/update a footer from the numbering dialogue. Footer
+and number rows are separate. Later updates replace the same tracked slot while
+retaining the other slots. Text shrinks to fit its page band. These slots apply
+to PDFCreator's new decorations; untracked imported headers/footers are unchanged.
+
+Edit > Add link offers three placement modes: click existing text, image or shape;
+draw a link area; or place new linked text. The dialogue can add visible display
+text with a chosen installed font, size and colour, plus a website/email or
+internal-page destination. New text and its link form one undo action. Choose
+Done to follow links, or use the existing arrow badge to edit/remove a destination.
+Click targets follow text lines and identifiable image/vector/annotation bounds;
+flattened scans require an area selection because their text/shapes are pixels.
+
+BOTTOM PAGE PREVIEW ORGANISATION
+Click a preview to navigate and select. Ctrl/Cmd-click toggles individual pages;
+Shift-click selects a range. Ctrl/Cmd+Shift extends an existing selection. Drag
+selected tiles together before or after another tile; the insertion mark shows
+the position. Dragging near the strip's edges scrolls it. Drop in empty space
+to append. The viewed original page follows its new position; undo restores it.
+Right-click a tile or the strip for Select all, Rotate, Duplicate, Delete, Extract,
+Move earlier/later, Insert blank before/after, Insert pages from PDF, Replace
+selected from PDF and Open Page organiser. Right-clicking a selected tile retains
+the selection; an unselected tile becomes the selection. New blank pages match
+the clicked page's displayed dimensions. Imports accept another open tab or a
+local file, with source page ranges. Signed sources and pending redactions need
+resolving before import. Live form pages must be flattened before copying.
+Changes apply immediately as one undo action and use normal local autosave.
+The full organiser continues to offer a staged preview before Apply.
+These controls work with both compact and expanded bottom previews. With a tile
+focused, Ctrl/Cmd+A selects all, Alt+Left/Right moves earlier/later, Delete asks
+before deletion, and Shift+F10 opens the context menu. Escape/outside click closes
+the menu. Page selection resets after unrelated PDF changes or tab switches.
+
+node page-features-test.mjs checks page-band pixels on cropped/rotated pages,
+tracked-slot replacement, timestamps, existing-object/new-text links, the About
+changes, watermark controls, compact tool CSS and organiser document switching.
+node page-strip-test.mjs checks multi-selection, drag/drop, context menu actions,
+blank/imported pages, native destination retention, form-copy safeguards, undo and
+local recovery. Both use synthetic PDFs and a controlled DOM, not live browser
+layout or actual browser drag/download behaviour.
+
+SIZE-AWARE SAVE AND BETTER PDF COMPRESSION (29 October 2026)
+Save PDF now opens export settings. Current quality downloads the exact current
+bytes; choose Lossless, High quality (220 dpi / 90% JPEG), Balanced (150 dpi /
+78% JPEG), Small file (96 dpi / 58% JPEG), or Choose a target file size. Enter a
+maximum in decimal MB or kB, or use 1/2/5/10 MB presets. You can change the filename.
+Compressed exports show current/prepared byte counts and percentage reduction
+before download. Target results explicitly state whether the maximum was reached.
+Cancelling either dialogue or the processing task keeps the working PDF intact.
+The current-quality option preserves existing certificate signatures byte for
+byte. Rewriting a signed PDF requires confirmation because signatures are invalidated.
+
+Target mode first tries lossless cleanup. It then tries image settings from
+300 dpi / 92% JPEG down to the chosen floors (default 72 dpi / 45% JPEG). It stops
+at the first result at or below the maximum, or offers the smallest available
+result. Higher resolution floors still permit quality adjustment. No padding is
+added to force an exact size, and no result larger than the input is chosen.
+Text-heavy, already compressed or unsupported-image PDFs may not reach the target.
+Quality choices can soften photographic detail or scanned text; inspect the result.
+
+Eligible opaque 8-bit RGB/grey image streams are JPEG-recompressed and downsampled
+using their largest actual display size across pages and nested Forms. Shared
+images are processed once, never upsampled, and replaced only when smaller.
+Transparent/soft-mask/colour-key images, monochrome images, small images, special
+colour spaces, images over 20 million pixels, inline images and unknown uses are
+retained. Page content is not rasterised. Native text, vector graphics, links,
+annotations, forms, page geometry, metadata and attachments are retained.
+Lossless cleanup keeps image pixels and font programmes, removes unused/duplicate
+objects and compresses streams/object streams. Target trials start from the
+original bytes so JPEG quality loss does not accumulate between attempts.
+
+The Compress tool offers the same settings and an actual-size preview, then
+applies the result to the working PDF in one undo step. Saving a compressed copy
+keeps the open PDF bytes, view and undo history at their existing quality.
+Pending redactions require the usual acknowledgement before an unredacted save;
+apply or clear them before changing the working PDF with Compress.
+
+node compression-test.mjs checks real image/target compression, lossless pixel
+equality, form/link/attachment/text/geometry retention, protected masks, size
+floors and cancellation. node compression-interactions-test.mjs uses the actual
+embedded offline worker to check Save/Compress settings, result confirmation,
+attainable/unattainable targets, filenames, undo, cancellation and signature/
+redaction decisions. These use synthetic documents and a controlled DOM; native
+browser save pickers and layout have not been checked in this revision.
+
+FUNCTION NAVIGATION TOGGLES
+Click a left navigation function to open its popup. Click the same function again
+to close it; another function replaces the popup content. Create follows the same
+behaviour, including on Home and with collapsed navigation. When tools are pinned
+as a right-side icon bar, clicking the active group closes its floating settings
+while keeping the pinned bar. Home/tab-bar Create entries open the Create pane.
+node navigation-toggle-test.mjs checks group/Create toggles, accessible state,
+collapsed/pinned modes and retention of PDF bytes, page, tab and undo history.
+
+SEARCH APP FUNCTIONS
+The magnifying glass beside the dark-mode switch opens an offline function
+search. Ctrl/Cmd+K opens it from the keyboard. Search tool names or common terms
+such as compress, hyperlink, circle, reorder and scan. Results show their tool
+group; shared tools appear once. The catalogue contains all 72 distinct tools
+plus Create, Home, Local library, theme and About actions.
+Click a result to open the matching tool or its normal settings/confirmation.
+Existing safety confirmations and undo behaviour remain. Document tools are
+disabled until a PDF is open; Create and app actions work on Home. A result
+requiring a PDF resumes the active document if Home is showing. Opening an
+already-selected placement tool retains its selection.
+Arrow keys navigate, Enter opens, and Escape closes and restores focus to the
+magnifier. Clicking outside or focusing another control dismisses the popup.
+The header question-mark button opens About & source, retaining its accessible
+name, source/licence links and authorship/contact information.
+node function-search-test.mjs checks catalogue coverage, aliases, disabled states,
+keyboard/dismissal behaviour, actual PDF actions, confirmations and About/theme.
+These are controlled DOM/native PDF checks; live browser layout is unverified.
