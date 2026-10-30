@@ -1,9 +1,9 @@
 PDFCreator FEATURE AUDIT
-29 October 2026 · Asia/Singapore
-Standalone HTML SHA256: 6fcd86a874ec46e3bef1840facd4ecc6eda57a12a78f2bd3e0b77f6614cd992c
+30 October 2026 · Asia/Singapore
+Standalone HTML SHA256: 99baca86f2b69db404213a42bb3ca42faa1ca551a3d2f6300b56fafe4c137ac4
 
 RESULT
-76 distinct tool actions are mapped below to passing regression workflows.
+80 distinct tool actions are mapped below to passing regression workflows.
 The functional baseline passed 1,270 counted assertions plus certificate-signing
 and actual-package integrity checks. The later circular-indicator presentation
 update reran 165 targeted workflow/continuous-page/source-export assertions plus
@@ -16,6 +16,7 @@ suites were rerun. The paragraph/chunk reflow revision then adds 188 native PDF
 and controlled UI assertions, with affected Direct edit/layout/storage suites rerun.
 The PDFCreator rename then passed 30 branding/workspace/recovery checks, with
 affected PDF/UI suites and release/source integrity checks rerun.
+The experience revision adds a shared dockable inspector, real PDF decoration previews, labelled history/checkpoints, form assistance/detection, object/layer selection/visibility/locks, export review, searchable tagged library/bin/backups and reusable templates. See experience-test.mjs and experience-interactions-test.mjs.
 Protect & sign includes Remove security for password-authenticated, verified unencrypted exports of the current copy or a chosen local PDF. See remove-security-test.mjs and remove-security-interactions-test.mjs.
 Field editors are bounded within the visible PDF page, with internal scrolling. Protect & sign can remove certificate signatures into an unsigned working copy; see page-popup-test.mjs and remove-signatures-test.mjs.
 Native form widgets are directly editable with multiline text/formatting, shared field values and appearances retained. See form-fields-test.mjs and form-fields-interactions-test.mjs. Large-image soft-mask memory growth no longer invalidates image colour buffers; see image-memory-test.mjs. Independent cm page decoration offsets are checked in page-placement-test.mjs.
@@ -73,6 +74,12 @@ Import from Word [createWord]
 Open PDF [createPDF]
   PASS in create-interactions-test.mjs
 
+Templates [templates]
+  PASS in experience-test.mjs, experience-interactions-test.mjs
+
+History & checkpoints [history]
+  PASS in experience-test.mjs, experience-interactions-test.mjs
+
 Find text [search]
   PASS in feature-audit-test.mjs
 
@@ -123,6 +130,9 @@ Crop area [crop]
 
 Resize page [resize]
   PASS in feature-audit-test.mjs
+
+Objects & layers [layers]
+  PASS in experience-test.mjs, experience-interactions-test.mjs
 
 Select objects [objects]
   PASS in completion-interactions-test.mjs, annotation-interactions-test.mjs, placement-tools-test.mjs
@@ -201,6 +211,9 @@ Stamp [stamp]
 
 Comments [comments]
   PASS in completion-interactions-test.mjs, annotation-interactions-test.mjs, placement-tools-test.mjs
+
+Form assistant [formassist]
+  PASS in experience-test.mjs, experience-interactions-test.mjs
 
 Fill form [fill]
   PASS in form-fields-test.mjs, form-fields-interactions-test.mjs, page-popup-test.mjs, feature-audit-test.mjs

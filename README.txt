@@ -192,7 +192,7 @@ appear in the viewer. Unsupported destination schemes are not opened.
 
 FEATURE AUDIT
 FEATURE-AUDIT.txt in the GitHub package (or pdfcreator-FEATURE-AUDIT.txt beside the
-standalone HTML) maps all 65 distinct tool actions to the regression suites used.
+standalone HTML) maps all 80 distinct tool actions to the regression suites used.
 The PDF worker, OCR core and English model are executed with real synthetic PDFs
 and images in a controlled worker runtime. Tests inspect PDF/text/image/JSON/ZIP
 outputs, including complete form and certificate-signing UI workflows. A fresh
@@ -779,3 +779,44 @@ because rewriting invalidates those signatures in the export. Use Remove digital
 signatures separately if you need an unsigned file. Pending redaction marks must
 be applied or cleared before exporting the current document. Processing runs in a
 local worker with cancellation. No password guessing or remote service is used.
+
+EXPERIENCE UPDATE — 30 OCTOBER 2026
+- One properties inspector now hosts Direct edit, rich text/stamps/comments, image,
+  object and native form editors. Dock it to reserve working-area width or float it.
+  An explicit discard choice protects unapplied drafts; changing tools/pages/tabs
+  keeps them. Apply/Cancel finishes the draft. Narrow screens use a bounded drawer.
+- Watermark, headers/footers, page/Bates number dialogues render a debounced preview
+  through their actual PDF operations, with page selection and Show original.
+  Image adjustments have an original-pixels comparison; rich text keeps its live
+  on-page preview. Previews do not modify document bytes or history.
+- View > History & checkpoints names edits, dates and past/future versions. Open
+  any available version as a separate tab. Checkpoints also retain pending marks.
+  Up to 20 undo versions/150 MiB and 10 checkpoints/100 MiB are retained locally.
+- Forms > Form assistant lists fields, previous/next navigation, empty required
+  fields and estimated text overflow. Detection reviews vector boxes/underlines
+  on the current page before making selected areas interactive text/checkbox fields.
+  Scanned boxes are not automatically detected; use manual field placement.
+- Edit > Objects & layers lists native text, XObjects, straight vector shapes and
+  annotations. Selection opens properties. Hide/Show is a temporary isolated PDF
+  preview only; show objects again to edit. Workspace locks prevent selecting that
+  object; they are not PDF access controls. Annotation stacking supports Bring to
+  front. Complex clipped/curved paths and inline images remain content groups or
+  require their existing specialist tools. This is not a PDF optional-content editor.
+- Save PDF ends with Export review: actual prepared size/name/page count, mode,
+  live fields/signatures, empty required fields, possible overflow and pending marks.
+  Cancel prevents download. Existing redaction/signature decisions still apply.
+- Local library searches names/tags and filters by tag. Project deletion moves the
+  exact stored project to Bin, closing its tab after the atomic transaction. Restore
+  recovers originals/history/checkpoints; Delete permanently requires confirmation.
+  The bin is retained until emptied individually and uses browser storage too.
+  PDF-data totals exclude history/overhead; browser-origin usage is shown when
+  available. Select projects for ZIP backup. Extract its .pdfcreator-backup files
+  and Import backup to recover independent projects with history/checkpoints/tags.
+  Bin copies/templates must be backed up separately. No documents are uploaded.
+- Create > Templates offers Blank A4, Ruled A4 and Letterhead, plus saved masters.
+  Save the current prepared master, export/import .pdfcreator-template, or create an
+  independent tab. PDF content, form values and layout are retained exactly, with
+  preferred text font/colour/size. Prepare blank masters before saving. Templates
+  are separate from projects; limit 50/100 MiB. IndexedDB v1 migrates in place to v2.
+Native PDF and controlled-DOM tests validate these flows. Browser layout, actual
+file-origin storage and native browser download/print UI still need live review.

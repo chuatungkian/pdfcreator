@@ -1,6 +1,6 @@
 PDFCreator — REMOVE PASSWORD SECURITY
 Date: 29 October 2026 (Asia/Singapore)
-Standalone HTML SHA256: 6fcd86a874ec46e3bef1840facd4ecc6eda57a12a78f2bd3e0b77f6614cd992c
+Standalone HTML SHA256: 99baca86f2b69db404213a42bb3ca42faa1ca551a3d2f6300b56fafe4c137ac4
 
 CURRENT REVISION
 remove-security-test.mjs: 65 assertions passed with RC4-40/128 and AES-128/256.
@@ -23,7 +23,7 @@ PREVIOUS REVISION VALIDATION
 
 PDFCreator — FIELD POPUP CONTAINMENT AND DIGITAL SIGNATURE REMOVAL
 Date: 29 October 2026 (Asia/Singapore)
-Standalone HTML SHA256: 6fcd86a874ec46e3bef1840facd4ecc6eda57a12a78f2bd3e0b77f6614cd992c
+Standalone HTML SHA256: 99baca86f2b69db404213a42bb3ca42faa1ca551a3d2f6300b56fafe4c137ac4
 
 CURRENT REVISION
 Removed the idle Select a function prompt and the Protect & sign pane warning.
@@ -51,7 +51,7 @@ PREVIOUS REVISION VALIDATION
 
 PDFCreator — NATIVE FORM FIELDS, LARGE-IMAGE FIX AND CM PAGE POSITIONS
 Date: 29 October 2026 (Asia/Singapore)
-Standalone HTML SHA256: 6fcd86a874ec46e3bef1840facd4ecc6eda57a12a78f2bd3e0b77f6614cd992c
+Standalone HTML SHA256: 99baca86f2b69db404213a42bb3ca42faa1ca551a3d2f6300b56fafe4c137ac4
 
 CURRENT REVISION
 Form fields: 38 synthetic native assertions, plus six optional supplied-document
@@ -86,7 +86,7 @@ PREVIOUS REVISION VALIDATION
 
 PDFCreator — EXISTING AND ADDED IMAGE EDITING
 Date: 29 October 2026 (Asia/Singapore)
-Standalone HTML SHA256: 6fcd86a874ec46e3bef1840facd4ecc6eda57a12a78f2bd3e0b77f6614cd992c
+Standalone HTML SHA256: 99baca86f2b69db404213a42bb3ca42faa1ca551a3d2f6300b56fafe4c137ac4
 
 CURRENT IMAGE EDITING REVISION
 node image-edit-test.mjs: 40 assertions passed with native synthetic PDFs/pixels.
@@ -112,7 +112,7 @@ PREVIOUS REVISION VALIDATION
 
 PDFCreator — HOME PROJECT DELETION
 Date: 29 October 2026 (Asia/Singapore)
-Standalone HTML SHA256: 6fcd86a874ec46e3bef1840facd4ecc6eda57a12a78f2bd3e0b77f6614cd992c
+Standalone HTML SHA256: 99baca86f2b69db404213a42bb3ca42faa1ca551a3d2f6300b56fafe4c137ac4
 
 CURRENT HOME DELETION REVISION
 node home-deletion-test.mjs: 50 assertions passed with native synthetic PDFs
@@ -130,7 +130,7 @@ PREVIOUS REVISION VALIDATION
 
 PDFCreator — APP FUNCTION SEARCH AND HEADER ICONS
 Date: 29 October 2026 (Asia/Singapore)
-Standalone HTML SHA256: 6fcd86a874ec46e3bef1840facd4ecc6eda57a12a78f2bd3e0b77f6614cd992c
+Standalone HTML SHA256: 99baca86f2b69db404213a42bb3ca42faa1ca551a3d2f6300b56fafe4c137ac4
 
 CURRENT FUNCTION SEARCH REVISION
 node function-search-test.mjs: 61 assertions passed in a controlled DOM using
@@ -148,7 +148,7 @@ PREVIOUS REVISION VALIDATION
 
 PDFCreator — CREATE IN THE SHARED TOOL PANE
 Date: 29 October 2026 (Asia/Singapore)
-Standalone HTML SHA256: 6fcd86a874ec46e3bef1840facd4ecc6eda57a12a78f2bd3e0b77f6614cd992c
+Standalone HTML SHA256: 99baca86f2b69db404213a42bb3ca42faa1ca551a3d2f6300b56fafe4c137ac4
 
 CURRENT CREATE PANE REVISION
 node navigation-toggle-test.mjs: 63 assertions passed for every left navigation
@@ -168,7 +168,7 @@ PREVIOUS REVISION VALIDATION
 
 PDFCreator — SIZE-AWARE SAVE AND PDF COMPRESSION
 Date: 29 October 2026 (Asia/Singapore)
-Standalone HTML SHA256: 6fcd86a874ec46e3bef1840facd4ecc6eda57a12a78f2bd3e0b77f6614cd992c
+Standalone HTML SHA256: 99baca86f2b69db404213a42bb3ca42faa1ca551a3d2f6300b56fafe4c137ac4
 
 CURRENT COMPRESSION REVISION
 node compression-test.mjs: 33 assertions passed using native PDFs and encoded
@@ -193,7 +193,7 @@ PREVIOUS REVISION VALIDATION
 
 PDFCreator — PAGE TOOLS, LINKS AND THUMBNAIL ORGANISATION
 Date: 29 October 2026 (Asia/Singapore)
-Standalone HTML SHA256: 6fcd86a874ec46e3bef1840facd4ecc6eda57a12a78f2bd3e0b77f6614cd992c
+Standalone HTML SHA256: 99baca86f2b69db404213a42bb3ca42faa1ca551a3d2f6300b56fafe4c137ac4
 
 CURRENT REVISION
 node page-features-test.mjs: 100 assertions passed with native PDF pixels and a
@@ -217,7 +217,7 @@ PREVIOUS RELEASE VALIDATION (historical results below)
 
 PDFCreator — CENTRED WATERMARKS AND EXISTING-LAYER EDITING
 Date: 28 October 2026 (Asia/Singapore)
-Standalone HTML SHA256: 6fcd86a874ec46e3bef1840facd4ecc6eda57a12a78f2bd3e0b77f6614cd992c
+Standalone HTML SHA256: 99baca86f2b69db404213a42bb3ca42faa1ca551a3d2f6300b56fafe4c137ac4
 
 CURRENT WATERMARK REVISION
 node watermarks-test.mjs: 115 assertions passed with native PDF geometry/pixels
@@ -235,7 +235,7 @@ Live browser layout remains unverified under the earlier file:// tool restrictio
 
 PDFCreator — CREATE AND NATIVE WORD IMPORT
 Date: 28 October 2026 (Asia/Singapore)
-Standalone HTML SHA256: 6fcd86a874ec46e3bef1840facd4ecc6eda57a12a78f2bd3e0b77f6614cd992c
+Standalone HTML SHA256: 99baca86f2b69db404213a42bb3ca42faa1ca551a3d2f6300b56fafe4c137ac4
 
 CURRENT CREATE REVISION
 node create-interactions-test.mjs: 38 assertions passed with native PDF bytes,
@@ -260,7 +260,7 @@ an optional Windows/Microsoft Word companion workflow approved by the user.
 
 PDFCreator — COMPLETION WORKSPACES
 Date: 28 October 2026 (Asia/Singapore)
-Standalone HTML SHA256: 6fcd86a874ec46e3bef1840facd4ecc6eda57a12a78f2bd3e0b77f6614cd992c
+Standalone HTML SHA256: 99baca86f2b69db404213a42bb3ca42faa1ca551a3d2f6300b56fafe4c137ac4
 
 CURRENT REVISION
 node completion-interactions-test.mjs: 80 assertions passed with native PDF bytes,
@@ -282,7 +282,7 @@ Affected existing suites were rerun; their historical counts below are retained.
 
 PDFCreator — BRANDING AND BACKWARD COMPATIBILITY
 Date: 28 October 2026 (Asia/Singapore)
-Standalone HTML SHA256: 6fcd86a874ec46e3bef1840facd4ecc6eda57a12a78f2bd3e0b77f6614cd992c
+Standalone HTML SHA256: 99baca86f2b69db404213a42bb3ca42faa1ca551a3d2f6300b56fafe4c137ac4
 
 RENAME CHECKS
 node branding-compatibility-test.mjs: 30 assertions passed with native PDFs.
@@ -702,3 +702,5 @@ exports; remove closed copies from Library when appropriate. Download PDFs/works
 for backup or transfer. Certificate passwords and signing keys are not persisted.
 The application remains an offline PDF toolkit with README.txt limitations; it does
 not claim complete Acrobat parity or standards/certificate-trust certification.
+
+Experience update: experience-test.mjs passes 40 assertions for native fields/detection, history, backup data and IndexedDB v1-to-v2 migration. experience-interactions-test.mjs passes 62 assertions for the shared inspector/drafts, real PDF previews, form creation, object visibility/transforms/locks, export review, templates, searchable tags, bin restoration, ZIP backup/import and fresh-instance recovery. Native preview and independent Poppler template renders were inspected. No live-browser layout claim.
