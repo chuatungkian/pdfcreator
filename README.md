@@ -1,80 +1,58 @@
 # PDFCreator
 
-An offline PDF workspace packaged as one HTML file. The current `index.html` is **20.90 MB** and includes its PDF engines, English OCR model, Inter font and downloadable source bundle.
+A single-file offline PDF workspace for editing, organising, annotating, filling forms, OCR, comparison, redaction and signing. `index.html`, `pdfcreator.html` and the legacy `pdfpro.html` contain identical current app bytes.
 
-## Experience update
+## Open
 
-Shared dockable properties, actual PDF previews, history/checkpoints, form assistance and vector-field detection, objects/layers, export review, searchable tagged projects with bin/backup, and reusable document templates. Local IndexedDB v1 storage upgrades in place to v2. Form overflow/detection is assistive; review results. Object visibility/locks are workspace controls.
+Open one of the HTML files in a current desktop browser. PDF tools, English OCR and the **In-browser docx and doc converter** work on this device without an account or network download. The optional Microsoft Word companion uses installed desktop Word on Windows. Built-in conversion substitutes embedded Arimo fonts and can change pagination; review its output.
 
-## Use
+## Generate forms from XLSX or CSV
 
-Download `pdfcreator.html` (or the identical `index.html`) and open it in a current desktop browser. Standalone PDF tools need no installation, account or network connection after download. PDFs are processed on your device. The optional Word import companion requires Windows and installed Microsoft Word desktop.
+1. Open a PDF containing editable form fields and choose **Forms > Generate from XLSX / CSV**. Flat/scanned forms need fields added first.
+2. Choose a data file, worksheet and header row. Select formatted text to preserve displayed dates and leading zeroes, or raw values when needed. CSV text is preserved literally.
+3. Match PDF fields to columns, retain template values or enter fixed values. Preview records and PDF pages; correct required fields, invalid choices and character limits.
+4. Select record ranges and an output filename pattern. For example, `Letter_{B}_{row}` uses column B and the record number. Duplicate filenames receive suffixes.
+5. Keep fields editable or flatten them, then generate and download the ZIP. It includes a UTF-8 CSV report with source row numbers and any skipped records.
 
-The workspace includes document tabs, local recovery, continuous page scrolling, annotations and freehand drawing, page organisation, added text/images, forms, OCR, comparison, encryption, redaction, signatures and exports. The page toolbar can float, minimise, or lock across the top or bottom of the working area. The old `pdfpro.html` path is retained as a byte-identical compatibility copy for local bookmarks and storage. New workspaces use `.pdfcreator`; older `.pdfpro` workspaces still import.
+Formulas use saved workbook results and are never recalculated. Missing cached results and spreadsheet errors block affected mapped fields. Multi-select values use semicolons; checkboxes accept yes/no, true/false or 1/0. Invalid records require correction or explicit skipping. Read-only fields retain their values. Pending redactions and digitally signed templates require resolving first.
 
-**Edit > Direct edit** offers **Paragraph** (default), **Line** and dragged **Text chunk** scopes. Paragraph and chunk edits rewrap at the chosen width, closing gaps inside the selection. Include several paragraphs in one chunk to pull them together. Original native font programmes, colours, opacity and sizes remain, with unchanged inline styles retained and replacement words inheriting source styles. The first baseline stays in place; following lines move as text rewraps. Width and editing scope are remembered, and applied edits recover locally. Reflow stays on one page and avoids unselected text.
+Data is read by an embedded, cancellable worker; no upload or external spreadsheet service is used. Source data and mappings are transient. The open template, tabs and undo history are retained. Limits are 20 MB input, 10,000 records, 256 columns, 500,000 workbook cells and 250 MB of generated PDFs.
 
-Choose the editing scope in tool settings or the on-page editor. **Width (pt)** controls wrapping; Enter adds a hard break and Ctrl+Enter (Cmd+Enter on Mac) applies a paragraph/chunk edit. Compatible embedded fonts load locally for typing previews. New PDFCreator text boxes retain their device-font recipe for editing as a complete box. Missing font characters, overflow and unsupported encodings are refused; scanned, outlined and older image-backed text are excluded. The tool remains selected for repeated edits.
+## Workspace update — 31 October 2026
 
-Edits and inserted items retain the current page and both scroll offsets. Visual signatures combine a typed name and drawing, with the name below the drawing. Processing uses a circular outline that traces the circumference for unknown progress and fills as progress is reported.
+- A persistent active-tool guide explains the next gesture and provides Done, tool search and a favourite star.
+- Pin tools in function search. Favourites appear before recent tools; Home provides shortcuts. Preferences recover with this browser's local session.
+- Selecting PDF text offers Copy, Highlight, Underline, Edit paragraph and Add link. The selection must stay on one page. Native PDF edits use existing signature checks, undo and recovery.
+- Image properties provide Crop, Adjust, Replace image and Add link. Replacement keeps other occurrences of a shared image intact and is one undo step; its proportions fit inside the selected image's displayed bounds.
+- Dialogues have consistent sticky actions, bounded keyboard focus and an inert background. Page-range inputs provide All pages, Current page and a selected-page count. Background blur is removed.
+- All HTML copies, embedded app sources, the separate source ZIP, licences and checksums are aligned in this release.
 
-**Organise > Merge & split** combines current edited PDFs from open tabs, the local library or uploads. Reorder sources, add visual split points or grouped page ranges, preview filenames, download grouped PDFs as a ZIP, or create a merged working tab. Plans recover locally and detect changed or missing sources.
+## Existing capabilities
 
-**Edit > Add link** supports websites, email addresses and pages in the same PDF. Click existing text, an image or a shape; draw an area; or place new visible linked text with a chosen font, size and colour. Text and its link form one undo step. Choose Done to follow links. The small arrow edits or removes a link. Native PDF links survive undo/redo, exports and local recovery. OCR phrase search and plain-text line grouping are also checked in this revision.
+Create blank/ruled/squared PDFs; use reusable templates; open document tabs; edit native text and rich text boxes; edit images and supported objects; organise/merge/split pages; add links and page decorations; annotate and review comments; create/fill/flatten forms; recognise English text; compare documents; compress to a target size; redact/sanitise; encrypt/unlock; apply visual/certificate signatures; export PDFs/images/text/workspaces; batch process; maintain a local library, Bin, backups, history and checkpoints. See [the user guide](README.txt) and [feature audit](FEATURE-AUDIT.txt).
 
-IndexedDB retains documents and edits when permitted by the browser. Its availability for local files depends on the browser; check the save indicator. Local recovery may include unlocked copies, originals and undo history. Download important work and use Library to remove closed stored copies when needed.
+## Source and rebuilding
 
-**Home project cards have a dustbin beside Resume.** A warning asks for confirmation before deleting a locally saved project, its original copy, edits and history. Confirming also closes that project if it is open; cancelling keeps it intact. Downloaded files and other projects are retained. Storage deletion completes before an open tab closes, and queued/stale autosaves cannot recreate a deleted project. This revision passes 50 deletion checks covering cancellation, failures, concurrent saves and recovery.
+Extract `pdfcreator-3.0-app-source.zip` and enter `source`. The HTML's `window.PDFCreator.downloadSource()` exports the same paths and bytes. With Node.js and pnpm installed:
 
-## Create and expanded editing tools
+```powershell
+pnpm install --frozen-lockfile
+node build.mjs C:\path\to\release-folder
+node workspace-ux-test.mjs
+node form-generation-test.mjs
+node form-generation-interactions-test.mjs
+$env:PDFCREATOR_RELEASE_DIR = 'C:\path\to\release-folder'
+node release-alignment-test.mjs
+```
 
-**Create** is the first entry in the left toolbar. It opens the same side tool pane as the other navigation functions, with **New PDF**, **Import from Word** and **Open PDF** actions. Clicking the same navigation group again closes its popup; another group switches the content. New documents support named files, standard/custom page sizes, orientation, margins, multiple pages and blank/ruled/squared paper. Existing PDFs open in separate tabs.
+The current build recompiles preferred app sources and retains the exact distributed PDF/OCR/Word engine bytes under `vendor/`. Runtime engines, fonts, source notices and English OCR data are local. No conversion runtime is fetched by the built app. `build-full.mjs` retains the earlier complete engine packaging workflow; its prerequisites are documented in that file and README.txt.
 
-For Word import, download [PDFCreator-Word-Companion.zip](PDFCreator-Word-Companion.zip), extract it and run `start-word-companion.cmd`. Paste its pairing code into **Create > Import from Word**. The companion uses the installed Microsoft Word PDF exporter over an authenticated loopback connection. No cloud conversion service is used. Word renders formatting, pictures, tables, headers, footers and page layout; source fonts and document restrictions can affect fidelity. The same companion ZIP is downloadable from the standalone HTML.
+`PDFCreator-Ream-Source.zip` retains the Word converter's MIT dependency sources. Extract alongside the main source ZIP when rebuilding that worker. The official MuPDF corresponding source remains under `upstream/`; reconstruct it with `python upstream/assemble-mupdf-source.py`. Preserve these sources and third-party notices when redistributing.
 
-Field popups stay inside the visible PDF page and workspace, move inward near edges and use a scrolling body with separate Close/Apply controls. Bounds update for resized content and narrow views; 32 geometry checks pass.
+## Verification and boundaries
 
-**Protect & sign > Remove security** downloads a password-free copy of the current document or a selected protected PDF. Enter a valid password when required. Wrong-password errors stay in the dialogue; passwords are not stored. Output is verified to be unencrypted, with live fields, page content, layout and attachments retained. Already-unprotected copies retain exact bytes. The original/current tab and undo history are unchanged. Encrypted signed inputs require a decision because rewriting invalidates certificate signatures. The native checks pass 65 assertions across RC4/AES; 28 interaction checks exercise the actual local worker, downloads and cancellation.
+See `VALIDATION.txt` for this release's completed checks. Controlled-DOM tests exercise real PDF engines with synthetic files and simulated geometry; they do not establish live browser layout, file-origin storage, clipboard or native download/print behaviour.
 
-**Protect & sign > Remove digital signatures** confirms removal before making an unsigned working copy. Signed fields/widgets and their appearances, signing dictionaries, certification/usage-rights signature policies, obsolete validation data and old incremental signature revisions are removed. Ordinary fields, other page content, empty signature fields and separate visual signatures are retained. Undo restores exact signed bytes. This revision passes 25 native/cryptographic checks and 18 interaction checks; original signing tests also pass. Signatures flattened into text/images can be removed with Select objects or Edit images.
+OCR is English-only. Direct text reflow stays within the selected page. Some PDF fonts, image types and advanced structures are unsupported. Visual signatures are separate from certificate signatures. Signature integrity checks do not establish trusted identity. Cropping/deleting images and workspace visibility controls are not secure redaction. Local recovery retains earlier content; manage stored copies when working with sensitive documents. No PDF/A, PDF/X or PDF/UA certification is claimed.
 
-**Edit > Edit form fields** (also in Forms) makes standard AcroForm fields directly clickable. Enter multiline paragraphs, retain the original font or choose a standard PDF font, and adjust size, colour and alignment. Choices, checkboxes and radio/list selections stay interactive. Add text, Direct edit and Replace route field clicks to this editor. Shared widgets, canonical values/appearances, lock/max-length rules, undo/redo, page position and local recovery are retained. Bulk Fill form now uses multiline textareas where appropriate. This revision passes 38 synthetic native checks, six local supplied-form checks and 50 interaction checks. No user PDF is packaged or uploaded.
-
-**Edit > Edit images** lets you click existing images directly and crop, move, resize, delete, or adjust opacity, brightness, contrast, saturation, hue and warm/cool tone. Add image opens the same compact inspector after placement. A crop preview and position fields support precise adjustments; undo/redo and local recovery retain them. Shared/nested image instances are isolated. Original pixels are retained for readjustment, so crop/delete are not secure redaction. Inline/stencil images and colour adjustments above 20 million pixels are excluded. Clicking grey space outside the PDF deactivates the selected function; controls remain usable. The image tools pass 40 native checks and 58 interaction checks. A further 10-check large-image regression fixes colour/alpha buffers invalidated by WASM memory growth while decoding transparency masks. For an affected previous edit, Reset appearance and Apply restores the retained source pixels.
-
-**Edit > Select objects** moves, resizes, rotates, duplicates and removes supported text, image/signature, Form and annotation objects, with alignment and snapping. **Annotate > Erase drawing** removes touched ink strokes. Rich text supports mixed fonts, bold/italic, colour, bullets, spacing and live page preview. Text-aware highlight/underline/strikeout follows multiple lines.
-
-**Comments** spans all pages, with editing, replies, resolved status, filters and an exportable printable summary. **Organise > Page organiser** stages visual multi-page rearrangement, rotation, duplication, deletion, insertion and replacement from other tabs/uploads. **Find and replace** offers case/whole-word/page-range controls and a selectable replacement preview for supported native paragraphs and tracked text boxes. New edits use the shared undo and local recovery workflows.
-
-**Edit > Watermark** now centres the visible rotated text on each displayed page, including crop/rotation handling, with size, angle, opacity, font and colour controls. Batch watermarks use the same positioning. **Edit > Edit watermarks** identifies tracked and older PDFCreator layers, tagged imported layers and candidate native text watermarks. Preview/select layers, update their text/appearance, or remove them with undo support. Inferred candidates need review; watermarks baked into page images cannot be separated automatically. The watermark revision passes 115 native geometry/pixel and controlled-interaction checks, including preserving overlapping body text. Rotation accepts -360 to 360 degrees in 0.1 degree steps.
-
-**Headers, footers and page/Bates numbers** support independent left/centre/right alignment. Each has centimetre controls for distance from the top or bottom edge and separate left/right margins. Centre alignment uses the area between those margins; distances follow visible cropped/rotated page edges. Position checks pass 84 native-pixel/UI assertions. Add full-width header/footer rules with adjustable thickness and static date/time stamps. Footer text and page numbers use separate rows and can appear together. Later updates replace the corresponding tracked decoration while retaining the other rows.
-
-The bottom page previews support Ctrl/Cmd-click and Shift-click selection, group dragging, and a right-click menu for rotation, duplication, deletion, extraction, moving, blank insertion and importing/replacing from other PDFs. The full Page organiser also has a document dropdown listing every open tab, defaults to the active PDF and switches it with staged-change protection.
-
-**Save PDF** offers unchanged bytes, lossless cleanup, High/Balanced/Small image compression, or a target maximum in MB/kB. Target mode tries progressively smaller image settings within chosen quality limits and shows actual byte counts and whether the target was reached before download. It retains PDF text, vectors, forms, links and annotations; unsupported/protected images keep their pixels. Target size is best effort, and lower image quality can soften detail. Compressed downloads leave the open PDF at its current quality; the Optimise tool applies compression in one undo step.
-
-The header **magnifying glass** searches all 80 distinct tools and five app actions, including common aliases. Ctrl/Cmd+K opens it, arrow keys navigate, Enter opens a result and Escape closes it. Tools requiring a PDF are disabled on empty Home. The header **question mark** opens About & source, including authorship/contact and source/licence links.
-
-## Documentation and verification
-
-- [User guide and limitations](README.txt)
-- [Validation results](VALIDATION.txt): the earlier functional baseline passed 1,270 counted assertions, followed by 576 Direct edit/view-retention checks. Later revisions add 188 paragraph/chunk checks, 30 branding checks, 80 completion-workflow checks and 57 Create checks. Later targeted revisions add 100 page-feature checks, 74 thumbnail-organiser checks, 75 compression checks, 63 navigation-toggle checks and 61 function-search checks. The Word companion passes 22 checks against actual Microsoft Word and loopback HTTP using a synthetic document. Both native Word PDF pages were rendered and visually inspected. Affected regressions, actual-package integrity and source export also pass.
-- [Feature audit](FEATURE-AUDIT.txt): all 80 distinct tool actions mapped to regression workflows. Live browser layout, font loading, external navigation, downloads and print-dialogue behaviour remain unverified.
-- [Checksums](SHA256SUMS.txt)
-
-PDFCreator is an offline PDF toolkit. It does not claim complete Adobe Acrobat feature parity, PDF/A or PDF/UA certification, or certificate identity/trust validation.
-
-## Development history
-
-Earlier commits remain available in [the original pdfpro repository](https://github.com/chuatungkian/pdfpro). This repository publishes the PDFCreator release under its new name.
-
-## Source and rebuild
-
-The complete application source kit is available in [pdfcreator-3.0-app-source.zip](pdfcreator-3.0-app-source.zip). The same file contents remain embedded and can be exported offline with `window.PDFCreator.downloadSource()`. About links to this repository; the former source/notice download buttons have been removed.
-
-Extract the source kit, enter its `source` folder and install the locked dependencies with `pnpm install --frozen-lockfile`. From the repository root, run `python upstream/assemble-mupdf-source.py` to reconstruct the [complete MuPDF source archive](upstream/README.md) from its three verified parts. Copy the resulting `upstream/mupdf-1.28.1-source.tar.gz` beside `build.mjs`, then run `node build.mjs`. See README.txt for the exact runtime versions, test dependencies and build details. No user PDFs, browser storage, credentials or signing keys are included in this repository.
-
-## Licence
-
-PDFCreator is distributed under [AGPL-3.0-or-later](LICENSE.txt). Components retain their own licences; see [third-party notices](THIRD-PARTY-NOTICES.txt). The full MuPDF corresponding source is retained under `upstream/` in losslessly reassembled parts.
+AGPL-3.0-or-later; component licences are retained in `THIRD-PARTY-NOTICES.txt` and the source kits.

@@ -1,0 +1,20 @@
+PDFCreator built-in Word conversion — Ream 1.33.1
+
+The HTML embeds a conversion worker and the four original Arimo font faces.
+No conversion runtime or font download is needed after opening the HTML.
+The compact font set substitutes one Arial-like family for document fonts.
+Characters absent from these fonts, including Chinese, are refused with an
+explanation rather than exported as blank/missing glyphs.
+
+The complete Ream runtime/dependency sources and the font files accompany
+this release in PDFCreator-Ream-Source.zip. Extract it alongside the main
+pdfcreator-3.0-app-source.zip so both archives' source/ folders merge.
+It supplies source/word-dependencies/node_modules/ and source/fonts/Arimo-*.
+The main app ZIP and the HTML's embedded source download retain the app's
+integration source. Ream's dependencies are deliberately outside the HTML
+source archive to keep the runnable file below 25,000,000 bytes.
+
+Ream: MIT, Copyright (c) 2026 Alexandr Krassavin.
+https://github.com/alex-krassavin/reamkit
+Arimo: SIL Open Font License 1.1. Original font bytes and licence retained.
+https://github.com/googlefonts/arimo

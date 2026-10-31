@@ -1,14 +1,60 @@
 PDFCreator 3.0.0 — offline PDF workspace
 ==================================
 
+SPREADSHEET-DRIVEN FORM GENERATION — 31 OCTOBER 2026
+Open a PDF with editable form fields. Choose Forms > Generate from XLSX / CSV,
+select a file, worksheet and header row, then map each field to a column, a fixed
+value or its existing template value. Review records and actual PDF previews.
+Use a record range such as 1-10,12 and filename tokens such as Letter_{B}_{row}.
+Keep fields editable or flatten them. Generate ZIP produces separate PDFs and a
+UTF-8 generation-report.csv. Duplicate filenames get _2, _3 and so on.
+
+Formatted XLSX values preserve displayed dates and leading zeroes; Raw values is
+an explicit alternative. CSV values stay literal, including leading zeroes.
+XLSX formulas use saved results; recalculate and save in Excel first. Missing
+results and spreadsheet errors are reported for affected mapped columns.
+Checkboxes accept yes/no, true/false or 1/0. Multi-select lists use semicolons.
+Required values, field character limits and choice values are checked. Invalid
+records block generation unless Skip invalid records is explicitly selected.
+Read-only fields retain template values. Resolve pending redactions and remove
+digital signatures on a working copy before generation. Flat/scanned forms need
+form fields added first. Review text fit in generated PDFs.
+
+The embedded spreadsheet worker performs no network requests and can be cancelled.
+Cancel generation stops before download; the original PDF and undo history remain
+unchanged. Imported source data and mappings are transient, not saved in projects.
+Limits: 20 MB input, 10,000 records, 256 columns, 500,000 workbook cells and 250 MB
+of generated PDFs. Split larger jobs into record ranges/files.
+
+
+WORKSPACE UPDATE — 31 OCTOBER 2026
+- The active-tool guide above the document explains the next gesture. Done returns
+  to reading/selection. Tools opens function search; the star pins the current tool.
+- Function search has separate favourite stars. Favourites rank before recent tools
+  in the empty query. Home shows quick tools. Preferences recover on this device.
+- Select native PDF text on one page for Copy, Highlight, Underline, Edit paragraph
+  or Add link. Cross-page selections do not offer ambiguous editing actions.
+- Image properties offer Crop, Adjust, Replace image and Add link. Replacement fits
+  the chosen picture within the old bounds while retaining its proportions. Other
+  occurrences of a shared image are retained. Undo restores exact prior PDF bytes.
+- Dialogues use visible sticky actions, keyboard focus containment and an inert
+  background. Page ranges provide All pages, Current page and a selection count.
+- index.html, pdfcreator.html and pdfpro.html now contain the same current build.
+  Embedded and separate source exports have identical file contents.
+- This revision is verified with synthetic PDFs and a controlled DOM. Actual live
+  browser layout, clipboard, file-origin recovery and native download/print UI
+  remain unverified in this environment. Earlier browser results describe earlier builds.
+
+
 OPEN
 Open pdfcreator.html (or index.html from the GitHub package) in current desktop
 Chrome, Edge, Firefox, or Safari. No installation, accounts, or network access
-are needed for standalone PDF tools. The optional Word import companion requires
+are needed for standalone PDF tools. Built-in Word import is also offline. The optional Word companion requires
 Windows and installed Microsoft Word desktop. Chrome and Edge were tested earlier.
 The app may take a few seconds to unpack its embedded engines on first launch.
-The current image-editing revision was checked with native PDF processing and a
-controlled test DOM; a fresh live-browser layout check was not available.
+An earlier Word-import build was checked in Chromium 138 using the HTML directly
+from disk, with normal file-origin security and all HTTP/HTTPS requests blocked.
+The converter uses a fully bundled classic Blob worker; no server is needed.
 
 NAME AND COMPATIBILITY
 PDFCreator was previously named pdfpro. The legacy pdfpro.html path is supplied
@@ -21,7 +67,7 @@ The build enforces a strict limit of 25,000,000 bytes for the HTML. PDF/OCR
 engines, English recognition data, Inter and source files are retained locally.
 Identical files share their stored bytes; source copies of runtime assets refer
 to the existing embedded assets. No CDN or first-run download is required.
-The complete source/build ZIP accompanies the release. The embedded source is
+The source/build ZIPs accompany the release. The embedded source is
 also available through window.PDFCreator.downloadSource(), which assembles it
 locally. Its paths and file contents match the separate app-source ZIP. When
 browser compression is unavailable, a valid larger ZIP preserves the same files.
@@ -55,33 +101,52 @@ disable the tracing animation, and native progress semantics remain accessible.
 
 CREATE A NEW DOCUMENT OR IMPORT WORD
 Choose Create in the left toolbar, on Home, or beside the document tabs.
-It opens the same compact side tool pane as the other navigation functions.
-New PDF opens page settings; Import from Word opens companion controls; Open PDF
-goes directly to the file picker. There is no central Create choice dialogue.
-The pane supports outside-click dismissal, collapsed navigation and icon-only
-docking. It is also available on Home before a PDF has been opened.
-- New PDF: name your document, choose A4/A5/A3/Letter/Legal or a custom size,
-  orientation, 1-200 pages, margins and blank/ruled/squared paper. Dimensions and
-  margins are in millimetres. The PDF opens ready to add text in Edit; use Add image,
-  shapes or form tools to build the document from scratch. Other tabs stay open.
-- Open PDF: select one or more existing PDFs. Password entry and document tabs work
-  as before. Images can still be dragged in to create PDFs or placed using Add image.
-- Import from Word: download/extract PDFCreator-Word-Companion.zip, then run
-  start-word-companion.cmd. In the import dialogue, paste the console's pairing
-  code, choose a .docx/.doc file and select Convert and open. The companion is also
-  included in the GitHub ZIP and downloadable directly from the HTML itself.
+New PDF opens page settings. Open PDF goes to the file picker. Import from
+Word offers a built-in offline converter and the optional Word companion.
 
-Word import uses Microsoft Word's native PDF export on Windows. The HTML does not
-try to recreate Word documents as browser HTML. Visible formatting, pictures,
-tables, headers, footers and page layouts follow Word's rendering; use the source
-fonts and review complex documents. Missing fonts, linked content or unsupported
-Word features can affect fidelity. There is no unconditional guarantee of every
-possible Word layout. Protected files may require manual PDF export from Word.
-No cloud conversion API or account is used by PDFCreator. The companion binds only
-to 127.0.0.1 and requires a fresh pairing code; your browser may ask for local-network
-access. Pairing credentials stay in session memory, not IndexedDB. New/existing
-PDF tools remain usable with the HTML alone. See WORD-COMPANION-README.txt for
-requirements, temporary files, cancellation and process handling details.
+BUILT-IN WORD CONVERTER
+- Built-in converter is selected by default. Choose a .docx or Word 97–2003
+  .doc document (up to 64 MB), then Convert and review.
+- Ream 1.33.1 runs in a separate, disposable local worker. Four complete
+  Arimo faces (regular/bold/italic/bold italic) are embedded in the HTML.
+  No Word installation, companion, server, account, font download or first-run
+  asset download is required. Network access is disabled in the worker.
+- The compact font set substitutes an Arial-like family for document fonts.
+  Source typefaces, line wrapping and pagination can therefore differ.
+  Characters absent from these fonts, including Chinese, are refused with
+  an explanation. No extra language fonts are downloaded automatically.
+- The review shows page count, actual PDF size, a first-page rendering and
+  conversion notes. Open PDF adds a new tab; Cancel discards the result.
+  The source Word file and other PDF tabs are retained.
+- Converted text stays searchable. Ordinary PDF editing, saving, undo/redo
+  and local recovery work on the new PDF. Review all pages before sharing.
+- An optional password is used only for this conversion and is not stored
+  in projects. Protected legacy .doc files need Word. Layout elements that
+  cannot be reproduced are reported where the engine supplies a loss note.
+  Legacy drawings/text boxes and comments have limited support.
+- Cancel terminates the conversion worker. A 180-second timeout stops a
+  stalled conversion. The built-in importer rejects expanded ZIP content
+  above 256 MB and documents above its text/container limits.
+
+OPTIONAL MICROSOFT WORD COMPANION
+Choose Microsoft Word companion in the Converter menu for Word's own PDF
+export. It requires Windows and installed Microsoft Word desktop.
+Download/extract PDFCreator-Word-Companion.zip, run start-word-companion.cmd,
+paste its pairing code, choose the document and Convert and review. The
+Word export opens as a new PDF tab. Native Word fidelity still depends on
+installed fonts, linked content and document restrictions.
+The companion binds to 127.0.0.1 and requires a fresh pairing code; the
+browser may ask for local-network access. No cloud conversion is used.
+See WORD-COMPANION-README.txt for temporary-file and process details.
+
+SOURCE PACKAGING
+The app's source and existing PDF/OCR dependency sources remain embedded
+and downloadable through window.PDFCreator.downloadSource(). Their paths
+match pdfcreator-3.0-app-source.zip. The additional Ream dependency sources,
+font files, licences and legacy fixture builders are supplied separately
+in PDFCreator-Ream-Source.zip. Extract both source ZIPs into the same folder
+before rebuilding; their source/ directories merge. See REAM-SOURCE.txt.
+The runnable HTML remains strictly below 25,000,000 bytes.
 
 QUICK START
 Choose Edit > Direct edit. Paragraph is the default: click an outlined paragraph,
@@ -104,7 +169,8 @@ unselected paragraphs, artwork and page elements do not move. To pull several
 paragraphs together, include them in the same chunk. Growth that would overlap
 unselected text or leave the page is refused; adjust width or select a larger chunk.
 
-The saved PDF reuses original native font programmes, colours, opacity and sizes.
+Without formatting changes, the saved PDF reuses original native font programmes,
+colours, opacity and sizes.
 Unchanged mixed-style words retain their styles; replacement words inherit the
 style of the source text they replace. New inserted words inherit a neighbouring
 style. The first baseline stays in place; following lines move as text rewraps.
@@ -192,7 +258,7 @@ appear in the viewer. Unsupported destination schemes are not opened.
 
 FEATURE AUDIT
 FEATURE-AUDIT.txt in the GitHub package (or pdfcreator-FEATURE-AUDIT.txt beside the
-standalone HTML) maps all 80 distinct tool actions to the regression suites used.
+standalone HTML) maps all 81 distinct tool actions to the regression suites used.
 The PDF worker, OCR core and English model are executed with real synthetic PDFs
 and images in a controlled worker runtime. Tests inspect PDF/text/image/JSON/ZIP
 outputs, including complete form and certificate-signing UI workflows. A fresh
@@ -507,7 +573,7 @@ User documents are processed locally and are not committed or uploaded.
 
 SOURCE AND BUILD
 About & source shows authorship/contact and links to source/build instructions
-and component licences. The complete source/build kit remains embedded and can
+and component licences. The app source/build kit remains embedded and can
 be exported with window.PDFCreator.downloadSource().
 The GitHub ZIP additionally includes the complete official MuPDF1.28.1 source
 tarball, including third-party sources. Its platform/wasm/BUILDING.md describes
@@ -701,7 +767,7 @@ SEARCH APP FUNCTIONS
 The magnifying glass beside the dark-mode switch opens an offline function
 search. Ctrl/Cmd+K opens it from the keyboard. Search tool names or common terms
 such as compress, hyperlink, circle, reorder and scan. Results show their tool
-group; shared tools appear once. The catalogue contains all 72 distinct tools
+group; shared tools appear once. The catalogue contains all 81 distinct tools
 plus Create, Home, Local library, theme and About actions.
 Click a result to open the matching tool or its normal settings/confirmation.
 Existing safety confirmations and undo behaviour remain. Document tools are
@@ -796,6 +862,9 @@ EXPERIENCE UPDATE — 30 OCTOBER 2026
   fields and estimated text overflow. Detection reviews vector boxes/underlines
   on the current page before making selected areas interactive text/checkbox fields.
   Scanned boxes are not automatically detected; use manual field placement.
+- Edit > Objects & layers: use the small circular-arrow Refresh icon beside Float and Close in
+  the pane header after scrolling to another page or editing
+  the PDF. The pane reloads the current page and clears temporary hidden previews.
 - Edit > Objects & layers lists native text, XObjects, straight vector shapes and
   annotations. Selection opens properties. Hide/Show is a temporary isolated PDF
   preview only; show objects again to edit. Workspace locks prevent selecting that
@@ -820,3 +889,60 @@ EXPERIENCE UPDATE — 30 OCTOBER 2026
   are separate from projects; limit 50/100 MiB. IndexedDB v1 migrates in place to v2.
 Native PDF and controlled-DOM tests validate these flows. Browser layout, actual
 file-origin storage and native browser download/print UI still need live review.
+
+Objects & layers uses a compact 260 px pane in docked and floating modes.
+The pane header retains Refresh, Float/Dock and Close.
+
+TEXT FORMATTING — 30 OCTOBER 2026
+Direct edit and Add text offer Bold, Italic, Underline, Strikethrough, font,
+font size and colour controls. Select words to format a range; when there is
+no selection the formatting applies to the whole block. Changes remain drafts
+until Apply. Cancel leaves the PDF unchanged. Each Apply is one undo step.
+
+Native Direct edit keeps unformatted source styles and native searchable
+glyphs. The font menu offers Original font, Helvetica / Arial, Times New Roman
+and Courier New, using embedded PDF fonts for changes. Bold/italic changes
+use the matching embedded serif, sans-serif or monospaced family; a custom
+source typeface may therefore change when emphasis is requested. Original
+font without emphasis changes retains the source typeface. Size changes use
+4–144 pt. Reflow and page/overlap checks still apply. Unsupported characters
+or invalid settings leave the current PDF unchanged. Underline and strike
+are native PDF text-markup appearances that can be toggled independently;
+they follow supported text moves/duplicates/deletions and persist on reopen.
+The formatting preview shows selected styles before Apply.
+
+Add text uses the existing device-font menu, now with underline and
+strikethrough as independent run properties. Selected ranges retain mixed
+fonts, sizes, colours and emphasis in the preview and exported appearance.
+Fit to area may reduce sizes; disable it to require the requested sizes.
+The searchable text layer and editable recipe remain with each text box.
+Direct edit reopens both newer rich text and older tracked plain text boxes
+with these controls. Undo, redo and local project recovery retain formatting.
+Device fonts use this computer's installed fonts and fallbacks; no font
+service or network connection is required. Scans still need OCR and are not
+automatically converted into editable native text.
+
+Verification: text-formatting-test.mjs and
+text-formatting-interactions-test.mjs use synthetic native PDFs and a
+controlled DOM. No fresh live-browser layout check is claimed.
+
+STANDALONE WORD STARTUP FIX — 30 October 2026
+The previous module Blob worker failed before executing when the standalone
+HTML was opened via file:// in Chromium. Replaced it with a self-contained
+IIFE bundle in an explicit classic Blob worker. No companion, extra file,
+local server, network access or browser security override is required.
+The original startup error was reproduced in Chromium 138.0.7204.0.
+offline-word-browser-test.mjs passed 15 assertions with the corrected HTML
+opened directly from disk: DOCX and binary DOC conversion, actual first-page
+preview, cancel preserving the original tab, searchable PDF and PDF download;
+zero HTTP/HTTPS requests and no page runtime errors.
+Native/VM Word suites also pass (24 + 27 assertions), including worker
+cancellation, timeout and cleanup. Other historical browser limitations in
+this document apply to their earlier revisions and unrelated features.
+
+CURRENT PORTABLE BUILD
+Run pnpm install --frozen-lockfile in the extracted source folder, then
+node build.mjs C:\path\to\release-folder. This rebuilds the current app from
+preferred JS sources and the exact distributed engine bytes under vendor/.
+The older full packaging workflow is retained in build-full.mjs.
+See README.md for current commands and RELEASE-NOTES.md for the workspace changes.

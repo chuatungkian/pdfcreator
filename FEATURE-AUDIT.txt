@@ -1,10 +1,11 @@
 PDFCreator FEATURE AUDIT
-30 October 2026 · Asia/Singapore
-Standalone HTML SHA256: 99baca86f2b69db404213a42bb3ca42faa1ca551a3d2f6300b56fafe4c137ac4
+31 October 2026 · Asia/Singapore
+Standalone HTML SHA256: 48a8da252667f0e7942e114cf83ec516ed66a4a34c7d05cce5b392c249a86e59
 
 RESULT
-80 distinct tool actions are mapped below to passing regression workflows.
-The functional baseline passed 1,270 counted assertions plus certificate-signing
+81 distinct tool actions are mapped below to passing regression workflows.
+The spreadsheet revision adds XLSX/CSV column mapping, per-record PDF previews, editable/flattened generation, named ZIPs and error reports; see form-generation-test.mjs and form-generation-interactions-test.mjs. The workspace revision adds the active-tool guide, favourites/recent tools and selection actions; see workspace-ux-test.mjs.
+The earlier functional baseline passed 1,270 counted assertions plus certificate-signing
 and actual-package integrity checks. The later circular-indicator presentation
 update reran 165 targeted workflow/continuous-page/source-export assertions plus
 syntax and package-integrity checks. The visual-signature fix then passed 281
@@ -217,6 +218,9 @@ Form assistant [formassist]
 
 Fill form [fill]
   PASS in form-fields-test.mjs, form-fields-interactions-test.mjs, page-popup-test.mjs, feature-audit-test.mjs
+
+Generate from XLSX / CSV [formgenerate]
+  PASS in form-generation-test.mjs, form-generation-interactions-test.mjs
 
 Text field [fieldText]
   PASS in feature-audit-test.mjs

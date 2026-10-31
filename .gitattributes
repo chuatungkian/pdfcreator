@@ -1,0 +1,8 @@
+* text=auto eol=lf
+*.html -text
+*.zip -text
+*.gz* -text
+*.woff2 -text
+*.wasm -text
+*.ttf -text
+*.pdf -text
