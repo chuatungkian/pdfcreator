@@ -1,48 +1,39 @@
-PDFCreator workspace update — 31 October 2026
+PDFCreator text character-mapping fix — 31 October 2026
+Based on repository main db29be13813be060d29a0cdfbaebc0c54ad354db.
 
-Spreadsheet form-generation checks:
-- form-generation-test.mjs: 53 assertions for actual XLSX/CSV parsing, date/ID
-  formatting, field types/shared widgets, required values, choices, fixed mappings,
-  filename safety, duplicate names, flattening and template isolation.
-- form-generation-interactions-test.mjs: 42 assertions with the shipped parser
-  worker, actual PDF previews, named PDF ZIPs, error reports, native/flattened
-  outputs, invalid-record handling, cancellation and zero network requests.
-- The same 42 interaction checks also pass against the compiled app bundle.
+Reproduced: editing a Word-converted embedded subset font generated a Type0
+Identity-H font without ToUnicode, causing reopened text to become glyph codes.
+Fix: preserve the actual glyph-to-Unicode mappings, merge shared font aliases,
+and reopen/check the overlay before removing source text. Glyph selection uses
+known source mappings before the font program's fallback cmap. No font download.
 
-Completed controlled-DOM/native-PDF checks in this workspace:
-- workspace-ux-test.mjs: 49 assertions (tool guide, pins, selection edits, image
-  replacement/isolation, exact undo, page-range controls, focus and recovery).
-- function-search-test.mjs: 61 assertions.
-- image-interactions-test.mjs: 58 assertions.
-- placement-tools-test.mjs: 40 assertions.
-- experience-interactions-test.mjs: 62 assertions.
-- create-interactions-test.mjs: 57 assertions.
+Fresh checks for this fix:
+- native-text-unicode-test.mjs: 123 assertions, cmap-less subset fonts, exact
+  repeated line/paragraph/chunk edits, four page rotations, save/reopen,
+  Find and replace, move/duplicate, mixed formatting, accents, punctuation,
+  numbers and supplementary Unicode; ambiguous glyph aliases safely refused.
+  Independent Poppler extraction confirms exact text; rendered proof inspected.
+- offline-word-interactions-test.mjs: 34 assertions including opening the same
+  edited paragraph again, a second edit, exact readable words, undo/redo and
+  edited-text IndexedDB recovery. Also tested against the compiled app bundle.
+- direct-text-test.mjs: 518 native font/style, pixels, Unicode and repeat checks.
+- direct-reflow-test.mjs: 145 assertions.
+- text-formatting-test.mjs: 59 assertions.
+- direct-edit-interactions-test.mjs: 59 assertions.
+- direct-reflow-interactions-test.mjs: 43 assertions.
+- text-formatting-interactions-test.mjs: 21 assertions.
+- completion-interactions-test.mjs: 80 assertions (including Find and replace).
+- fonts-previews-test.mjs: 107 assertions for Add/Replace text, comments/stamps,
+  page numbers and batch watermarks. Local DejaVu serif/mono faces were
+  registered as Georgia/Consolas for the test renderer's installed-font checks.
+- annotations-test.mjs: 122 assertions.
+- engine-worker-ocr-test.mjs: 13 assertions using the actual bundled engines.
 
-Additional completed checks:
-- release-runtime-test.mjs: 11 assertions using the actual compiled release.
-- feature-audit-test.mjs: 82 assertions across native PDF/UI workflows, including
-  exports, redaction, security, batch processing and zero worker network attempts.
-- form-fields-interactions-test.mjs: 52 assertions.
-- source-export-ui-test.mjs: 17 assertions using actual release assets.
-- page-features-test.mjs: 100 assertions.
-- page-strip-test.mjs: 74 assertions.
-- offline-word-interactions-test.mjs: 27 assertions using the shipped converter worker.
-- offline-word-test.mjs: 24 assertions using DOCX and legacy DOC fixtures.
-- source-package-test.mjs: 34 assertions.
-- release-alignment-test.mjs verifies every declared checksum, identical HTML
-  aliases, embedded/separate source-file identity and engine/source retention.
+Native writer warnings about a missing cmap can occur while preparing a
+transient overlay; its corrected ToUnicode map is verified before use.
+Expected unsupported-glyph refusals are deliberate test cases.
 
-Offline Word tests deliberately check unsupported Chinese glyph rejection and
-can log that expected rejection; no user document is used.
-Native image replacement is occurrence-local and one undo action. Selection
-actions reject stale revisions and cross-page ambiguity; Done protects drafts.
-All processing and tests used local files and synthetic PDF/Word fixtures.
-
-These are controlled-DOM tests with actual PDF processing and simulated layout.
-No user PDFs, browser profile, credentials or signing keys were used. Browser
-automation policy blocks this local-file page. No alternate browser route was
-used. Current live layout, file-origin storage, clipboard, native save pickers
-and operating-system print behaviour have not been verified in this release.
-
-Historical test results are retained in VALIDATION.template.txt inside the source
-kit. They describe earlier builds and are not fresh checks of this revision.
+Tests use synthetic documents, real PDF engines, a controlled DOM and VM worker
+transport. No new live-browser layout/file-origin storage or OS print claim.
+Previously saved corrupted PDFs require Undo/History or the unmodified source;
+no automatic reconstruction of lost text is claimed.

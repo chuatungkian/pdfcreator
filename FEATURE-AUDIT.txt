@@ -1,6 +1,6 @@
 PDFCreator FEATURE AUDIT
 31 October 2026 · Asia/Singapore
-Standalone HTML SHA256: 48a8da252667f0e7942e114cf83ec516ed66a4a34c7d05cce5b392c249a86e59
+Standalone HTML SHA256: 40a6d46fda593f5d663bcf562dc53e6fd57dcf95fe058442d5fd9f2a7cc9b828
 
 RESULT
 81 distinct tool actions are mapped below to passing regression workflows.
@@ -342,3 +342,15 @@ LIMITS OF THIS AUDIT
   standards limitations. There is no claim of complete Adobe Acrobat equivalence.
 
 See VALIDATION.txt for individual suite counts and README.txt for usage/retention.
+
+
+# Direct edit character mapping fix — 31 October 2026
+
+Fixed edited text reopening as glyph codes or gibberish with embedded subset fonts. The PDF writer previously tried to reconstruct Unicode from the font program's cmap, which can be absent or differ from the source PDF's text encoding. Edited overlays now carry an explicit glyph-to-Unicode map derived from the actual text being written. The prepared overlay is saved, reopened and checked before removing any source text. Existing glyph mappings take priority over a font's fallback cmap.
+
+The shared fix covers line, paragraph and chunk Direct edit, Find and replace, and native text move/duplicate. Original fonts, appearance, layout, colours and formatting are retained. Ambiguous glyph aliases or unsupported encodings fail before the source text is removed. Full Unicode destinations use UTF-16, including supplementary characters where the source font supports them.
+
+Added exact-content regression checks for repeated edits, reopening the same editor, save/reopen, undo/redo and recovery. Original tests also exercise Add text/rich formatting, Replace text, selected-text editing, page decorations, annotations, search/extraction and OCR. The package retains the spreadsheet form generator and workspace improvements from repository commit db29be1.
+
+This prevents new corruption. For a PDF already saved with broken character mappings, use Undo/History or reopen an unmodified original and reapply the edit. The app does not guess at lost characters or silently rewrite an already-corrupted PDF.
+

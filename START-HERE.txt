@@ -1,0 +1,21 @@
+PDFCreator — Direct edit text fix — 31 October 2026
+
+Extract this ZIP and open index.html in a current desktop browser.
+The separate pdfcreator.html file runs alone.
+HTML: 23,597,846 bytes (23.60 MB).
+
+FIX
+Direct edits preserve the glyph-to-Unicode mappings of the actual text.
+The prepared text layer is saved/reopened and checked before source removal.
+This prevents edited subset-font text reopening as glyph codes or gibberish.
+It also fixes the shared Find and replace and native move/duplicate paths.
+Original fonts, styles and placement are retained when supported.
+Other text and spreadsheet/workspace functions have been regression checked.
+
+EXISTING CORRUPTED PDFs
+Use Undo/History or reopen the unmodified original, then reapply your edit
+with this build. This fix does not guess at characters already lost from a PDF.
+
+Full source kits, licences, notices and MuPDF corresponding-source parts
+are included. See README.md, RELEASE-NOTES.md and SOURCE-COMMIT.txt.
+All processing remains on this device; built-in engines need no network.

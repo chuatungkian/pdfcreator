@@ -1,0 +1,11 @@
+Base repository: https://github.com/chuatungkian/pdfcreator
+Base commit: db29be13813be060d29a0cdfbaebc0c54ad354db
+
+This package adds the Direct edit glyph-to-Unicode mapping fix to that version.
+It is a local rebuilt release; no new upstream GitHub commit is claimed.
+The complete fixed preferred sources are in pdfcreator-3.0-app-source.zip.
+TEXT-UNICODE-FIX.patch shows the changes relative to the base source kit.
+To use the patch, extract the base source kit and apply it from the directory
+containing source/. The updated source kit already includes these changes.
+index.html and the separate pdfcreator.html download contain identical bytes.
+Duplicate runnable aliases are omitted from this ZIP to reduce its size.

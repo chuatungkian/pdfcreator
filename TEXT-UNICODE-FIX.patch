@@ -1,0 +1,357 @@
+--- /dev/null
++++ b/source/native-text-unicode.js
+@@ -0,0 +1,47 @@
++/* Preserve the actual Unicode supplied to MuPDF's native PDF text writer.
++ * Subset fonts may omit their own cmap, or map a glyph to a different character.
++ * MuPDF 1.28.1 writes Identity-H glyph IDs and names fonts F0, F1, ... in
++ * first-use order (source/pdf/pdf-device.c). Never infer text from those IDs.
++ */
++import {mupdf} from './engine.js';
++const failure=()=>Error('The original font cannot preserve this text reliably. Your PDF has not been changed. Choose another font or use Add text.');
++const hex=value=>value.toString(16).padStart(4,'0');
++function unicodeHex(value){return String.fromCodePoint(value).split('').map(c=>hex(c.charCodeAt(0))).join('')}
++function cmap(entries){
++ const lines=['/CIDInit /ProcSet findresource begin','12 dict begin','begincmap','/CIDSystemInfo << /Registry (Adobe) /Ordering (UCS) /Supplement 0 >> def','/CMapName /PDFCreatorTextUnicode def','/CMapType 2 def','1 begincodespacerange','<0000> <ffff>','endcodespacerange'];
++ const rows=[...entries].sort((a,b)=>a[0]-b[0]);
++ for(let i=0;i<rows.length;i+=100){const chunk=rows.slice(i,i+100);lines.push(chunk.length+' beginbfchar',...chunk.map(([gid,unicode])=>'<'+hex(gid)+'> <'+unicodeHex(unicode)+'>'),'endbfchar')}
++ return [...lines,'endcmap','CMapName currentdict /CMap defineresource pop','end','end'].join('\n');
++}
++export function preserveNativeTextUnicode(bytes,glyphs){
++ const fonts=new Map();let expected='';
++ for(const {font,gid,unicode}of glyphs){
++  if(!Number.isInteger(gid)||gid<0||gid>65535||!Number.isInteger(unicode)||unicode<0||unicode>0x10ffff||unicode>=0xd800&&unicode<=0xdfff)throw failure();
++  let row=fonts.get(font.pointer);if(!row){row={name:font.getName(),map:new Map()};fonts.set(font.pointer,row)}
++  if(row.map.has(gid)&&row.map.get(gid)!==unicode)throw failure();row.map.set(gid,unicode);expected+=String.fromCodePoint(unicode);
++ }
++ const doc=mupdf.Document.openDocument(bytes,'application/pdf').asPDF();let page,result;
++ try{
++  page=doc.loadPage(0);const resources=page.getObject().getInheritable('Resources').get('Font'),maps=new Map();let index=0;
++  for(const row of fonts.values()){
++   const font=resources.get('F'+index++);if(!font.isDictionary())throw failure();
++   if(font.get('Encoding').asName()!=='Identity-H')continue;
++   if(font.get('Subtype').asName()!=='Type0')throw failure();
++   const key=font.isIndirect()?font.asIndirect():font.pointer;let item=maps.get(key);
++   // Helvetica/NimbusSans and other aliases may share one font-program resource.
++   // Check its first name once, then merge every alias's actual character uses.
++   if(!item){if(font.get('BaseFont').asName()!==row.name)throw failure();item={font,map:new Map()};maps.set(key,item)}
++   for(const [gid,unicode]of row.map){if(item.map.has(gid)&&item.map.get(gid)!==unicode)throw failure();item.map.set(gid,unicode)}
++  }
++  for(const {font,map}of maps.values()){const stream=doc.addStream(cmap(map),{});try{font.put('ToUnicode',stream)}finally{stream.destroy()}}
++  const buffer=doc.saveToBuffer('garbage=2,compress');try{result=buffer.asUint8Array().slice()}finally{buffer.destroy()}
++ }finally{page?.destroy();doc.destroy()}
++ // Reopen before any source redaction: font caches and rendered appearance must
++ // agree with the exact characters that the user will reopen in Direct edit.
++ const check=mupdf.Document.openDocument(result,'application/pdf').asPDF();let checkPage,device,actual='';
++ try{
++  checkPage=check.loadPage(0);device=new mupdf.Device({fillText(text,ctm,space){try{text.walk({showGlyph(font,matrix,gid,unicode){if(unicode<0)throw failure();actual+=String.fromCodePoint(unicode)}})}finally{text.destroy();space.destroy()}}});
++  checkPage.runPageContents(device,mupdf.Matrix.identity);device.close();if(actual!==expected)throw failure();
++ }finally{device?.destroy();checkPage?.destroy();check.destroy()}
++ return result;
++}
+--- a/source/direct-text.js
++++ b/source/direct-text.js
+@@ -1,6 +1,7 @@
+ /* Edit visible PDF text with its original native font and graphics style. AGPL-3.0-or-later. */
+ import {mupdf} from './engine.js';
+ import {makeDirectSelections,selectDirectChunk,flowGlyphs,union} from './direct-layout.js';
++import {preserveNativeTextUnicode} from './native-text-unicode.js';
+ const I=mupdf.Matrix.identity;
+ const near=(a,b,t=.03)=>a.length===b.length&&a.every((v,i)=>Math.abs(v-b[i])<t);
+ export function saveDirectEdit(doc){
+@@ -79,14 +80,14 @@
+ }
+ function copyDict(doc,source){const out=doc.newDictionary();if(!source.isNull())source.forEach((value,key)=>out.put(key,value));return out}
+ function overlayPDF(run,text,glyphMap,bounds){
+-  const shape=new mupdf.Text(),buffer=new mupdf.Buffer();let writer,output;
++  const shape=new mupdf.Text(),buffer=new mupdf.Buffer(),glyphs=[];let writer,output;
+   try{
+     let x=run.matrix[4],y=run.matrix[5];
+-    for(const char of text){const unicode=char.codePointAt(0),gid=run.font.encodeCharacter(unicode)||glyphMap.get(unicode);if(!gid)throw Error('The original PDF font does not contain “'+char+'”. Your text has not been changed.');shape.showGlyph(run.font,[...run.matrix.slice(0,4),x,y],gid,unicode,0);const step=run.font.advanceGlyph(gid);x+=run.matrix[0]*step;y+=run.matrix[1]*step}
++    for(const char of text){const unicode=char.codePointAt(0),gid=glyphMap.get(unicode)||run.font.encodeCharacter(unicode);if(!gid)throw Error('The original PDF font does not contain “'+char+'”. Your text has not been changed.');shape.showGlyph(run.font,[...run.matrix.slice(0,4),x,y],gid,unicode,0);glyphs.push({font:run.font,gid,unicode});const step=run.font.advanceGlyph(gid);x+=run.matrix[0]*step;y+=run.matrix[1]*step}
+     const rect=shape.getBounds(null,I);if(rect[0]<bounds[0]-2||rect[1]<bounds[1]-2||rect[2]>bounds[2]+2||rect[3]>bounds[3]+2)throw Error('The replacement extends beyond the page. Shorten the text to retain its original size.');
+     writer=new mupdf.DocumentWriter(buffer,'pdf','compress');const device=writer.beginPage(bounds);
+     try{device.fillText(shape,I,run.space,run.color,run.alpha)}finally{device.destroy()}
+-    writer.endPage();writer.close();output=buffer.asUint8Array().slice();return{bytes:output,rect};
++    writer.endPage();writer.close();output=preserveNativeTextUnicode(buffer.asUint8Array().slice(),glyphs);return{bytes:output,rect};
+   }finally{writer?.destroy();buffer.destroy();shape.destroy()}
+ }
+ export function replaceDirectText(doc,pageIndex,target,replacement){
+@@ -120,8 +121,8 @@
+       const form=doc.addStream(parts.join('\n'),{Type:'XObject',Subtype:'Form',BBox:media,Resources:resources});
+       const dest=page.getObject(),res=copyDict(doc,dest.getInheritable('Resources')),objects=copyDict(doc,res.get('XObject')),name='PdfProDirect'+form.asIndirect();objects.put(name,form);res.put('XObject',objects);dest.put('Resources',res);
+       const transform=mupdf.Matrix.concat(lp.getTransform(),mupdf.Matrix.invert(page.getTransform()));
+-      // The writer supplies a ToUnicode map. Wrapping an entire Form in ActualText
+-      // can duplicate accented words in structured-text consumers.
++      // The prepared layer has an explicit, verified glyph-to-Unicode map.
++      // Whole-Form ActualText can duplicate accented words in PDF consumers.
+       stream=doc.addStream('q '+transform.join(' ')+' cm /'+name+' Do Q',{});
+       const all=doc.newArray(),old=dest.get('Contents');if(old.isArray())old.forEach(value=>all.push(value));else if(!old.isNull())all.push(old);all.push(stream);dest.put('Contents',all);
+     }finally{stream?.destroy();lp.destroy();layer.destroy()}
+@@ -155,7 +156,7 @@
+     if(rect&&(rect[0]<bounds[0]-2||rect[1]<bounds[1]-2||rect[2]>bounds[2]+2||rect[3]>bounds[3]+2))throw Error('The reflowed text extends beyond the page. Shorten the text or increase its width.');
+     writer=new mupdf.DocumentWriter(buffer,'pdf','compress');const device=writer.beginPage(bounds);
+     try{for(const s of shapes)device.fillText(s.text,I,s.run.space,s.run.color,s.run.alpha)}finally{device.destroy()}
+-    writer.endPage();writer.close();return{bytes:buffer.asUint8Array().slice(),rect,rects};
++    writer.endPage();writer.close();return{bytes:preserveNativeTextUnicode(buffer.asUint8Array().slice(),flow.glyphs.map(g=>({font:g.s.font,gid:g.gid,unicode:g.unicode}))),rect,rects};
+   }finally{writer?.destroy();buffer.destroy();shapes.forEach(s=>s.text.destroy())}
+ }
+ export function replaceDirectTextGroup(doc,pageIndex,target,replacement,options={}){
+--- a/source/direct-layout.js
++++ b/source/direct-layout.js
+@@ -94,7 +94,7 @@
+   let previousEnd=0;for(const range of formatting){if(!Number.isInteger(range.start)||!Number.isInteger(range.end)||range.start<previousEnd||range.end<=range.start||range.end>Array.from(raw).length||!resolveStyle)throw Error('Invalid text formatting range.');previousEnd=range.end;for(let i=Math.max(0,range.start-offset);i<Math.min(units.length,range.end-offset);i++)units[i].style=resolveStyle(units[i].style,range.style)}
+   let baseline=l.top,x=l.left+l.firstIndent,indent=l.firstIndent,line=0,largeSize=0;
+   const newLine=explicit=>{line++;baseline+=Math.max(l.leading,largeSize*1.15);largeSize=0;indent=explicit?l.firstIndent:l.restIndent;x=l.left+indent};
+-  function measured(unit){const s=styles.get(unit.style);if(!s)throw Error('This text style changed. Select the text again.');const unicode=unit.ch.codePointAt(0),gid=s.font.encodeCharacter(unicode)||s.glyphMap.get(unicode);if(!gid)throw Error('The original PDF font does not contain “'+unit.ch+'”. Your text has not been changed.');return{...unit,s,gid,unicode,advance:s.font.advanceGlyph(gid)*Math.hypot(s.matrix[0],s.matrix[1])}}
++  function measured(unit){const s=styles.get(unit.style);if(!s)throw Error('This text style changed. Select the text again.');const unicode=unit.ch.codePointAt(0),gid=s.glyphMap.get(unicode)||s.font.encodeCharacter(unicode);if(!gid)throw Error('The original PDF font does not contain “'+unit.ch+'”. Your text has not been changed.');return{...unit,s,gid,unicode,advance:s.font.advanceGlyph(gid)*Math.hypot(s.matrix[0],s.matrix[1])}}
+   const tokens=units.map(u=>u.ch).join('').match(/\n|[^\S\n]+|[^\s]+/gu)||[];let cursor=0,pending=[];
+   function place(g){const y=baseline+(g.s.baselineOffset??l.offsets[g.style]??0),matrix=[...g.s.matrix.slice(0,4),l.u[0]*x+l.v[0]*y,l.u[1]*x+l.v[1]*y];glyphs.push({...g,matrix,line});x+=g.advance;lines[line]=true;if(g.s.size>target.size*1.15)largeSize=Math.max(largeSize,g.s.size)}
+   for(const token of tokens){const length=Array.from(token).length,group=units.slice(cursor,cursor+length);cursor+=length;
+--- /dev/null
++++ b/source/native-text-unicode-test.mjs
+@@ -0,0 +1,59 @@
++/* Regression for real subset fonts without cmap; exact text, repeated edits,
++ * line/paragraph/chunk paths, transforms, Unicode and independent extraction. */
++import assert from 'node:assert/strict';
++import fs from 'node:fs';
++import {spawnSync} from 'node:child_process';
++import * as E from './engine.js';
++import {convertOfflineWord} from './offline-word-converter.js';
++import {wordFixture} from './offline-word-fixtures.mjs';
++import {directTextTargets,directEditTargets,directChunkTarget,replaceDirectText,replaceDirectTextGroup,transformDirectText,saveDirectEdit} from './direct-text.js';
++import {preserveNativeTextUnicode} from './native-text-unicode.js';
++import {planReplacements,applyReplacements} from './find-replace.js';
++let count=0;const check=(v,label)=>{count++;assert.ok(v,label)},equal=(a,b,label)=>{count++;assert.deepEqual(a,b,label)},fold=text=>text.replace(/\s+/gu,' ').trim();
++const fonts=Object.fromEntries([['regular','Regular'],['bold','Bold'],['italic','Italic'],['boldItalic','BoldItalic']].map(([key,label])=>[key,new Uint8Array(fs.readFileSync('fonts/Arimo-'+label+'.ttf'))]));
++const phrase='ReadCoach helps learners practise English. café résumé 0123456789: A+B / a=b.',replacement='ReadCoach helps learners practise English. résumé café 9876543210: B+A / b=a.';
++const converted=await convertOfflineWord(wordFixture({text:phrase}),fonts);
++for(const rotation of [0,90,180,270]){
++ let bytes=converted.bytes;const original=E.openPDF(bytes);try{const page=original.loadPage(0);page.getObject().put('Rotate',rotation);page.destroy();bytes=saveDirectEdit(original)}finally{original.destroy()}
++ for(const scope of ['paragraph','chunk']){
++  let current=bytes;
++  for(const value of [replacement,phrase,replacement]){
++   const doc=E.openPDF(current);try{
++    let target=directEditTargets(doc,0).find(t=>t.text.startsWith('ReadCoach'));
++    check(target,'edited subset paragraph reopens with readable characters');
++    if(scope==='chunk')target=directChunkTarget(doc,0,target.rect);
++    const before=E.extractTextPDF(current)[0].text;
++    replaceDirectTextGroup(doc,0,target,value,{width:target.layout.width});current=saveDirectEdit(doc);
++    check(fold(E.extractTextPDF(current)[0].text).includes(value),'exact Unicode survives save/reopen');
++    check(E.extractTextPDF(current)[0].text.includes('HEADER RETAINED')&&before.includes('HEADER RETAINED'),'unselected text survives');
++    const reopened=E.openPDF(current);try{equal(directEditTargets(reopened,0).find(t=>t.text.startsWith('ReadCoach'))?.text,value,'editor target equals intended text after every edit')}finally{reopened.destroy()}
++   }finally{doc.destroy()}
++  }
++  if(rotation===0&&scope==='paragraph'){
++   const independent=spawnSync('pdftotext',['-layout','-','-'],{input:Buffer.from(current)});
++   if(!independent.error){equal(independent.status,0,'independent PDF text extraction succeeds');check(fold(independent.stdout.toString()).includes(replacement),'Poppler reads exact edited words, numbers, accents and punctuation')}
++   fs.mkdirSync('../../tmp',{recursive:true});fs.writeFileSync('../../tmp/text-unicode-proof.pdf',current);fs.writeFileSync('../../tmp/text-unicode-proof.png',E.renderPagePNG(current,0,{scale:1.2}).bytes);
++  }
++ }
++}
++for(const [original,replacement]of [['TABLE LEFT','LEFT TABLE'],['Italic and underline retained.','retained. Italic and underline']]){
++ const doc=E.openPDF(converted.bytes);try{const target=directTextTargets(doc,0).find(t=>t.text===original);replaceDirectText(doc,0,target,replacement);const bytes=saveDirectEdit(doc),reopened=E.openPDF(bytes);try{check(directTextTargets(reopened,0).some(t=>t.text===replacement),'single-line edit retains subset-font Unicode');replaceDirectText(reopened,0,directTextTargets(reopened,0).find(t=>t.text===replacement),original);check(E.extractTextPDF(saveDirectEdit(reopened))[0].text.includes(original),'single-line subset text supports a second edit')}finally{reopened.destroy()}}finally{doc.destroy()}
++}
++for(const action of ['transform','duplicate']){
++ const doc=E.openPDF(converted.bytes);try{const target=directEditTargets(doc,0).find(t=>t.text.startsWith('ReadCoach'));transformDirectText(doc,0,target,{action,matrix:[1,0,0,1,0,2]});const bytes=saveDirectEdit(doc),reopened=E.openPDF(bytes);try{const matches=directEditTargets(reopened,0).filter(t=>t.text.startsWith('ReadCoach'));check(matches.length>0,'transformed subset text remains readable');check(fold(E.extractTextPDF(bytes)[0].text).includes(phrase),'move/duplicate keeps searchable words')}finally{reopened.destroy()}}finally{doc.destroy()}
++}
++{
++ const doc=E.openPDF(converted.bytes);try{const plan=planReplacements(doc,{query:'ReadCoach',replacement:'CoachRead',pages:[0],caseSensitive:true});equal(plan.length,1,'Find and replace locates the subset-font paragraph');applyReplacements(doc,plan);const bytes=saveDirectEdit(doc),reopened=E.openPDF(bytes);try{check(fold(E.extractTextPDF(bytes)[0].text).includes(phrase.replace('ReadCoach','CoachRead')),'Find and replace preserves exact Unicode');check(directEditTargets(reopened,0).some(t=>t.text.startsWith('CoachRead')),'Find and replace output reopens in Direct edit')}finally{reopened.destroy()}}finally{doc.destroy()}
++}
++{
++ const doc=E.openPDF(converted.bytes);try{const target=directEditTargets(doc,0).find(t=>t.text.startsWith('ReadCoach'));replaceDirectTextGroup(doc,0,target,replacement,{formatting:[{start:0,end:9,style:{font:'Courier',size:16,italic:true,underline:true,color:'#0044aa'}}]});const bytes=saveDirectEdit(doc),reopened=E.openPDF(bytes);try{check(fold(E.extractTextPDF(bytes)[0].text).includes(replacement),'mixed original and new fonts retain exact words');check(directTextTargets(reopened,0).find(t=>t.text==='ReadCoach')?.underline,'mixed-font formatting survives with repaired text')}finally{reopened.destroy()}}finally{doc.destroy()}
++}
++// A valid cmap may map a glyph to several Unicode values. The writer's reverse
++// map is not authoritative; use the requested scalar, including surrogate pairs.
++{
++ const fontPath=[process.env.PDFPRO_TEST_TTF,'/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf','fonts/Arimo-Regular.ttf'].find(p=>p&&fs.existsSync(p));
++ const font=new E.mupdf.Font('UnicodeFixture',fs.readFileSync(fontPath)),text=new E.mupdf.Text(),buffer=new E.mupdf.Buffer(),writer=new E.mupdf.DocumentWriter(buffer,'pdf','compress'),glyphs=[];
++ try{const value='café Ω Ж'+(font.encodeCharacter(0x1f600)?' 😀':''),matrix=[18,0,0,-18,40,60];let x=40;for(const ch of value){const unicode=ch.codePointAt(0),gid=font.encodeCharacter(unicode);check(gid>0,'Unicode fixture has glyph '+ch);text.showGlyph(font,[...matrix.slice(0,4),x,60],gid,unicode);glyphs.push({font,gid,unicode});x+=font.advanceGlyph(gid)*18}const device=writer.beginPage([0,0,500,200]);try{device.fillText(text,E.mupdf.Matrix.identity,E.mupdf.ColorSpace.DeviceRGB,[0,0,0],1)}finally{device.destroy()}writer.endPage();writer.close();const result=preserveNativeTextUnicode(buffer.asUint8Array(),glyphs);equal(E.extractTextPDF(result)[0].text.trim(),value,'BMP and supplementary Unicode are stored correctly');count++;assert.throws(()=>preserveNativeTextUnicode(buffer.asUint8Array(),[glyphs[0],{...glyphs[0],unicode:66}]),/cannot preserve/,'ambiguous glyph aliases are refused before source mutation')}
++ finally{writer.destroy();buffer.destroy();text.destroy();font.destroy()}
++}
++console.log('Native text Unicode: '+count+' assertions passed with subset fonts, repeated edits, transforms, formatting and independent PDF extraction.');
+--- a/source/offline-word-interactions-test.mjs
++++ b/source/offline-word-interactions-test.mjs
+@@ -1,5 +1,7 @@
+ import assert from 'node:assert/strict';
+ import fs from 'node:fs';
++import path from 'node:path';
++import {pathToFileURL} from 'node:url';
+ import {gunzipSync} from 'node:zlib';
+ import {boot} from './experience-test-env.mjs';
+ import {installTestWorkers} from './test-worker-runtime.mjs';
+@@ -8,16 +10,21 @@
+ const html=fs.readFileSync('../../outputs/pdfcreator.html','utf8'),assets=JSON.parse(gunzipSync(Buffer.from(html.match(/id="pdfpro-payload"[^>]*>([^<]+)/)[1],'base64')));
+ const runtime=installTestWorkers();let context,requests=0,assertions=0;const originalFetch=globalThis.fetch,check=(v,label)=>{assertions++;assert.ok(v,label)},until=async(fn)=>{const end=Date.now()+15000;while(!fn()){if(Date.now()>end)throw Error('Timed out waiting for Word UI');await new Promise(r=>setTimeout(r,10))}};
+ const file=(name,bytes)=>({name,size:bytes.length,arrayBuffer:async()=>Uint8Array.from(bytes).buffer});
++let compiledURL=null;if(process.argv.includes('--compiled')){const target=path.resolve('../../tmp/offline-word-compiled.mjs');fs.mkdirSync(path.dirname(target),{recursive:true});fs.writeFileSync(target,assets.app);compiledURL=pathToFileURL(target).href}
++let bootNumber=0;const startApp=()=>boot(compiledURL?{moduleURL:compiledURL+'?word-regression='+bootNumber++,assets}:{});
+ globalThis.fetch=()=>{requests++;throw Error('No network allowed in offline import test')};
+ try{
+- context=await boot();let {app,$,window}=context;window.PDFPRO_ASSETS.word=assets.word;await app.createDemo();const original=app.state.bytes,owner=app.activeTabId,tabs=app.tabs.length,source=file('Built-in conversion.docx',wordFixture());
++ context=await startApp();let {app,$,window}=context;window.PDFPRO_ASSETS.word=assets.word;await app.createDemo();const original=app.state.bytes,owner=app.activeTabId,tabs=app.tabs.length,source=file('Built-in conversion.docx',wordFixture());
+  async function start(source,password=''){const task=app.importWordDocument();await until(()=>$('wordEngine'));check($('wordEngine').value==='offline','built-in converter is the default');check($('wordCompanionSetup').hidden&&$('wordPort').disabled,'no companion setup required');Object.defineProperty($('wordSource'),'files',{configurable:true,value:[source]});$('wordPassword').value=password;await $('modalform').onsubmit({preventDefault(){}});return{task}}
+  let pending=await start(source,'session-secret-ream-test');await until(()=>$('modaltitle')?.textContent==='Review Word conversion');check($('modalform').textContent.includes('2 pages'),'review states the converted page count');check($('modalform').querySelector('img')?.src.startsWith('data:image/png'),'review renders the actual PDF first page');check(app.activeTabId===owner&&app.state.bytes===original,'review keeps the existing document untouched');$('modalcancel').click();await pending.task;check(app.tabs.length===tabs,'cancelling review creates no project');check(runtime.activeWorkerCount===0,'conversion worker is disposed after review');
+  pending=await start(source,'session-secret-ream-test');await until(()=>$('modaltitle')?.textContent==='Review Word conversion');await $('modalform').onsubmit({preventDefault(){}});await pending.task;check(app.tabs.length===tabs+1,'Open PDF adds an independent tab');check(app.state.name==='Built-in conversion.pdf'&&app.state.doc.countPages()===2,'converted PDF opens with name and pages');check(app.Engine.extractTextPDF(app.state.bytes).map(p=>p.text).join('\n').includes('TABLE LEFT'),'imported content remains searchable');
+- await app.activate('directedit');const target=[...document.querySelectorAll('.direct-text-target')].find(b=>b.getAttribute('aria-label').includes('OFFLINE WORD'));check(target,'converted PDF text supports Direct edit');await target.onclick(new window.MouseEvent('click'));const editor=document.querySelector('.direct-editor');editor.querySelector('.direct-editor-input').value='WORD IMPORT';await editor.onsubmit({preventDefault(){}});check(!editor.isConnected,'converted text can be directly edited');check(!app.Engine.extractTextPDF(app.state.bytes)[0].text.includes('OFFLINE WORD'),'native edit replaces the source glyphs');await $('undo').onclick();check(app.Engine.extractTextPDF(app.state.bytes)[0].text.includes('OFFLINE WORD IMPORT'),'undo restores imported text');
++ await app.activate('directedit');const target=[...document.querySelectorAll('.direct-text-target')].find(b=>b.getAttribute('aria-label').includes('OFFLINE WORD'));check(target,'converted PDF text supports Direct edit');await target.onclick(new window.MouseEvent('click'));let editor=document.querySelector('.direct-editor');editor.querySelector('.direct-editor-input').value='WORD IMPORT';await editor.onsubmit({preventDefault(){}});check(!editor.isConnected,'converted text can be directly edited');check(!app.Engine.extractTextPDF(app.state.bytes)[0].text.includes('OFFLINE WORD'),'native edit replaces the source glyphs');
++ check(app.Engine.extractTextPDF(app.state.bytes)[0].text.includes('WORD IMPORT'),'edited subset text remains exactly readable');
++ const again=[...document.querySelectorAll('.direct-text-target')].find(b=>b.getAttribute('aria-label').includes('WORD IMPORT'));check(again,'edited paragraph can be selected again');await again.onclick(new window.MouseEvent('click'));editor=document.querySelector('.direct-editor');check(editor.querySelector('.direct-editor-input').value==='WORD IMPORT','reopening the same chunk shows the exact edited words');editor.querySelector('.direct-editor-input').value='IMPORT WORD';await editor.onsubmit({preventDefault(){}});check(app.Engine.extractTextPDF(app.state.bytes)[0].text.includes('IMPORT WORD'),'a second edit keeps exact searchable text');await $('undo').onclick();check(app.Engine.extractTextPDF(app.state.bytes)[0].text.includes('WORD IMPORT'),'undo restores the first readable edit');await $('redo').onclick();check(app.Engine.extractTextPDF(app.state.bytes)[0].text.includes('IMPORT WORD'),'redo keeps the second readable edit');await $('undo').onclick();await $('undo').onclick();check(app.Engine.extractTextPDF(app.state.bytes)[0].text.includes('OFFLINE WORD IMPORT'),'undo restores imported text');
+  const savedId=app.activeTabId,retained=app.state.bytes;pending=await start(file('Unsupported.docx',wordFixture({chinese:true})));await pending.task;check(app.activeTabId===savedId&&app.state.bytes===retained,'unsupported glyphs preserve the current PDF');check($('toast').textContent.includes('embedded font'),'unsupported characters are explained');
+  const abort=new AbortController();await assert.rejects(()=>convertWordOffline(source,assets.word,{signal:abort.signal,onProgress:value=>{if(value>=.1)abort.abort()}}),{name:'AbortError'});assertions++;check(runtime.activeWorkerCount===0,'cancellation terminates the conversion worker');
+  await assert.rejects(()=>convertWordOffline(source,assets.word,{WorkerImpl:class{postMessage(){}terminate(){this.stopped=true}},timeoutMs:10}),/too long/);assertions++;
+- await app.local.flush();const session=await app.local.store.readSession();check(!JSON.stringify(session).includes('session-secret-ream-test'),'password is not retained in local project storage');await context.close();context=await boot();({app}=context);check(app.activeTabId===savedId,'converted tab recovers after restart');check(app.Engine.extractTextPDF(app.state.bytes)[0].text.includes('OFFLINE WORD IMPORT'),'imported PDF recovers with undo result');check(requests===0&&runtime.networkAttempts===0,'worker and import UI make zero network requests');
++ await $('redo').onclick();check(app.Engine.extractTextPDF(app.state.bytes)[0].text.includes('WORD IMPORT'),'readable edited PDF is selected for local recovery');
++ await app.local.flush();const session=await app.local.store.readSession();check(!JSON.stringify(session).includes('session-secret-ream-test'),'password is not retained in local project storage');await context.close();context=await startApp();({app}=context);check(app.activeTabId===savedId,'converted tab recovers after restart');check(app.Engine.extractTextPDF(app.state.bytes)[0].text.includes('WORD IMPORT'),'edited subset text recovers without gibberish');check(requests===0&&runtime.networkAttempts===0,'worker and import UI make zero network requests');
+  console.log('Offline Word UI: '+assertions+' assertions passed with the shipped worker, real DOCX/PDF, preview, cancel, direct edit, undo and recovery.');
+ }finally{if(context)await context.close();runtime.close();globalThis.fetch=originalFetch}
+--- a/source/package.json
++++ b/source/package.json
+@@ -73,7 +73,9 @@
+     "test:release-runtime": "node release-runtime-test.mjs",
+     "test:form-generation": "node form-generation-test.mjs",
+     "test:form-generation-ui": "node form-generation-interactions-test.mjs",
+-    "test:form-generation-compiled": "node form-generation-interactions-test.mjs --compiled"
++    "test:form-generation-compiled": "node form-generation-interactions-test.mjs --compiled",
++    "test:text-unicode": "node native-text-unicode-test.mjs",
++    "test:offline-word-compiled": "node offline-word-interactions-test.mjs --compiled"
+   },
+   "devDependencies": {
+     "jsdom": "30.1.3",
+--- a/source/RELEASE-NOTES.md
++++ b/source/RELEASE-NOTES.md
+@@ -1,3 +1,13 @@
++# Direct edit character mapping fix — 31 October 2026
++
++Fixed edited text reopening as glyph codes or gibberish with embedded subset fonts. The PDF writer previously tried to reconstruct Unicode from the font program's cmap, which can be absent or differ from the source PDF's text encoding. Edited overlays now carry an explicit glyph-to-Unicode map derived from the actual text being written. The prepared overlay is saved, reopened and checked before removing any source text. Existing glyph mappings take priority over a font's fallback cmap.
++
++The shared fix covers line, paragraph and chunk Direct edit, Find and replace, and native text move/duplicate. Original fonts, appearance, layout, colours and formatting are retained. Ambiguous glyph aliases or unsupported encodings fail before the source text is removed. Full Unicode destinations use UTF-16, including supplementary characters where the source font supports them.
++
++Added exact-content regression checks for repeated edits, reopening the same editor, save/reopen, undo/redo and recovery. Original tests also exercise Add text/rich formatting, Replace text, selected-text editing, page decorations, annotations, search/extraction and OCR. The package retains the spreadsheet form generator and workspace improvements from repository commit db29be1.
++
++This prevents new corruption. For a PDF already saved with broken character mappings, use Undo/History or reopen an unmodified original and reapply the edit. The app does not guess at lost characters or silently rewrite an already-corrupted PDF.
++
+ # Workspace and spreadsheet forms — 31 October 2026
+ 
+ Forms now includes **Generate from XLSX / CSV**. Choose the worksheet/header row, map columns or fixed values to native form fields, preview each record and generate named PDFs in a ZIP with a CSV report. Outputs can retain interactive fields or be flattened. Required values, choices, character limits, cached formula results and duplicate filenames are handled explicitly. Cancellation and generation preserve the open template and history. Spreadsheet processing stays offline in an embedded worker.
+--- a/source/README.txt
++++ b/source/README.txt
+@@ -946,3 +946,15 @@
+ preferred JS sources and the exact distributed engine bytes under vendor/.
+ The older full packaging workflow is retained in build-full.mjs.
+ See README.md for current commands and RELEASE-NOTES.md for the workspace changes.
++
++
++# Direct edit character mapping fix — 31 October 2026
++
++Fixed edited text reopening as glyph codes or gibberish with embedded subset fonts. The PDF writer previously tried to reconstruct Unicode from the font program's cmap, which can be absent or differ from the source PDF's text encoding. Edited overlays now carry an explicit glyph-to-Unicode map derived from the actual text being written. The prepared overlay is saved, reopened and checked before removing any source text. Existing glyph mappings take priority over a font's fallback cmap.
++
++The shared fix covers line, paragraph and chunk Direct edit, Find and replace, and native text move/duplicate. Original fonts, appearance, layout, colours and formatting are retained. Ambiguous glyph aliases or unsupported encodings fail before the source text is removed. Full Unicode destinations use UTF-16, including supplementary characters where the source font supports them.
++
++Added exact-content regression checks for repeated edits, reopening the same editor, save/reopen, undo/redo and recovery. Original tests also exercise Add text/rich formatting, Replace text, selected-text editing, page decorations, annotations, search/extraction and OCR. The package retains the spreadsheet form generator and workspace improvements from repository commit db29be1.
++
++This prevents new corruption. For a PDF already saved with broken character mappings, use Undo/History or reopen an unmodified original and reapply the edit. The app does not guess at lost characters or silently rewrite an already-corrupted PDF.
++
+--- a/source/VALIDATION.txt
++++ b/source/VALIDATION.txt
+@@ -1,48 +1,39 @@
+-PDFCreator workspace update — 31 October 2026
++PDFCreator text character-mapping fix — 31 October 2026
++Based on repository main db29be13813be060d29a0cdfbaebc0c54ad354db.
+ 
+-Spreadsheet form-generation checks:
+-- form-generation-test.mjs: 53 assertions for actual XLSX/CSV parsing, date/ID
+-  formatting, field types/shared widgets, required values, choices, fixed mappings,
+-  filename safety, duplicate names, flattening and template isolation.
+-- form-generation-interactions-test.mjs: 42 assertions with the shipped parser
+-  worker, actual PDF previews, named PDF ZIPs, error reports, native/flattened
+-  outputs, invalid-record handling, cancellation and zero network requests.
+-- The same 42 interaction checks also pass against the compiled app bundle.
++Reproduced: editing a Word-converted embedded subset font generated a Type0
++Identity-H font without ToUnicode, causing reopened text to become glyph codes.
++Fix: preserve the actual glyph-to-Unicode mappings, merge shared font aliases,
++and reopen/check the overlay before removing source text. Glyph selection uses
++known source mappings before the font program's fallback cmap. No font download.
+ 
+-Completed controlled-DOM/native-PDF checks in this workspace:
+-- workspace-ux-test.mjs: 49 assertions (tool guide, pins, selection edits, image
+-  replacement/isolation, exact undo, page-range controls, focus and recovery).
+-- function-search-test.mjs: 61 assertions.
+-- image-interactions-test.mjs: 58 assertions.
+-- placement-tools-test.mjs: 40 assertions.
+-- experience-interactions-test.mjs: 62 assertions.
+-- create-interactions-test.mjs: 57 assertions.
++Fresh checks for this fix:
++- native-text-unicode-test.mjs: 123 assertions, cmap-less subset fonts, exact
++  repeated line/paragraph/chunk edits, four page rotations, save/reopen,
++  Find and replace, move/duplicate, mixed formatting, accents, punctuation,
++  numbers and supplementary Unicode; ambiguous glyph aliases safely refused.
++  Independent Poppler extraction confirms exact text; rendered proof inspected.
++- offline-word-interactions-test.mjs: 34 assertions including opening the same
++  edited paragraph again, a second edit, exact readable words, undo/redo and
++  edited-text IndexedDB recovery. Also tested against the compiled app bundle.
++- direct-text-test.mjs: 518 native font/style, pixels, Unicode and repeat checks.
++- direct-reflow-test.mjs: 145 assertions.
++- text-formatting-test.mjs: 59 assertions.
++- direct-edit-interactions-test.mjs: 59 assertions.
++- direct-reflow-interactions-test.mjs: 43 assertions.
++- text-formatting-interactions-test.mjs: 21 assertions.
++- completion-interactions-test.mjs: 80 assertions (including Find and replace).
++- fonts-previews-test.mjs: 107 assertions for Add/Replace text, comments/stamps,
++  page numbers and batch watermarks. Local DejaVu serif/mono faces were
++  registered as Georgia/Consolas for the test renderer's installed-font checks.
++- annotations-test.mjs: 122 assertions.
++- engine-worker-ocr-test.mjs: 13 assertions using the actual bundled engines.
+ 
+-Additional completed checks:
+-- release-runtime-test.mjs: 11 assertions using the actual compiled release.
+-- feature-audit-test.mjs: 82 assertions across native PDF/UI workflows, including
+-  exports, redaction, security, batch processing and zero worker network attempts.
+-- form-fields-interactions-test.mjs: 52 assertions.
+-- source-export-ui-test.mjs: 17 assertions using actual release assets.
+-- page-features-test.mjs: 100 assertions.
+-- page-strip-test.mjs: 74 assertions.
+-- offline-word-interactions-test.mjs: 27 assertions using the shipped converter worker.
+-- offline-word-test.mjs: 24 assertions using DOCX and legacy DOC fixtures.
+-- source-package-test.mjs: 34 assertions.
+-- release-alignment-test.mjs verifies every declared checksum, identical HTML
+-  aliases, embedded/separate source-file identity and engine/source retention.
++Native writer warnings about a missing cmap can occur while preparing a
++transient overlay; its corrected ToUnicode map is verified before use.
++Expected unsupported-glyph refusals are deliberate test cases.
+ 
+-Offline Word tests deliberately check unsupported Chinese glyph rejection and
+-can log that expected rejection; no user document is used.
+-Native image replacement is occurrence-local and one undo action. Selection
+-actions reject stale revisions and cross-page ambiguity; Done protects drafts.
+-All processing and tests used local files and synthetic PDF/Word fixtures.
+-
+-These are controlled-DOM tests with actual PDF processing and simulated layout.
+-No user PDFs, browser profile, credentials or signing keys were used. Browser
+-automation policy blocks this local-file page. No alternate browser route was
+-used. Current live layout, file-origin storage, clipboard, native save pickers
+-and operating-system print behaviour have not been verified in this release.
+-
+-Historical test results are retained in VALIDATION.template.txt inside the source
+-kit. They describe earlier builds and are not fresh checks of this revision.
++Tests use synthetic documents, real PDF engines, a controlled DOM and VM worker
++transport. No new live-browser layout/file-origin storage or OS print claim.
++Previously saved corrupted PDFs require Undo/History or the unmodified source;
++no automatic reconstruction of lost text is claimed.
+--- a/source/FEATURE-AUDIT.template.txt
++++ b/source/FEATURE-AUDIT.template.txt
+@@ -342,3 +342,15 @@
+   standards limitations. There is no claim of complete Adobe Acrobat equivalence.
+ 
+ See VALIDATION.txt for individual suite counts and README.txt for usage/retention.
++
++
++# Direct edit character mapping fix — 31 October 2026
++
++Fixed edited text reopening as glyph codes or gibberish with embedded subset fonts. The PDF writer previously tried to reconstruct Unicode from the font program's cmap, which can be absent or differ from the source PDF's text encoding. Edited overlays now carry an explicit glyph-to-Unicode map derived from the actual text being written. The prepared overlay is saved, reopened and checked before removing any source text. Existing glyph mappings take priority over a font's fallback cmap.
++
++The shared fix covers line, paragraph and chunk Direct edit, Find and replace, and native text move/duplicate. Original fonts, appearance, layout, colours and formatting are retained. Ambiguous glyph aliases or unsupported encodings fail before the source text is removed. Full Unicode destinations use UTF-16, including supplementary characters where the source font supports them.
++
++Added exact-content regression checks for repeated edits, reopening the same editor, save/reopen, undo/redo and recovery. Original tests also exercise Add text/rich formatting, Replace text, selected-text editing, page decorations, annotations, search/extraction and OCR. The package retains the spreadsheet form generator and workspace improvements from repository commit db29be1.
++
++This prevents new corruption. For a PDF already saved with broken character mappings, use Undo/History or reopen an unmodified original and reapply the edit. The app does not guess at lost characters or silently rewrite an already-corrupted PDF.
++

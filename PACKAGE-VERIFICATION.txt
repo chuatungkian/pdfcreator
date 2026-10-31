@@ -1,0 +1,31 @@
+PDFCreator Direct edit character-mapping fix — 31 October 2026
+HTML bytes: 23597846
+HTML SHA256: 40a6d46fda593f5d663bcf562dc53e6fd57dcf95fe058442d5fd9f2a7cc9b828
+
+Reproduced the missing-ToUnicode failure with a genuine Ream subset font.
+New native-text-unicode-test.mjs: 123 assertions, repeated edits, exact saved
+and reopened text, four rotations, Unicode accents/supplementary characters,
+Find and replace, native move/duplicate and mixed formatting.
+Independent Poppler text extraction and rendered proof checked.
+offline-word-interactions-test.mjs --compiled: 34 assertions, exact text when
+reopening the same chunk, second edit, undo/redo and edited-text recovery.
+direct-text-test.mjs: 518; direct-reflow-test.mjs: 145;
+text-formatting-test.mjs: 59; direct-edit-interactions-test.mjs: 59;
+direct-reflow-interactions-test.mjs: 43; text-formatting-interactions-test.mjs: 21;
+completion-interactions-test.mjs: 80; fonts-previews-test.mjs: 107;
+annotations-test.mjs: 122; engine-worker-ocr-test.mjs: 13.
+The fonts test registered local serif and mono faces for the canvas renderer.
+release-alignment-test.mjs: 1765 assertions, exact embedded/separate preferred
+sources, vendor bytes, aliases, required source archive and all release hashes.
+form-generation-interactions-test.mjs --compiled: 42 assertions.
+workspace-ux-test.mjs: 49; release-runtime-test.mjs: 11.
+The workspace test redirected only its Windows canvas lookup for this host.
+
+All checks use synthetic files, real PDF engines, controlled DOM/VM transport.
+No fresh live-browser layout, file-origin storage or OS download/print claim.
+Expected unsupported-glyph errors are deliberate refusal tests. A native font
+cmap warning can occur before the prepared overlay is corrected and verified.
+
+Previously saved corrupt mappings require Undo/History or an original copy.
+The delivered HTML remains below the enforced 25,000,000-byte limit.
+ZIP CRCs and all packaged SHA256 checksums verified.
