@@ -974,3 +974,8 @@ rotate, align, duplicate or delete the group with one undo step.
 Object properties has compact horizontal actions and a Back arrow when opened
 from Objects & layers. Drag a right-hand pane's left edge to resize it.
 Arrow keys adjust a focused divider; double-click resets its default width.
+
+OVERLAPPING TEXT EDITS
+Direct edit now asks before saving formatting that overlaps nearby text.
+Choose Apply anyway to proceed, or Cancel to keep your formatted draft open.
+Nearby text stays in place. Undo restores the original PDF in one step.

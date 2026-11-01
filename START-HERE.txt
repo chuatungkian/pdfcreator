@@ -1,4 +1,4 @@
-PDFCreator — object groups and resizable panes — 1 November 2026
+PDFCreator — confirm overlapping text edits — 1 November 2026
 
 Open index.html in a current desktop browser. pdfcreator.html and the legacy
 pdfpro.html are identical runnable aliases. Processing stays on this device.
@@ -13,6 +13,9 @@ popups to resize them. Widths are remembered. Double-click resets a divider.
 Direct edit shows formatting in the editable text box. Font, size, colour and
 emphasis controls appear at the top. Select words to format them, or leave the
 selection empty to format the whole block. Apply saves the edit to the PDF.
+
+If formatting would overlap nearby text, choose Apply anyway in the
+confirmation to proceed. Cancel keeps the draft. Undo reverses the edit.
 
 Hide the helper bar with its × button. Restore it using the top three-dot menu
 and Show helper bar. This preference is remembered on this device.

@@ -1,3 +1,23 @@
+Overlap confirmation — 1 November 2026
+
+Fresh checks:
+- direct-overlap-ui-test.mjs: 37 assertions in source and compiled app.
+  Partial formatting prompts before mutation; Cancel retains the draft; Apply
+  anyway writes native formatting, preserves neighbouring text and positions,
+  reopens successfully and supports exact Undo/Redo. Consent is per edit. A
+  changed revision cannot consume stale consent. Other errors keep their own
+  messages, and non-overlapping formatting needs no extra confirmation.
+- direct-edit-interactions-test.mjs: 59 assertions.
+- text-formatting-interactions-test.mjs: 21 assertions.
+- direct-reflow-interactions-test.mjs: 43 assertions.
+- direct-reflow-test.mjs: 145 assertions.
+- native-text-unicode-test.mjs: 119 assertions on this host.
+- Compiled object/pane, inline-editor, startup, Word, spreadsheet-form and
+  release-alignment checks are repeated against the rebuilt deliverable.
+
+Live browser layout and file-origin behaviour have not been freshly verified.
+Earlier release checks follow.
+
 Object groups, Back navigation and pane sizing — 1 November 2026
 
 Fresh controlled-DOM/native-PDF verification:

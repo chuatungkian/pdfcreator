@@ -1,9 +1,13 @@
-PDFCreator object groups, navigation and resizable panes — 1 November 2026
+PDFCreator overlap confirmation — 1 November 2026
 
 The current HTML aliases contain identical bytes below the 25,000,000-byte cap.
 Exact current hashes for every release file are listed in SHA256SUMS.txt.
 
-Current object/pane checks on this Windows host:
+New overlap checks:
+direct-overlap-ui-test.mjs: 37 assertions, source and compiled app.
+See VALIDATION.txt for confirmation, cancellation, revision and Undo evidence.
+
+Retained object/pane checks on this Windows host:
 object-workspace-ui-test.mjs: 61 assertions, source and compiled app.
 layers-refresh-test.mjs: native list refresh and navigation checks.
 experience-interactions-test.mjs: 62 assertions.
