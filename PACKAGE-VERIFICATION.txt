@@ -1,9 +1,18 @@
-PDFCreator visible Direct edit for outlines and scans — 1 November 2026
+PDFCreator live previews, OCR review, object groups and text layout — 1 November 2026
+
+Text boxes: in Edit > Select objects, resizing native text, added text and FreeText comments changes the container and wrapping without scaling font sizes. Boxes grow downward when needed, and Direct edit keeps the chosen width as words are added. Added text defaults to automatic growth; Fit text remains an explicit sizing choice. Mixed groups scale artwork while retaining text sizes. Growth that affects nearby content requires confirmation, and page-edge overflow requires moving or widening the box.
+
+Text-box sizing checks: text-box-sizing-ui-test.mjs, 68 assertions in source and compiled app: fixed run sizes, native/rich/comment wrapping, four page rotations, logical words, draft pixels, height growth, metadata/reopen, mixed groups, confirmation, page boundaries and exact Undo.
 
 The current HTML aliases contain identical bytes below the 25,000,000-byte cap.
 Exact current hashes for every release file are listed in SHA256SUMS.txt.
 
-New OCR Direct edit checks:
+New editing workflow checks:
+editor-upgrades-ui-test.mjs: 36 assertions, source and compiled app.
+ocr-direct-ui-test.mjs: 51 synthetic plus 12 outlined acceptance checks
+(63 total), source and compiled app. See VALIDATION.txt.
+
+Historical OCR Direct edit checks:
 ocr-direct-ui-test.mjs: 37 synthetic assertions plus 8 supplied-outline
 acceptance checks (45 total), source and compiled app, real offline engines.
 See VALIDATION.txt for pixel, formatting, recovery and rendered-proof evidence.

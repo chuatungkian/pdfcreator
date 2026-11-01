@@ -1,5 +1,14 @@
 # Direct edit character mapping fix — 31 October 2026
 
+## Editing workflow upgrade — 1 November 2026
+
+Text boxes: in Edit > Select objects, resizing native text, added text and FreeText comments changes the container and wrapping without scaling font sizes. Boxes grow downward when needed, and Direct edit keeps the chosen width as words are added. Added text defaults to automatic growth; Fit text remains an explicit sizing choice. Mixed groups scale artwork while retaining text sizes. Growth that affects nearby content requires confirmation, and page-edge overflow requires moving or widening the box.
+
+- **Live page preview:** typing, formatting, width and layout choices render a draft on the PDF page. Amber outlines mark nearby text/artwork affected; purple outlines show following text moving. Preview never writes document bytes or history. Cancel restores the original view; Apply uses the same preparation engine.
+- **OCR correction:** expand **Review recognised words and source boxes**. Correct words individually, filter uncertain words, jump to the next uncertain word, and adjust source-lettering boxes by dragging/resizing or entering coordinates. **Match original appearance** compares the local Helvetica/Times/Courier families and emphasis against the source ink. Fonts/backgrounds remain estimates.
+- **Object controls:** drag an empty page area to select fully enclosed objects; Shift/Ctrl/Cmd adds to the selection. Group/Ungroup persists PDFCreator group membership in the PDF without flattening members. Arrange objects relative to selection bounds, the first selected object or the page; distribute spacing and match widths/heights/sizes. Grouped copies remain grouped. Replacing a text member can make that member independent.
+- **Text layout:** choose **Keep layout**, **Fit text into box**, or **Move following text in this column**. Fit reduces the requested sizes only as needed, with a 4 pt lower limit. Column reflow shifts following text on the same page, including pulling it up after deletion. It stops at artwork/table rules, another column and the page edge; rotated text can use Fit. Reflowing additional OCR regions requires confirmation because their words and formatting are reconstructed from recognition.
+
 ## Direct edit for outlined and scanned text — 1 November 2026
 
 Choose **Edit → Direct edit**. A page with drawings or scans and no editable text is recognised automatically. On mixed pages or later pages, choose **Recognise text for editing** at the top right of the page. Recognition uses the embedded English engine and leaves the PDF unchanged.

@@ -1,3 +1,36 @@
+Editing workflow upgrade — 1 November 2026
+
+Text boxes: in Edit > Select objects, resizing native text, added text and FreeText comments changes the container and wrapping without scaling font sizes. Boxes grow downward when needed, and Direct edit keeps the chosen width as words are added. Added text defaults to automatic growth; Fit text remains an explicit sizing choice. Mixed groups scale artwork while retaining text sizes. Growth that affects nearby content requires confirmation, and page-edge overflow requires moving or widening the box.
+
+Text-box sizing checks: text-box-sizing-ui-test.mjs, 68 assertions in source and compiled app: fixed run sizes, native/rich/comment wrapping, four page rotations, logical words, draft pixels, height growth, metadata/reopen, mixed groups, confirmation, page boundaries and exact Undo.
+
+Focused source and compiled-app verification:
+- editor-upgrades-ui-test.mjs: 36 assertions. Actual PDF page draft pixels,
+  opaque preview/affected markers, formatting-button updates, no draft mutation
+  or undo entries, fit sizing, column expansion/deletion, untouched other
+  columns, table boundaries, exact Undo, marquee, saved/reopened groups,
+  group move/duplication/ungroup, equal spacing, size matching and independent
+  native-text alignment matrices.
+- ocr-direct-ui-test.mjs: 51 synthetic assertions plus 12 supplied outlined-PDF
+  acceptance checks (63 total). Real offline OCR, visible source replacement,
+  word correction/selection, local font matching, adjustable/clamped source
+  boxes, uncertainty review, native re-editing, deletion, coloured backgrounds,
+  confirmed OCR column reflow, Undo/Redo, recovery and zero network requests.
+- direct-edit-interactions-test.mjs: 59; direct-reflow-interactions-test.mjs: 43;
+  text-formatting-interactions-test.mjs: 21; inline-editor-ui-test.mjs: 29;
+  object-workspace-ui-test.mjs: 61; experience-interactions-test.mjs: 62;
+  native-text-unicode-test.mjs: 119 on this host; direct-reflow-test.mjs: 145;
+  ocr-layer-test.mjs: 5; engine-worker-ocr-test.mjs: 13.
+- Compiled overlap, Word, spreadsheet-form, startup and full release-alignment
+  checks are repeated against the rebuilt single-file deliverable.
+
+A supplied outlined heading/table-cell proof is rendered with MuPDF and
+independent Poppler for visual review. That external PDF is not distributed.
+Controlled DOM checks do not establish live-browser layout or file-origin
+behaviour. Column reflow is horizontal, bounded and stays on one page. OCR
+English text, fonts, spacing and solid backgrounds require review. Previous
+release checks follow.
+
 OCR-backed visible Direct edit — 1 November 2026
 
 Fresh verification:

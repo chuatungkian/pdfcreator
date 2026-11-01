@@ -1,8 +1,10 @@
 PDFCreator FEATURE AUDIT
-31 October 2026 · Asia/Singapore
-Standalone HTML SHA256: 4c2df7aad8b4d7c4781ce840c10874b2a15287e3d68c6ca5776d1dd87bc5db90
+1 November 2026 · Asia/Singapore
+Standalone HTML SHA256: 0af27cd119b6c9dc1f3297b41014a6422057d798255638347eb304a1f09c9610
 
 RESULT
+Text boxes: in Edit > Select objects, resizing native text, added text and FreeText comments changes the container and wrapping without scaling font sizes. Boxes grow downward when needed, and Direct edit keeps the chosen width as words are added. Added text defaults to automatic growth; Fit text remains an explicit sizing choice. Mixed groups scale artwork while retaining text sizes. Growth that affects nearby content requires confirmation, and page-edge overflow requires moving or widening the box.
+Current editing workflow: live page draft pixels/affected markers, OCR word/box correction and local font matching, object marquee/persistent groups/arrangement, and Keep/Fit/column text layout. See editor-upgrades-ui-test.mjs and ocr-direct-ui-test.mjs; historical baseline evidence follows.
 81 distinct tool actions are mapped below to passing regression workflows.
 The spreadsheet revision adds XLSX/CSV column mapping, per-record PDF previews, editable/flattened generation, named ZIPs and error reports; see form-generation-test.mjs and form-generation-interactions-test.mjs. The workspace revision adds the active-tool guide, favourites/recent tools and selection actions; see workspace-ux-test.mjs.
 The earlier functional baseline passed 1,270 counted assertions plus certificate-signing
@@ -41,12 +43,12 @@ FIXES
   flow. Source font programmes, colours, sizes and unchanged inline styles remain.
 - Inline/tool scope controls, wrapping width, draft protection and remembered scope
   accompany gap closing, original-width retention, undo/redo and local recovery.
-  Flow stays on one page and avoids unselected text; scanned/outlined text is excluded.
+  Flow stays on one page, with overlap confirmation and bounded fit/column choices. Scanned/outlined lettering uses reviewed OCR-backed replacement.
 - Direct edit opens an on-page editor for visible PDF text runs, retaining their
   source font programme, colour, alpha, size and baseline. New PDFCreator text boxes
   retain their system-font recipe; compatible embedded fonts load locally for typing.
 - Missing glyphs, overflowing replacements and unsupported encodings are refused.
-  Scanned/outlined text and older image-backed boxes cannot be edited directly.
+  Outlined/scanned text and image-backed lettering can be recognised and visibly replaced; source fonts and spacing are estimated.
 - Document rebuilds restore the current page and both scroll offsets after edits,
   insertions and undo/redo, including simulated browser layout clamping.
 - Typed names and drawn signatures are combined without erasing the drawing, with

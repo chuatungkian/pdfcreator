@@ -1,7 +1,21 @@
-PDFCreator — Direct edit for outlined and scanned text — 1 November 2026
+PDFCreator — live previews, OCR review, groups and text layout — 1 November 2026
+
+Text boxes: in Edit > Select objects, resizing native text, added text and FreeText comments changes the container and wrapping without scaling font sizes. Boxes grow downward when needed, and Direct edit keeps the chosen width as words are added. Added text defaults to automatic growth; Fit text remains an explicit sizing choice. Mixed groups scale artwork while retaining text sizes. Growth that affects nearby content requires confirmation, and page-edge overflow requires moving or widening the box.
+
+Text-box sizing checks: text-box-sizing-ui-test.mjs, 68 assertions in source and compiled app: fixed run sizes, native/rich/comment wrapping, four page rotations, logical words, draft pixels, height growth, metadata/reopen, mixed groups, confirmation, page boundaries and exact Undo.
 
 Open index.html in a current desktop browser. pdfcreator.html and the legacy
 pdfpro.html are identical runnable aliases. Processing stays on this device.
+
+Direct edit previews changes on the page while you type. Choose Keep layout,
+Fit text, or Move following text in this column. Amber areas mark affected
+content; purple areas mark moved text. Cancel discards the preview.
+
+Expand Review recognised words and source boxes to correct OCR words and masks
+or match estimated font appearance.
+
+Select objects now supports rectangle selection, Group/Ungroup, alignment,
+equal spacing and matching sizes. Groups persist when reopening in PDFCreator.
 
 Edit > Direct edit can recognise outlined or scanned English text.
 Click a recognised region to edit and replace its visible lettering.

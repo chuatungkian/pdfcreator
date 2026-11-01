@@ -1,4 +1,8 @@
 PDFCreator 3.0.0 — offline PDF workspace
+
+Text boxes: in Edit > Select objects, resizing native text, added text and FreeText comments changes the container and wrapping without scaling font sizes. Boxes grow downward when needed, and Direct edit keeps the chosen width as words are added. Added text defaults to automatic growth; Fit text remains an explicit sizing choice. Mixed groups scale artwork while retaining text sizes. Growth that affects nearby content requires confirmation, and page-edge overflow requires moving or widening the box.
+
+Text-box sizing checks: text-box-sizing-ui-test.mjs, 68 assertions in source and compiled app: fixed run sizes, native/rich/comment wrapping, four page rotations, logical words, draft pixels, height growth, metadata/reopen, mixed groups, confirmation, page boundaries and exact Undo.
 ==================================
 
 SPREADSHEET-DRIVEN FORM GENERATION — 31 OCTOBER 2026
@@ -987,3 +991,15 @@ Click a recognised region, review the words and estimated formatting, then
 Apply. This replaces visible lettering with editable/searchable PDF text.
 Recognition is English and works offline. Undo restores the previous PDF.
 Fonts, spacing and solid backgrounds are estimated; review complex artwork.
+
+LIVE PREVIEW, OCR REVIEW, GROUPS AND REFLOW
+Direct edit previews typing and formatting on the PDF page. Amber marks show
+nearby affected content; purple marks show following text moving.
+Text layout offers Keep layout, Fit text into box (minimum 4 pt), and Move
+following text in this column. Reflow stays on one horizontal page column and
+stops at artwork/table rules and page edges. OCR reflow asks for confirmation.
+Review recognised words and source boxes provides word correction, uncertain
+word review, local font matching, and draggable/resizable lettering masks.
+Select objects supports rectangle selection, persistent Group/Ungroup,
+individual alignment, equal spacing and matching widths/heights/sizes.
+These operations retain Undo; draft page previews add no history entries.
