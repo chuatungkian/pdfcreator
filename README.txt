@@ -979,3 +979,11 @@ OVERLAPPING TEXT EDITS
 Direct edit now asks before saving formatting that overlaps nearby text.
 Choose Apply anyway to proceed, or Cancel to keep your formatted draft open.
 Nearby text stays in place. Undo restores the original PDF in one step.
+
+EDIT OUTLINED OR SCANNED LETTERING
+Edit > Direct edit recognises pages that have no editable PDF text.
+Use Recognise text for editing on the page for mixed or additional pages.
+Click a recognised region, review the words and estimated formatting, then
+Apply. This replaces visible lettering with editable/searchable PDF text.
+Recognition is English and works offline. Undo restores the previous PDF.
+Fonts, spacing and solid backgrounds are estimated; review complex artwork.

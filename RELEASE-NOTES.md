@@ -1,5 +1,13 @@
 # Direct edit character mapping fix — 31 October 2026
 
+## Direct edit for outlined and scanned text — 1 November 2026
+
+Choose **Edit → Direct edit**. A page with drawings or scans and no editable text is recognised automatically. On mixed pages or later pages, choose **Recognise text for editing** at the top right of the page. Recognition uses the embedded English engine and leaves the PDF unchanged.
+
+Click a recognised region to review and change its words, font, size, colour and emphasis in the same editor. Applying replaces the selected visible lettering with editable, searchable PDF text. Other recognised regions remain selectable, and one Undo restores the exact previous PDF. The replacement supports normal Direct edit afterwards. Table columns are separated at large gaps; the surrounding page is retained.
+
+Recognition can misread words. Fonts, spacing and solid background colours are estimates; complex backgrounds need careful visual review. This is region-based English editing, not reconstruction of an original Word document. Searchable OCR remains available separately and retains the original visible page.
+
 ## Confirm overlapping text edits — 1 November 2026
 
 When Direct edit formatting or reflow would overlap nearby text, the app asks **Apply edit with overlapping text?** Choose **Apply anyway** to save the edit, or **Cancel** to keep your formatted draft open. Nearby text stays in place and can be obscured by the new layout. Each edit requires its own confirmation, and one Undo restores the original PDF.

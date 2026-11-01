@@ -1,3 +1,30 @@
+OCR-backed visible Direct edit — 1 November 2026
+
+Fresh verification:
+- ocr-direct-ui-test.mjs: 37 assertions using a synthetic scanned PDF, actual
+  embedded offline OCR, native PDF edits and controlled DOM. Tests recognition
+  cancellation, unchanged PDF before Apply, formatting, underline/strikeout,
+  visible source replacement, deletion on a coloured background, unchanged
+  surrounding scan/table pixels, native re-editing, exact Undo/Redo, local
+  recovery, mixed native/scanned regions and zero network requests.
+- With PDFCREATOR_OCR_FIXTURE set to the supplied outlined acceptance PDF,
+  8 additional assertions (45 total) edit its heading and a table-cell label,
+  retain column separation and keep another page pixel-identical. Rendered
+  proof inspected: the original outlined lettering is visibly replaced.
+  This external PDF is not included in the distributed source archive.
+- Both synthetic and outlined acceptance checks run against the source app
+  and rebuilt compiled HTML. No simulated OCR results are used.
+- direct-edit-interactions-test.mjs: 59; text-formatting-interactions-test.mjs: 21;
+  direct-overlap-ui-test.mjs: 37; object-workspace-ui-test.mjs: 61;
+  ocr-layer-test.mjs: 5; engine-worker-ocr-test.mjs: 13;
+  native-text-unicode-test.mjs: 119 on this host.
+- Compiled Word, form-generation, startup and release-alignment checks are
+  repeated against the rebuilt release.
+
+Fonts/spacing and solid backgrounds are estimates. Complex imagery, upright
+English recognition and user review bound this capability. Live browser layout
+and file-origin behaviour have not been freshly verified. Earlier checks follow.
+
 Overlap confirmation — 1 November 2026
 
 Fresh checks:

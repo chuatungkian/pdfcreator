@@ -1,7 +1,12 @@
-PDFCreator — confirm overlapping text edits — 1 November 2026
+PDFCreator — Direct edit for outlined and scanned text — 1 November 2026
 
 Open index.html in a current desktop browser. pdfcreator.html and the legacy
 pdfpro.html are identical runnable aliases. Processing stays on this device.
+
+Edit > Direct edit can recognise outlined or scanned English text.
+Click a recognised region to edit and replace its visible lettering.
+For mixed/additional pages, choose Recognise text for editing on the page.
+Review OCR words and estimated fonts/spacing before Apply. Undo is available.
 
 In Edit > Select objects, Ctrl/Cmd-click or Shift-click to select a group on
 one page. Move, resize, duplicate or delete them together. Object properties

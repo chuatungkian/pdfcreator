@@ -1,9 +1,14 @@
-PDFCreator overlap confirmation — 1 November 2026
+PDFCreator visible Direct edit for outlines and scans — 1 November 2026
 
 The current HTML aliases contain identical bytes below the 25,000,000-byte cap.
 Exact current hashes for every release file are listed in SHA256SUMS.txt.
 
-New overlap checks:
+New OCR Direct edit checks:
+ocr-direct-ui-test.mjs: 37 synthetic assertions plus 8 supplied-outline
+acceptance checks (45 total), source and compiled app, real offline engines.
+See VALIDATION.txt for pixel, formatting, recovery and rendered-proof evidence.
+
+Retained overlap checks:
 direct-overlap-ui-test.mjs: 37 assertions, source and compiled app.
 See VALIDATION.txt for confirmation, cancellation, revision and Undo evidence.
 

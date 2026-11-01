@@ -1,8 +1,8 @@
 Repository: https://github.com/chuatungkian/pdfcreator
-Parent release: 03c7da3ca3d540febecf5ee58e558bd3622d31b5
+Parent release: 6f3958b8546a45b6f7ebff892d23c2ef93a21dd8
 
-This rebuilt release adds per-edit confirmation for Direct edit layouts
-that overlap neighbouring text. The exact preferred
+This rebuilt release adds OCR-backed visible Direct edit for outlined
+and scanned English text. The exact preferred
 sources for this build are in pdfcreator-3.0-app-source.zip and embedded in the
 HTML source download. All three HTML aliases contain identical bytes.
 
