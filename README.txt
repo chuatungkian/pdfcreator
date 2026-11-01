@@ -1,3 +1,11 @@
+Changes review — 1 November 2026
+
+Open View > Changes review to compare the working PDF with its originally opened copy. Changed pages are marked in the page strip and page headings. Previous/Next and the page list navigate modified, added, removed and moved pages. Toggle Original/Current for read-only page previews or open the larger comparison. Retained edits have individual before/after views without restoring earlier versions. Save PDF > Export review also offers Review page changes before downloading; this returns to the panel without downloading until Save is chosen again.
+
+Text-fit/reflow choices (feature 4) remain in Edit > Direct edit: Keep layout, Fit text into box, and Move following text in this column. Recognition buttons now use a pastel red background with visible hover/focus states.
+
+Review is local and does not change document bytes or history. It checks rendered pages, text geometry, form values, comments and links; tiny visual differences and hidden PDF structures may need separate inspection. Page matching uses contents; repeated identical pages are paired by position. Undo history is bounded to 20 steps, and undone edits are excluded from retained edits. The original baseline survives local recovery.
+
 PDFCreator 3.0.0 — offline PDF workspace
 
 Text boxes: in Edit > Select objects, resizing native text, added text and FreeText comments changes the container and wrapping without scaling font sizes. Boxes grow downward when needed, and Direct edit keeps the chosen width as words are added. Added text defaults to automatic growth; Fit text remains an explicit sizing choice. Mixed groups scale artwork while retaining text sizes. Growth that affects nearby content requires confirmation, and page-edge overflow requires moving or widening the box.
@@ -262,7 +270,7 @@ appear in the viewer. Unsupported destination schemes are not opened.
 
 FEATURE AUDIT
 FEATURE-AUDIT.txt in the GitHub package (or pdfcreator-FEATURE-AUDIT.txt beside the
-standalone HTML) maps all 81 distinct tool actions to the regression suites used.
+standalone HTML) maps all 82 distinct tool actions to the regression suites used.
 The PDF worker, OCR core and English model are executed with real synthetic PDFs
 and images in a controlled worker runtime. Tests inspect PDF/text/image/JSON/ZIP
 outputs, including complete form and certificate-signing UI workflows. A fresh
@@ -771,7 +779,7 @@ SEARCH APP FUNCTIONS
 The magnifying glass beside the dark-mode switch opens an offline function
 search. Ctrl/Cmd+K opens it from the keyboard. Search tool names or common terms
 such as compress, hyperlink, circle, reorder and scan. Results show their tool
-group; shared tools appear once. The catalogue contains all 81 distinct tools
+group; shared tools appear once. The catalogue contains all 82 distinct tools
 plus Create, Home, Local library, theme and About actions.
 Click a result to open the matching tool or its normal settings/confirmation.
 Existing safety confirmations and undo behaviour remain. Document tools are

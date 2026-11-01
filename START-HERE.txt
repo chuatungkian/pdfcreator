@@ -1,3 +1,11 @@
+Changes review — 1 November 2026
+
+Open View > Changes review to compare the working PDF with its originally opened copy. Changed pages are marked in the page strip and page headings. Previous/Next and the page list navigate modified, added, removed and moved pages. Toggle Original/Current for read-only page previews or open the larger comparison. Retained edits have individual before/after views without restoring earlier versions. Save PDF > Export review also offers Review page changes before downloading; this returns to the panel without downloading until Save is chosen again.
+
+Text-fit/reflow choices (feature 4) remain in Edit > Direct edit: Keep layout, Fit text into box, and Move following text in this column. Recognition buttons now use a pastel red background with visible hover/focus states.
+
+Review is local and does not change document bytes or history. It checks rendered pages, text geometry, form values, comments and links; tiny visual differences and hidden PDF structures may need separate inspection. Page matching uses contents; repeated identical pages are paired by position. Undo history is bounded to 20 steps, and undone edits are excluded from retained edits. The original baseline survives local recovery.
+
 PDFCreator — live previews, OCR review, groups and text layout — 1 November 2026
 
 Text boxes: in Edit > Select objects, resizing native text, added text and FreeText comments changes the container and wrapping without scaling font sizes. Boxes grow downward when needed, and Direct edit keeps the chosen width as words are added. Added text defaults to automatic growth; Fit text remains an explicit sizing choice. Mixed groups scale artwork while retaining text sizes. Growth that affects nearby content requires confirmation, and page-edge overflow requires moving or widening the box.

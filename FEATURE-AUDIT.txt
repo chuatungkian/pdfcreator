@@ -1,11 +1,12 @@
 PDFCreator FEATURE AUDIT
 1 November 2026 · Asia/Singapore
-Standalone HTML SHA256: 0af27cd119b6c9dc1f3297b41014a6422057d798255638347eb304a1f09c9610
+Standalone HTML SHA256: 2e68dcd9e3c07e0113ea1aa94470080f82509dc7a51fcf2a1044908b6b0cb7e0
 
 RESULT
+Changes review is verified by changes-review-ui-test.mjs (54 assertions), with changed-page markers/navigation, original/current and per-edit previews, export handoff, undo/redo and recovery. Text-fit/reflow feature 4 is retained; OCR buttons use pastel red styling.
 Text boxes: in Edit > Select objects, resizing native text, added text and FreeText comments changes the container and wrapping without scaling font sizes. Boxes grow downward when needed, and Direct edit keeps the chosen width as words are added. Added text defaults to automatic growth; Fit text remains an explicit sizing choice. Mixed groups scale artwork while retaining text sizes. Growth that affects nearby content requires confirmation, and page-edge overflow requires moving or widening the box.
 Current editing workflow: live page draft pixels/affected markers, OCR word/box correction and local font matching, object marquee/persistent groups/arrangement, and Keep/Fit/column text layout. See editor-upgrades-ui-test.mjs and ocr-direct-ui-test.mjs; historical baseline evidence follows.
-81 distinct tool actions are mapped below to passing regression workflows.
+82 distinct tool actions are mapped below to passing regression workflows.
 The spreadsheet revision adds XLSX/CSV column mapping, per-record PDF previews, editable/flattened generation, named ZIPs and error reports; see form-generation-test.mjs and form-generation-interactions-test.mjs. The workspace revision adds the active-tool guide, favourites/recent tools and selection actions; see workspace-ux-test.mjs.
 The earlier functional baseline passed 1,270 counted assertions plus certificate-signing
 and actual-package integrity checks. The later circular-indicator presentation
@@ -356,3 +357,5 @@ Added exact-content regression checks for repeated edits, reopening the same edi
 
 This prevents new corruption. For a PDF already saved with broken character mappings, use Undo/History or reopen an unmodified original and reapply the edit. The app does not guess at lost characters or silently rewrite an already-corrupted PDF.
 
+
+Changes review | changesreview | changes-review-ui-test.mjs
