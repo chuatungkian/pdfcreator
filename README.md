@@ -1,5 +1,13 @@
 # PDFCreator
 
+## Website update notifications — 1 November 2026
+
+Hosted HTTP/HTTPS copies check a small same-origin version.json after startup and every 30 minutes while the tab is visible and online. Returning to an overdue tab or reconnecting can trigger a throttled check. Heavy operations defer checking until idle; failed requests time out after 8 seconds and retry with backoff. No PDF/document data is sent. Downloaded file:// copies make no update requests.
+
+A new build shows Update now / Later. Later leaves an update badge and suppresses repeated banners for that build during this session. About & source (?) includes the embedded build ID and Check for updates. Only explicit Update now can reload. Apply your draft first through Keep editing, or confirm Discard draft and update. Running tasks and open merge/split workspaces must finish first. Applied PDFs, originals, retained history, open tabs and reading positions are saved locally before navigating to the same app path with a fresh build query. A failed local save keeps the app and draft open and offers a workspace ZIP backup; unapplied drafts are not included in that backup.
+
+Deployment: use node build.mjs with the output directory. Every build embeds a unique release ID and emits a matching version.json. Deploy that manifest beside index.html, pdfcreator.html and pdfpro.html in one atomic release. Where hosting supports it, use Cache-Control: no-store for version.json and no-cache for HTML. The checker also bypasses browser caching and adds a fresh query to manifest requests and release reloads. Existing tabs that predate this checker need one initial refresh to install it. Downloaded offline copies require replacing their HTML file.
+
 ## Changes review scroll following — 1 November 2026
 
 Changes review now follows the visible PDF page automatically while scrolling or using page navigation. Its page number, changed-page selection and Original/Current preview update together. Unchanged pages show Unchanged; Original mode follows each page without changing the working PDF. Opening review keeps the current reading position. Previous/Next still jumps between changed pages.
