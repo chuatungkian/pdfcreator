@@ -1,8 +1,8 @@
 Repository: https://github.com/chuatungkian/pdfcreator
-Parent release: a084b0df815d04097f1edff6ec9c2474a626d4e7
+Parent release: 443f65bef1a34beb8abe3a5c5ffd7771d155f120
 
-This rebuilt release adds inline Direct edit formatting and a persistent
-helper-bar visibility preference to that parent release. The exact preferred
+This rebuilt release adds multiple object selection, Back navigation, compact
+object properties and resizable right-hand panes to that parent release. The exact preferred
 sources for this build are in pdfcreator-3.0-app-source.zip and embedded in the
 HTML source download. All three HTML aliases contain identical bytes.
 

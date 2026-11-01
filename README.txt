@@ -966,3 +966,11 @@ words to format, or use an empty selection to format the block. Ctrl/Cmd+Z and
 Ctrl/Cmd+Shift+Z undo/redo draft changes; Apply creates one PDF undo step.
 Hide the helper with its x button; use the three-dot menu > Show helper bar
 to restore it. The preference is saved locally and frees the reserved space.
+
+MULTIPLE OBJECTS AND PANE WIDTH
+Use Edit > Select objects, then Ctrl/Cmd-click or Shift-click to add/remove
+objects on one page. The pane also offers click-to-add mode. Move, resize,
+rotate, align, duplicate or delete the group with one undo step.
+Object properties has compact horizontal actions and a Back arrow when opened
+from Objects & layers. Drag a right-hand pane's left edge to resize it.
+Arrow keys adjust a focused divider; double-click resets its default width.

@@ -1,5 +1,13 @@
 # PDFCreator
 
+## Multiple object selection and resizable panes — 1 November 2026
+
+In **Edit → Select objects**, use Ctrl/Cmd-click or Shift-click to add or remove objects on the same page. The properties pane also offers **Click to add/remove objects**. Each selected object is outlined. Move, resize, rotate, align, duplicate or delete the selection together; each applied group operation is one undo step. Select a content group or its internal text separately to avoid changing the same content twice.
+
+Object properties now starts at 260 px, with a compact two-column geometry grid and horizontal action buttons. Opening an object from **Objects & layers** provides a **← Back** button in the pane header. Back preserves unapplied changes until you choose to keep editing or discard them.
+
+Drag the left edge of any right-hand properties pane or docked tool-settings popup to adjust its width. The divider also supports arrow keys (Shift for larger steps), Home/End, and double-click to reset. Width preferences are saved on this device.
+
 ## Inline editing and optional helper bar — 1 November 2026
 
 Direct edit now shows fonts, sizes, colours and emphasis in the editable text box. Formatting controls appear first, and the separate formatting preview is removed. Text selection, plain-text paste, line breaks, composition input and draft undo/redo are retained. Apply still uses the verified native PDF writer and embedded-font Unicode fix.

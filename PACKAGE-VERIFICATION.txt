@@ -1,9 +1,15 @@
-PDFCreator inline editor and helper visibility — 1 November 2026
+PDFCreator object groups, navigation and resizable panes — 1 November 2026
 
 The current HTML aliases contain identical bytes below the 25,000,000-byte cap.
 Exact current hashes for every release file are listed in SHA256SUMS.txt.
 
-Fresh checks on this Windows host:
+Current object/pane checks on this Windows host:
+object-workspace-ui-test.mjs: 61 assertions, source and compiled app.
+layers-refresh-test.mjs: native list refresh and navigation checks.
+experience-interactions-test.mjs: 62 assertions.
+completion-interactions-test.mjs: 80 assertions.
+
+Retained inline-edit and underlying workflow checks:
 inline-editor-ui-test.mjs: 29 assertions, both source and compiled app.
 text-formatting-interactions-test.mjs: 21 assertions.
 direct-edit-interactions-test.mjs: 59 assertions.

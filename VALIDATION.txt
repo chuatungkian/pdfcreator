@@ -1,3 +1,24 @@
+Object groups, Back navigation and pane sizing — 1 November 2026
+
+Fresh controlled-DOM/native-PDF verification:
+- object-workspace-ui-test.mjs: 61 assertions in source and compiled app.
+  Mixed text, image, vector shape and annotation selections; group transforms,
+  resize, pointer drag, duplication/deletion, exact one-step undo, Unicode
+  extraction, lock/fit refusal, per-page selection, horizontal buttons, compact
+  default, Back/draft protection, pane resizing and IndexedDB width recovery.
+- layers-refresh-test.mjs: page changes, stale list actions, visibility
+  preview, refresh, locks and unchanged PDF/history.
+- experience-interactions-test.mjs: 62 assertions.
+- completion-interactions-test.mjs: 80 assertions.
+- ui-refresh-test.mjs: 75 assertions.
+- native-text-unicode-test.mjs: 119 assertions on this host.
+- inline-editor-ui-test.mjs: 29 assertions.
+- Compiled Word, spreadsheet-form and release-alignment checks are repeated
+  against the rebuilt deliverable. Exact release hashes: SHA256SUMS.txt.
+
+Live browser layout and file-origin behaviour have not been freshly verified.
+Earlier release checks and historical font-fix evidence follow.
+
 Inline direct editor and helper visibility — 1 November 2026
 
 Fresh controlled-DOM/native-PDF checks:

@@ -1,7 +1,14 @@
-PDFCreator — inline editing and optional helper bar — 1 November 2026
+PDFCreator — object groups and resizable panes — 1 November 2026
 
 Open index.html in a current desktop browser. pdfcreator.html and the legacy
 pdfpro.html are identical runnable aliases. Processing stays on this device.
+
+In Edit > Select objects, Ctrl/Cmd-click or Shift-click to select a group on
+one page. Move, resize, duplicate or delete them together. Object properties
+uses a compact layout, with Back to Objects & layers in its header.
+
+Drag the left edge of right-hand property panes or docked tool-settings
+popups to resize them. Widths are remembered. Double-click resets a divider.
 
 Direct edit shows formatting in the editable text box. Font, size, colour and
 emphasis controls appear at the top. Select words to format them, or leave the
