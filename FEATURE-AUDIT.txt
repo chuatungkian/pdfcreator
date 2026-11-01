@@ -1,8 +1,9 @@
 PDFCreator FEATURE AUDIT
 1 November 2026 · Asia/Singapore
-Standalone HTML SHA256: 2e68dcd9e3c07e0113ea1aa94470080f82509dc7a51fcf2a1044908b6b0cb7e0
+Standalone HTML SHA256: fc63beeaca48c74c371919cd8b4791d8f4eea8a3f2f93078a9fe79ac627e49c8
 
 RESULT
+Changes review follows viewport scrolling automatically; see changes-review-scroll-ui-test.mjs (45 assertions). Page numbers and original/current previews track changed and unchanged pages without moving the viewport or changing PDF bytes.
 Changes review is verified by changes-review-ui-test.mjs (54 assertions), with changed-page markers/navigation, original/current and per-edit previews, export handoff, undo/redo and recovery. Text-fit/reflow feature 4 is retained; OCR buttons use pastel red styling.
 Text boxes: in Edit > Select objects, resizing native text, added text and FreeText comments changes the container and wrapping without scaling font sizes. Boxes grow downward when needed, and Direct edit keeps the chosen width as words are added. Added text defaults to automatic growth; Fit text remains an explicit sizing choice. Mixed groups scale artwork while retaining text sizes. Growth that affects nearby content requires confirmation, and page-edge overflow requires moving or widening the box.
 Current editing workflow: live page draft pixels/affected markers, OCR word/box correction and local font matching, object marquee/persistent groups/arrangement, and Keep/Fit/column text layout. See editor-upgrades-ui-test.mjs and ocr-direct-ui-test.mjs; historical baseline evidence follows.

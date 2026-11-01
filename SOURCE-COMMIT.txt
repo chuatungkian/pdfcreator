@@ -1,7 +1,7 @@
 Repository: https://github.com/chuatungkian/pdfcreator
-Parent release: b0e818082053eedacbc8f24487d9fc107fd191a5
+Parent release: 3d4cb4397a2c57948952576781b80c8070ac89c2
 
-This rebuilt release adds Changes review with original/current and per-edit comparison,
+This rebuilt release makes Changes review follow scrolling and retains original/current and per-edit comparison,
 pastel red OCR controls, and retains live page previews, OCR correction/font matching,
 object marquee/group/arrangement controls and fit/column text layout. The exact preferred
 sources for this build are in pdfcreator-3.0-app-source.zip and embedded in the

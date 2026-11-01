@@ -1,5 +1,9 @@
 # Direct edit character mapping fix — 31 October 2026
 
+## Changes review scroll following — 1 November 2026
+
+Changes review now follows the visible PDF page automatically while scrolling or using page navigation. Its page number, changed-page selection and Original/Current preview update together. Unchanged pages show Unchanged; Original mode follows each page without changing the working PDF. Opening review keeps the current reading position. Previous/Next still jumps between changed pages.
+
 ## Changes review — 1 November 2026
 
 Open View > Changes review to compare the working PDF with its originally opened copy. Changed pages are marked in the page strip and page headings. Previous/Next and the page list navigate modified, added, removed and moved pages. Toggle Original/Current for read-only page previews or open the larger comparison. Retained edits have individual before/after views without restoring earlier versions. Save PDF > Export review also offers Review page changes before downloading; this returns to the panel without downloading until Save is chosen again.
