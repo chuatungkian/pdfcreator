@@ -1,6 +1,6 @@
 PDFCreator FEATURE AUDIT
 31 October 2026 · Asia/Singapore
-Standalone HTML SHA256: 40a6d46fda593f5d663bcf562dc53e6fd57dcf95fe058442d5fd9f2a7cc9b828
+Standalone HTML SHA256: 90ef4608ae9a0e7c001d121e4d730000bb5c8a4e458b64eea6e7ff430ff09c50
 
 RESULT
 81 distinct tool actions are mapped below to passing regression workflows.

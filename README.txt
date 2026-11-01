@@ -958,3 +958,11 @@ Added exact-content regression checks for repeated edits, reopening the same edi
 
 This prevents new corruption. For a PDF already saved with broken character mappings, use Undo/History or reopen an unmodified original and reapply the edit. The app does not guess at lost characters or silently rewrite an already-corrupted PDF.
 
+
+INLINE DIRECT EDIT AND HELPER VISIBILITY — 1 NOVEMBER 2026
+Formatting controls are at the top. Fonts, colours, sizes and emphasis appear
+in the same editable text box; there is no second formatting preview. Select
+words to format, or use an empty selection to format the block. Ctrl/Cmd+Z and
+Ctrl/Cmd+Shift+Z undo/redo draft changes; Apply creates one PDF undo step.
+Hide the helper with its x button; use the three-dot menu > Show helper bar
+to restore it. The preference is saved locally and frees the reserved space.

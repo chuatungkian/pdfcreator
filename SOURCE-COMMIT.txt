@@ -1,11 +1,12 @@
-Base repository: https://github.com/chuatungkian/pdfcreator
-Base commit: db29be13813be060d29a0cdfbaebc0c54ad354db
+Repository: https://github.com/chuatungkian/pdfcreator
+Parent release: a084b0df815d04097f1edff6ec9c2474a626d4e7
 
-This package adds the Direct edit glyph-to-Unicode mapping fix to that version.
-It is a local rebuilt release; no new upstream GitHub commit is claimed.
-The complete fixed preferred sources are in pdfcreator-3.0-app-source.zip.
-TEXT-UNICODE-FIX.patch shows the changes relative to the base source kit.
-To use the patch, extract the base source kit and apply it from the directory
-containing source/. The updated source kit already includes these changes.
-index.html and the separate pdfcreator.html download contain identical bytes.
-Duplicate runnable aliases are omitted from this ZIP to reduce its size.
+This rebuilt release adds inline Direct edit formatting and a persistent
+helper-bar visibility preference to that parent release. The exact preferred
+sources for this build are in pdfcreator-3.0-app-source.zip and embedded in the
+HTML source download. All three HTML aliases contain identical bytes.
+
+TEXT-UNICODE-FIX.patch documents the earlier font-mapping fix relative to
+db29be13813be060d29a0cdfbaebc0c54ad354db. It is historical and does not represent
+all changes in this release. The complete source kit already includes that fix
+and the current UI changes. See GitHub history for the publishing commit.

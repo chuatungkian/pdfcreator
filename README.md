@@ -1,5 +1,12 @@
 # PDFCreator
 
+## Inline editing and optional helper bar — 1 November 2026
+
+Direct edit now shows fonts, sizes, colours and emphasis in the editable text box. Formatting controls appear first, and the separate formatting preview is removed. Text selection, plain-text paste, line breaks, composition input and draft undo/redo are retained. Apply still uses the verified native PDF writer and embedded-font Unicode fix.
+
+Use the helper bar’s × button to hide it. Restore it from **⋯ → Show helper bar**. The preference is saved on this device and hiding the bar releases its reserved space.
+
+
 A single-file offline PDF workspace for editing, organising, annotating, filling forms, OCR, comparison, redaction and signing. `index.html`, `pdfcreator.html` and the legacy `pdfpro.html` contain identical current app bytes.
 
 ## Open
