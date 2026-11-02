@@ -173,3 +173,6 @@ Tests use synthetic documents, real PDF engines, a controlled DOM and VM worker
 transport. No new live-browser layout/file-origin storage or OS print claim.
 Previously saved corrupted PDFs require Undo/History or the unmodified source;
 no automatic reconstruction of lost text is claimed.
+
+Typography consistency — 2 November 2026
+Shared interface sizes: 12 px controls and body text, 11 px help/labels, 10 px metadata. Equivalent tool tiles, dialogue controls and inspector actions share these roles. Home help/recent metadata no longer inherit an oversized paragraph style. Heading/icon hierarchy and PDF text/field preview formatting remain independent. typography-test.mjs verifies 109 cascade assertions in a controlled DOM; live browser layout is not certified.

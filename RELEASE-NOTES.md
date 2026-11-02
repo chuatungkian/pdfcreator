@@ -77,3 +77,6 @@ Dialogues retain visible action buttons while scrolling, keep keyboard focus ins
 All three runnable HTML names contain the same build. The embedded source export and accompanying source ZIP contain identical file contents. The Word dependency source archive, current guide, third-party notices and release checksums accompany the app.
 
 Existing tools, local projects and the legacy `.pdfpro` workspace format remain supported. The change introduces no shared review service or document upload. See `VALIDATION.txt` for checks and browser-verification limits.
+
+Typography consistency — 2 November 2026
+Shared interface sizes: 12 px controls and body text, 11 px help/labels, 10 px metadata. Equivalent tool tiles, dialogue controls and inspector actions share these roles. Home help/recent metadata no longer inherit an oversized paragraph style. Heading/icon hierarchy and PDF text/field preview formatting remain independent. typography-test.mjs verifies 109 cascade assertions in a controlled DOM; live browser layout is not certified.

@@ -1021,3 +1021,6 @@ word review, local font matching, and draggable/resizable lettering masks.
 Select objects supports rectangle selection, persistent Group/Ungroup,
 individual alignment, equal spacing and matching widths/heights/sizes.
 These operations retain Undo; draft page previews add no history entries.
+
+Typography consistency — 2 November 2026
+Shared interface sizes: 12 px controls and body text, 11 px help/labels, 10 px metadata. Equivalent tool tiles, dialogue controls and inspector actions share these roles. Home help/recent metadata no longer inherit an oversized paragraph style. Heading/icon hierarchy and PDF text/field preview formatting remain independent. typography-test.mjs verifies 109 cascade assertions in a controlled DOM; live browser layout is not certified.
