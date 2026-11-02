@@ -1,6 +1,6 @@
 PDFCreator FEATURE AUDIT
 1 November 2026 · Asia/Singapore
-Standalone HTML SHA256: 71edde9225acc0d4ea4c74dc5e1daf0f57d33ddcc9db0d6ca14771afa1c75bd5
+Standalone HTML SHA256: e069e461df6c74d9779fa6d81451410bc3e783508bc7d74bf1b5b6f00cb6af59
 
 RESULT
 Website update notification: 49 controller and 48 UI assertions cover tiny version checks, throttling/visibility/offline behavior, user-controlled safe reload, draft consent, failed-save backup and tab/history recovery. Hosted copies request only the public same-origin version manifest; downloaded offline copies do not make update requests.
