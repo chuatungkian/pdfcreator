@@ -1,3 +1,10 @@
+Attachment icon movement validation - 2 November 2026
+attachment-move-test.mjs: 65 assertions in source and rebuilt app for actual native annotation positions and file bytes, fixed icon size, rotated/cropped page bounds, pointer drag vs click, destination preview, Undo/Redo, Escape/scroll/zoom/pointer cancellation, workspace/native locks, signature consent and save/reopen. Existing attachment native (35), preview/placement UI (45), object workspace (61) and website update UI (48) checks rerun. Controlled DOM and real PDF engines; live browser layout remains unverified.
+
+Move attachment icons - 2 November 2026
+
+In Read & select, drag a placed paperclip icon to move it within its PDF page. A destination preview follows the pointer; release to save its new position. A short click still opens the attachment preview/download menu. Movement preserves icon size and the original embedded file, stays inside the page bounds, and is one Undo step. Escape, scrolling, zoom changes or a cancelled pointer discard the drag. Unlock icons in Objects & layers before moving them.
+
 Page attachment icons - 2 November 2026
 
 Attachments are embedded inside the PDF. Use View > Attachments, choose a file (up to 50 MB), choose location, then click a PDF page to place its standard Paperclip icon. Nothing is embedded until the icon is placed. Done or Escape cancels placement. Existing embedded files without a page icon have a Place icon action. Filenames are kept unique so adding another file does not replace an earlier attachment.
@@ -9,7 +16,7 @@ attachments-test.mjs: 35 real-engine assertions for standard native FileAttachme
 
 PDFCreator FEATURE AUDIT
 1 November 2026 · Asia/Singapore
-Standalone HTML SHA256: 9f37d76191d831b69d3ffde6cb1f101fe069269ad9af393782fa63edbd736ce6
+Standalone HTML SHA256: c1cad87f2aa0cb6fb1bc31b260463593a1c94c3675c141785dae6f99d2a3ef5b
 
 RESULT
 Form controls can be selected/deleted with individual/group options and Undo (23 native + 28 UI checks). Visual signatures have colour, stroke thickness and typed boldness with live preview; the exact requested privacy statement is in About (28 UI/pixel checks).

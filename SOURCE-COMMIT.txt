@@ -1,7 +1,8 @@
 Repository: https://github.com/chuatungkian/pdfcreator
-Parent release: 813958a83f280961fbb668e35b00ca30b096324d
+Parent release: ff4990ac38496bd1f9d4522e04cd9fd28a64fea5
 
-This rebuilt release adds native PDF attachment icons with click-to-place and local preview/download,
+This rebuilt release adds direct dragging for placed PDF attachment icons with Undo,
+and retains click-to-place icons and local attachment preview/download,
 and retains website update notifications with unique build IDs and safe local-save reloads,
 and retains Changes review scroll following, original/current and per-edit comparison,
 pastel red OCR controls, and retains live page previews, OCR correction/font matching,

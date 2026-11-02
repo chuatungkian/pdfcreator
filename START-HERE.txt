@@ -1,3 +1,7 @@
+Move attachment icons - 2 November 2026
+
+In Read & select, drag a placed paperclip icon to move it within its PDF page. A destination preview follows the pointer; release to save its new position. A short click still opens the attachment preview/download menu. Movement preserves icon size and the original embedded file, stays inside the page bounds, and is one Undo step. Escape, scrolling, zoom changes or a cancelled pointer discard the drag. Unlock icons in Objects & layers before moving them.
+
 Page attachment icons - 2 November 2026
 
 Attachments are embedded inside the PDF. Use View > Attachments, choose a file (up to 50 MB), choose location, then click a PDF page to place its standard Paperclip icon. Nothing is embedded until the icon is placed. Done or Escape cancels placement. Existing embedded files without a page icon have a Place icon action. Filenames are kept unique so adding another file does not replace an earlier attachment.
