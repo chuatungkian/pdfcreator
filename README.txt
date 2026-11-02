@@ -1040,3 +1040,11 @@ The on-page text editing release is designated 3.0.1. Its standalone HTML, embed
 OCR action and popup placement — 2 November 2026
 
 The pastel red Recognise text for editing button stays below workspace popup layers. When a function/settings popup covers its usual page position, the action moves into clear space within the page and visible viewport. Closing or resizing the popup restores the usual position where possible. A completely covered control is temporarily hidden until room returns. Placement reacts to scrolling, resizing and popup changes without polling or changing PDF bytes.
+
+Form control deletion, signature styling and privacy — 2 November 2026
+
+Radio buttons and other supported form fields are now selectable in Edit > Select objects and Objects & layers. Delete selected (or keyboard Delete) removes selected widget instances, retaining unselected radio options and shared fields. A radio selection also offers Delete radio group, with confirmation covering options on other pages. Edit form fields has the same individual/group deletion controls. Empty field branches and calculation references are cleaned up, retained radio values/export labels stay aligned, and each operation is one Undo step. Printed option labels are separate PDF text and can be selected/deleted separately. Read-only/locked fields are protected.
+
+Protect & sign > Visual signature now offers Colour and Line thickness (0.5–16), which redraw existing strokes and the live preview. Bold typed name changes typed lettering weight. Typed and drawn signatures use the chosen colour, retain transparent PNG backgrounds and preserve normal placement/Undo. Imported PNG/JPEG signatures retain their original pixels and bypass styling.
+
+The ? > About popup includes: All information is processed locally on your device. No files are stored or uploaded to any cloud server or database. Your information remains yours.

@@ -1,8 +1,9 @@
 PDFCreator FEATURE AUDIT
 1 November 2026 · Asia/Singapore
-Standalone HTML SHA256: 0673893b53e28bdf0266dd4fa3ae2f31e603bfe8649243050359e644c63d8ca4
+Standalone HTML SHA256: e1d88ea4207ecb6fa98f333b43fd6bdc134f36c7e3b520f8f57b6324901e0b70
 
 RESULT
+Form controls can be selected/deleted with individual/group options and Undo (23 native + 28 UI checks). Visual signatures have colour, stroke thickness and typed boldness with live preview; the exact requested privacy statement is in About (28 UI/pixel checks).
 OCR actions avoid workspace popups through event-driven page placement and lower stacking; ocr-control-placement-test.mjs checks 24 geometry/UI/native-state assertions.
 Website update notification: 49 controller and 48 UI assertions cover tiny version checks, throttling/visibility/offline behavior, user-controlled safe reload, draft consent, failed-save backup and tab/history recovery. Hosted copies request only the public same-origin version manifest; downloaded offline copies do not make update requests.
 Changes review follows viewport scrolling automatically; see changes-review-scroll-ui-test.mjs (45 assertions). Page numbers and original/current previews track changed and unchanged pages without moving the viewport or changing PDF bytes.

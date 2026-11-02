@@ -1,5 +1,5 @@
 Repository: https://github.com/chuatungkian/pdfcreator
-Parent release: 6992cfdc06bd05cbf23efa4405af016da52663db
+Parent release: 12c496cb64595da628b2276c95e2e3d590b08b0c
 
 This rebuilt release adds website update notifications with unique build IDs and safe local-save reloads,
 and retains Changes review scroll following, original/current and per-edit comparison,
@@ -14,3 +14,5 @@ all changes in this release. The complete source kit already includes that fix
 and the current UI changes. See GitHub history for the publishing commit.
 
 This build keeps OCR page actions clear of function popups and retains the 3.0.1 on-page editing release.
+
+This revision adds form widget selection/deletion, visual-signature styling and the About privacy statement.
