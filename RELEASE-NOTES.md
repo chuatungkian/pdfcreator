@@ -92,3 +92,7 @@ Direct edit and added text boxes are typed directly on the PDF page, with format
 
 PDFCreator 3.0.1 — 2 November 2026
 The on-page text editing release is designated 3.0.1. Its standalone HTML, embedded release metadata and version.json share the same new build ID and version. Hosted tabs recognise the new build on their next visible/online check (normally every 30 minutes), or through About > Check for updates. Detection does not reload or discard work automatically. Downloaded file:// copies retain offline behaviour and must be replaced manually.
+
+OCR action and popup placement — 2 November 2026
+
+The pastel red Recognise text for editing button stays below workspace popup layers. When a function/settings popup covers its usual page position, the action moves into clear space within the page and visible viewport. Closing or resizing the popup restores the usual position where possible. A completely covered control is temporarily hidden until room returns. Placement reacts to scrolling, resizing and popup changes without polling or changing PDF bytes.

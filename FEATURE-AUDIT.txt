@@ -1,8 +1,9 @@
 PDFCreator FEATURE AUDIT
 1 November 2026 · Asia/Singapore
-Standalone HTML SHA256: 1ad71e941f5565eae391dcb8898e7c51ba9143540de63e4a1b7ba0e04341c430
+Standalone HTML SHA256: 0673893b53e28bdf0266dd4fa3ae2f31e603bfe8649243050359e644c63d8ca4
 
 RESULT
+OCR actions avoid workspace popups through event-driven page placement and lower stacking; ocr-control-placement-test.mjs checks 24 geometry/UI/native-state assertions.
 Website update notification: 49 controller and 48 UI assertions cover tiny version checks, throttling/visibility/offline behavior, user-controlled safe reload, draft consent, failed-save backup and tab/history recovery. Hosted copies request only the public same-origin version manifest; downloaded offline copies do not make update requests.
 Changes review follows viewport scrolling automatically; see changes-review-scroll-ui-test.mjs (45 assertions). Page numbers and original/current previews track changed and unchanged pages without moving the viewport or changing PDF bytes.
 Changes review is verified by changes-review-ui-test.mjs (54 assertions), with changed-page markers/navigation, original/current and per-edit previews, export handoff, undo/redo and recovery. Text-fit/reflow feature 4 is retained; OCR buttons use pastel red styling.

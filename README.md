@@ -112,3 +112,7 @@ See `VALIDATION.txt` for this release's completed checks. Controlled-DOM tests e
 OCR is English-only. Direct text reflow stays within the selected page. Some PDF fonts, image types and advanced structures are unsupported. Visual signatures are separate from certificate signatures. Signature integrity checks do not establish trusted identity. Cropping/deleting images and workspace visibility controls are not secure redaction. Local recovery retains earlier content; manage stored copies when working with sensitive documents. No PDF/A, PDF/X or PDF/UA certification is claimed.
 
 AGPL-3.0-or-later; component licences are retained in `THIRD-PARTY-NOTICES.txt` and the source kits.
+
+OCR action and popup placement — 2 November 2026
+
+The pastel red Recognise text for editing button stays below workspace popup layers. When a function/settings popup covers its usual page position, the action moves into clear space within the page and visible viewport. Closing or resizing the popup restores the usual position where possible. A completely covered control is temporarily hidden until room returns. Placement reacts to scrolling, resizing and popup changes without polling or changing PDF bytes.

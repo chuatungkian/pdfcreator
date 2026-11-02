@@ -63,3 +63,7 @@ copy; this release does not guess at characters already lost from a PDF.
 
 See README.md, RELEASE-NOTES.md, PACKAGE-VERIFICATION.txt and SOURCE-COMMIT.txt.
 Full corresponding sources, licences and third-party notices are included.
+
+OCR action and popup placement — 2 November 2026
+
+The pastel red Recognise text for editing button stays below workspace popup layers. When a function/settings popup covers its usual page position, the action moves into clear space within the page and visible viewport. Closing or resizing the popup restores the usual position where possible. A completely covered control is temporarily hidden until room returns. Placement reacts to scrolling, resizing and popup changes without polling or changing PDF bytes.

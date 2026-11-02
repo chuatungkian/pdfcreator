@@ -1,5 +1,5 @@
 Repository: https://github.com/chuatungkian/pdfcreator
-Parent release: f74ac5c9c74d884b22442ca9c2efaa17135e968d
+Parent release: 6992cfdc06bd05cbf23efa4405af016da52663db
 
 This rebuilt release adds website update notifications with unique build IDs and safe local-save reloads,
 and retains Changes review scroll following, original/current and per-edit comparison,
@@ -12,3 +12,5 @@ TEXT-UNICODE-FIX.patch documents the earlier font-mapping fix relative to
 db29be13813be060d29a0cdfbaebc0c54ad354db. It is historical and does not represent
 all changes in this release. The complete source kit already includes that fix
 and the current UI changes. See GitHub history for the publishing commit.
+
+This build keeps OCR page actions clear of function popups and retains the 3.0.1 on-page editing release.
