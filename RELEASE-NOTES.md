@@ -1,3 +1,9 @@
+Page attachment icons - 2 November 2026
+
+Attachments are embedded inside the PDF. Use View > Attachments, choose a file (up to 50 MB), choose location, then click a PDF page to place its standard Paperclip icon. Nothing is embedded until the icon is placed. Done or Escape cancels placement. Existing embedded files without a page icon have a Place icon action. Filenames are kept unique so adding another file does not replace an earlier attachment.
+
+In Read & select, click an icon for a local text or raster-image preview, Open PDF in a separate document tab, or Download. HTML, SVG and scripts are displayed as plain text. Other formats can be downloaded to open in an application on the device. Text previews show up to 1 MB; downloads retain the complete original file. No attachment is opened automatically. Icons remain in saved PDFs; external PDF viewer support for opening attachments varies. Move or delete an icon using Edit > Select objects or Objects & layers. Deleting an icon retains the file in the PDF attachment list. Adding a file and icon is one Undo step.
+
 # Direct edit character mapping fix — 31 October 2026
 
 ## Website update notifications — 1 November 2026

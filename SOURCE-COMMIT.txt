@@ -1,7 +1,8 @@
 Repository: https://github.com/chuatungkian/pdfcreator
-Parent release: 12c496cb64595da628b2276c95e2e3d590b08b0c
+Parent release: 813958a83f280961fbb668e35b00ca30b096324d
 
-This rebuilt release adds website update notifications with unique build IDs and safe local-save reloads,
+This rebuilt release adds native PDF attachment icons with click-to-place and local preview/download,
+and retains website update notifications with unique build IDs and safe local-save reloads,
 and retains Changes review scroll following, original/current and per-edit comparison,
 pastel red OCR controls, and retains live page previews, OCR correction/font matching,
 object marquee/group/arrangement controls and fit/column text layout. The exact preferred

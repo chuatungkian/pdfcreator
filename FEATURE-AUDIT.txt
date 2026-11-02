@@ -1,6 +1,15 @@
+Page attachment icons - 2 November 2026
+
+Attachments are embedded inside the PDF. Use View > Attachments, choose a file (up to 50 MB), choose location, then click a PDF page to place its standard Paperclip icon. Nothing is embedded until the icon is placed. Done or Escape cancels placement. Existing embedded files without a page icon have a Place icon action. Filenames are kept unique so adding another file does not replace an earlier attachment.
+
+In Read & select, click an icon for a local text or raster-image preview, Open PDF in a separate document tab, or Download. HTML, SVG and scripts are displayed as plain text. Other formats can be downloaded to open in an application on the device. Text previews show up to 1 MB; downloads retain the complete original file. No attachment is opened automatically. Icons remain in saved PDFs; external PDF viewer support for opening attachments varies. Move or delete an icon using Edit > Select objects or Objects & layers. Deleting an icon retains the file in the PDF attachment list. Adding a file and icon is one Undo step.
+
+Attachment validation - 2 November 2026
+attachments-test.mjs: 35 real-engine assertions for standard native FileAttachment/Paperclip appearance pixels, exact embedded bytes, legacy files, Unicode/colliding filenames, rotated cropped pages, page locations, save/reopen, icon movement/deletion, stale targets and unchanged page text. attachments-ui-test.mjs: 45 assertions in source and rebuilt app for file/placement cancellation, click-to-place, icon preview/download, safe HTML, raster preview URL cleanup, 50 MB input cap, existing-file placement, Undo/Redo, separate PDF tabs, second-page placement and recovery-safe tool snapshots. Controlled DOM and real native PDF engines; live browser layout and external viewer attachment behavior are not certified.
+
 PDFCreator FEATURE AUDIT
 1 November 2026 · Asia/Singapore
-Standalone HTML SHA256: e1d88ea4207ecb6fa98f333b43fd6bdc134f36c7e3b520f8f57b6324901e0b70
+Standalone HTML SHA256: 9f37d76191d831b69d3ffde6cb1f101fe069269ad9af393782fa63edbd736ce6
 
 RESULT
 Form controls can be selected/deleted with individual/group options and Undo (23 native + 28 UI checks). Visual signatures have colour, stroke thickness and typed boldness with live preview; the exact requested privacy statement is in About (28 UI/pixel checks).
