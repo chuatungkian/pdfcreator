@@ -65,3 +65,6 @@ Shared interface sizes: 12 px controls and body text, 11 px help/labels, 10 px m
 
 Home shortcuts — 2 November 2026
 Each Your tools shortcut has a separate, labelled remove button. Removing clears its favourite and recent entries, works without a PDF and retains keyboard focus. Removal persists locally; function search can pin it again. home-tools-test.mjs verifies 30 preference/DOM/recovery assertions.
+
+Automatic tools dock — 2 November 2026
+Choosing a feature docks its category tools on the right. Closing the dock retains the selected feature; the left category remains highlighted and names the active feature. Browsing another category is distinguished from the active category. Selecting another feature, Done or same-feature deselection updates this state. Shared tools retain the category from which they were selected, including tab switches and local recovery. auto-dock-test.mjs checks 97 selection, navigation, dismissal and recovery assertions in source and compiled app.
