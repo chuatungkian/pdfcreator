@@ -62,3 +62,6 @@ on the underlying embedded-font character-mapping fix.
 
 Typography consistency — 2 November 2026
 Shared interface sizes: 12 px controls and body text, 11 px help/labels, 10 px metadata. Equivalent tool tiles, dialogue controls and inspector actions share these roles. Home help/recent metadata no longer inherit an oversized paragraph style. Heading/icon hierarchy and PDF text/field preview formatting remain independent. typography-test.mjs verifies 109 cascade assertions in a controlled DOM; live browser layout is not certified.
+
+Home shortcuts — 2 November 2026
+Each Your tools shortcut has a separate, labelled remove button. Removing clears its favourite and recent entries, works without a PDF and retains keyboard focus. Removal persists locally; function search can pin it again. home-tools-test.mjs verifies 30 preference/DOM/recovery assertions.
