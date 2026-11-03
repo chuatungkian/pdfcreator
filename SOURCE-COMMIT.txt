@@ -1,5 +1,5 @@
 Repository: https://github.com/chuatungkian/pdfcreator
-Parent release: ff4990ac38496bd1f9d4522e04cd9fd28a64fea5
+Parent release: 2da4336b41a59148dd61106acf5dad66a88b9d4c
 
 This rebuilt release adds direct dragging for placed PDF attachment icons with Undo,
 and retains click-to-place icons and local attachment preview/download,
@@ -18,3 +18,5 @@ and the current UI changes. See GitHub history for the publishing commit.
 This build keeps OCR page actions clear of function popups and retains the 3.0.1 on-page editing release.
 
 This revision adds form widget selection/deletion, visual-signature styling and the About privacy statement.
+
+This revision adds the selected workspace appearance, contextual editing and tab navigation improvements described in RELEASE-NOTES.md.

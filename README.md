@@ -134,3 +134,7 @@ Radio buttons and other supported form fields are now selectable in Edit > Selec
 Protect & sign > Visual signature now offers Colour and Line thickness (0.5–16), which redraw existing strokes and the live preview. Bold typed name changes typed lettering weight. Typed and drawn signatures use the chosen colour, retain transparent PNG backgrounds and preserve normal placement/Undo. Imported PNG/JPEG signatures retain their original pixels and bypass styling.
 
 The ? > About popup includes: All information is processed locally on your device. No files are stored or uploaded to any cloud server or database. Your information remains yours.
+
+## Workspace controls
+
+Contextual selection properties now share a top bar with direct text editing. Use the header Focus icon (Ctrl+Alt+F, Escape to exit), choose interface density in the ellipsis menu, and drag or right-click document tabs for ordering, renaming and closing. The selected eight UI improvements and targeted verification are documented in [the user guide](README.txt).

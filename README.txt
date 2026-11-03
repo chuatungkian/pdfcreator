@@ -1058,3 +1058,22 @@ Radio buttons and other supported form fields are now selectable in Edit > Selec
 Protect & sign > Visual signature now offers Colour and Line thickness (0.5–16), which redraw existing strokes and the live preview. Bold typed name changes typed lettering weight. Typed and drawn signatures use the chosen colour, retain transparent PNG backgrounds and preserve normal placement/Undo. Imported PNG/JPEG signatures retain their original pixels and bypass styling.
 
 The ? > About popup includes: All information is processed locally on your device. No files are stored or uploaded to any cloud server or database. Your information remains yours.
+
+Workspace interface improvements — 3 November 2026
+Selected images, shapes/objects, annotations and native form controls now have quick contextual properties in the same top-of-workspace location as text formatting. Controls delegate to the existing image/object/field editors and keep their Apply, Cancel, validation and Undo behaviour. More properties opens the complete inspector; Crop and Adjust reach the existing image controls.
+
+Tool popups reserve canvas space beside the PDF on wider screens and below it on narrower screens. Duplicate tool settings hide while a contextual editor is active. Text/selection bars, the active-tool guide, page toolbar and inspector reserve their own space. Page content remains scrollable, and popup menus are bounded to the viewport.
+
+Focus mode is the corner icon beside the header help/search controls. Ctrl+Alt+F toggles it; Escape restores the workspace after open menus/dialogues are dismissed. It temporarily hides navigation, tool docks and page previews while keeping document/page/context controls available. It does not alter saved navigation settings or PDF bytes. More properties restores the normal workspace. Focus mode is intentionally not restored after reopening the app.
+
+More document actions (the ellipsis) includes Interface density: Compact (existing 12/11/10 px interface roles), Standard (13/12/11) and Comfortable (14/13/12). Density persists with workspace preferences and never changes PDF zoom or PDF text sizes.
+
+Direct edit uses browser caret hit testing near the clicked word when available, and shows an original-box/page-edge overflow indicator on the document and in the formatting bar. Existing layout/fit choices and native writer validation remain authoritative. IME composition Enter does not apply a draft.
+
+Document tabs can be dragged into order or moved with Alt+Shift+Left/Right. Right-click or Shift+F10 opens Rename, Close tab, Close other tabs and Close tabs to the right. Names and tab order persist locally. Closing retains locally saved projects in the library, with the existing failed-save confirmation. These actions do not rewrite PDF content.
+
+Shared SVG header/tab controls, consistent radii/borders/shadows, maroon selection states, labelled keyboard hints and visible focus rings refine the interface. Buttons retain at least 24 px pointer targets in the affected control areas; resize handles use a 24 px target around a small mark. Reduced-motion preferences suppress decorative transitions.
+
+Validation: workspace-polish-test.mjs passes 78 source and compiled assertions for contextual image/object/field edits, native annotation selection, Apply/Cancel/Undo, side/bottom reservations, Focus, density/PDF independence, caret/overflow/IME, drag and keyboard tab order, menus/renaming/closing, accessible hints and IndexedDB recovery. Affected image (58), field (52), object workspace (61), page toolbar (62), navigation (63), automatic dock (97), typography (109), text formatting (21), on-page text (52), workspace UX (49), update UI (48) and OCR Direct edit (51) checks pass. Controlled DOM/native-engine checks do not certify live-browser layout or screen-reader conformance. The historic tabs-interactions test predates automatic docking; current navigation is covered by auto-dock and workspace-polish tests.
+
+OCR control placement also recognises the new selection bar and tab menus as obstacles. The source and compiled ocr-control-placement-test.mjs regression passes 28 checks, including clear-space restoration and unchanged PDF/history.
