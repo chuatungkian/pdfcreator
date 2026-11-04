@@ -142,3 +142,7 @@ Contextual selection properties now share a top bar with direct text editing. Us
 ## Automatic tool selection
 
 Click text or shapes for Select objects, double-click text for on-page Direct edit, and click images or fields for their editing tools. Explicit drawing/placement gestures, dragged word selections, locks and drafts are protected. Use **More document actions > Automatic tool selection** to change the preference.
+
+## Reflow while resizing text
+
+Select a text object and drag its side handle to change the writing width. Words rewrap into the new shape while font sizes and alignment remain fixed; widening removes unused height and narrowing grows the box. Choose Text alignment in the top contextual bar or object properties. Dragging the body still moves the object, and each completed resize supports Undo.
