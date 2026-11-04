@@ -16,7 +16,7 @@ attachments-test.mjs: 35 real-engine assertions for standard native FileAttachme
 
 PDFCreator FEATURE AUDIT
 1 November 2026 · Asia/Singapore
-Standalone HTML SHA256: 4b5cbf38c83db7b38bd272875e6367f855ea3e4f13da869181972e00db85400b
+Standalone HTML SHA256: 76a26ab121567a542daa27e25790bed87b6d887bbb85ef53ed31a7c8be5d5dde
 
 RESULT
 Form controls can be selected/deleted with individual/group options and Undo (23 native + 28 UI checks). Visual signatures have colour, stroke thickness and typed boldness with live preview; the exact requested privacy statement is in About (28 UI/pixel checks).
@@ -430,3 +430,13 @@ Hosted copies check their deployment's version.json. Downloaded file copies chec
 Top object/image/form and on-page text toolbars use smaller desktop controls and tighter padding/gaps. Action names and field labels remain visible with tooltips, accessible names, focus outlines and larger touch targets. Density preferences still offer larger controls; the PDF font size and zoom are unchanged.
 
 Validation: update-checker-test.mjs passes 61 deterministic assertions, website-updates-ui-test.mjs passes 63 source/compiled assertions, and release-version-test.mjs passes 20 assertions. Existing workspace polish (80) and on-page editing (52) checks pass. These use bounded mocked update responses, controlled DOM and native PDF processing; they do not certify browser-specific background timer policies or live layout.
+
+
+PDFCreator 3.0.4 — 4 November 2026
+Images, object/annotation selections and interactive form fields now have one canonical properties editor above the PDF. The former quick-toolbar clones and duplicate right-side properties view have been replaced with the original editor controls, organised into labelled groups. Common size, text and actions stay visible. More expands position, rotation, arrangement/grouping, selection settings, image crop/preview/appearance, replacement/link actions and help within the same top surface. Nothing opens a second right properties pane.
+
+Image Crop and Adjust reveal and focus their existing controls. Form values, checkboxes/choices, typography, deletion and next/previous navigation remain available. Form editors detach from their old on-page popup positioning so scrolling the original field offscreen does not hide the top editor. Direct/native/rich text formatting is grouped into Text, Style and Paragraph controls, while editing stays on the PDF. No controls are cloned and no new PDF mutation path is introduced.
+
+The top surface reserves document height rather than width, wraps its groups and limits expanded content height with scrolling. More retains drafts, remains usable in Focus mode, and never restores a side duplicate. Apply, Cancel, discard protection, Back to Objects & layers, atomic edits and Undo/recovery are retained. Nonduplicated panels such as History, Changes review, Forms assistant and Objects & layers keep their existing single side panel.
+
+Validation: top-properties-test.mjs passes 118 source/compiled assertions for canonical control identity/counts, width recovery, More, image crop/adjustments, object transforms, field values and next navigation, scrolling, Focus, Back, native/rich grouping, draft guards and exact Undo. Affected source checks pass: image interactions 58; object workspace 61; form fields 52; field deletion 28; experience panels 59; Changes review 54; on-page text 52; selected formatting 21; contextual selection 84; text resize/reflow 98; workspace polish 86; safe update UI 63. Tests use synthetic PDFs, native processing and controlled DOM. No user browser storage was accessed; live-browser visual layout is not certified.

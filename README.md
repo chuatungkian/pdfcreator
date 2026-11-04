@@ -158,3 +158,7 @@ Hosted copies check their deployment's version.json. Downloaded file copies chec
 Top object/image/form and on-page text toolbars use smaller desktop controls and tighter padding/gaps. Action names and field labels remain visible with tooltips, accessible names, focus outlines and larger touch targets. Density preferences still offer larger controls; the PDF font size and zoom are unchanged.
 
 Validation: update-checker-test.mjs passes 61 deterministic assertions, website-updates-ui-test.mjs passes 63 source/compiled assertions, and release-version-test.mjs passes 20 assertions. Existing workspace polish (80) and on-page editing (52) checks pass. These use bounded mocked update responses, controlled DOM and native PDF processing; they do not certify browser-specific background timer policies or live layout.
+
+### One top properties editor
+
+Images, selected objects/annotations and form fields use a single grouped toolbar above the PDF. More expands advanced settings within that toolbar; it does not open another side pane. History, Changes review and Objects & layers retain their dedicated, nonduplicated lists.
