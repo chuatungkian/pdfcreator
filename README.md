@@ -12,7 +12,7 @@ In Read & select, click an icon for a local text or raster-image preview, Open P
 
 ## Website update notifications — 1 November 2026
 
-Hosted HTTP/HTTPS copies check a small same-origin version.json after startup and every 30 minutes while the tab is visible and online. Returning to an overdue tab or reconnecting can trigger a throttled check. Heavy operations defer checking until idle; failed requests time out after 8 seconds and retry with backoff. No PDF/document data is sent. Downloaded file:// copies make no update requests.
+Hosted HTTP/HTTPS copies check a small same-origin version.json after startup and every five minutes when online, including inactive tabs. Downloaded file:// copies check the official repository manifest. No PDF/document data or credentials are sent. Browsers can throttle or suspend background pages; an overdue check runs when the page resumes, is restored, regains focus or reconnects. Heavy PDF jobs defer checking until idle; failed requests time out after eight seconds and retry with backoff. Checks do not open modal dialogues, steal focus, or reload automatically.
 
 A new build shows Update now / Later. Later leaves an update badge and suppresses repeated banners for that build during this session. About & source (?) includes the embedded build ID and Check for updates. Only explicit Update now can reload. Apply your draft first through Keep editing, or confirm Discard draft and update. Running tasks and open merge/split workspaces must finish first. Applied PDFs, originals, retained history, open tabs and reading positions are saved locally before navigating to the same app path with a fresh build query. A failed local save keeps the app and draft open and offers a workspace ZIP backup; unapplied drafts are not included in that backup.
 
@@ -146,3 +146,15 @@ Click text or shapes for Select objects, double-click text for on-page Direct ed
 ## Reflow while resizing text
 
 Select a text object and drag its side handle to change the writing width. Words rewrap into the new shape while font sizes and alignment remain fixed; widening removes unused height and narrowing grows the box. Choose Text alignment in the top contextual bar or object properties. Dragging the body still moves the object, and each completed resize supports Undo.
+
+
+Versioned background updates and compact top toolbars — 4 November 2026
+PDFCreator is now 3.0.2. The ? heading, version details, app API, embedded metadata and version.json use package.json as their single version source. Each published app commit reserves exactly one patch above the latest repository version through release-version.mjs; rebuilding that same release keeps the reserved version. See RELEASING.md in the source kit. Older manifests cannot offer a downgrade.
+
+A small manifest is checked after startup and every five minutes online, without requiring the ? panel or an active/visible tab. Focus, resume, page restoration and reconnection schedule overdue checks without bypassing the cooldown. Browsers can throttle/suspend background pages; the checker catches up on waking instead of trying to prevent suspension. Failed checks remain non-blocking and retry with backoff. No PDF data or credentials are transmitted.
+
+Hosted copies check their deployment's version.json. Downloaded file copies check only the official public repository manifest; Download update opens the official updated HTML download on explicit user action and never navigates the existing local workspace. Apply unfinished edits, replace the HTML at its existing location, then reload to retain access to the same browser projects. Hosted Update now retains verified local saving, draft consent and failure backups; neither form of detection forces a reload.
+
+Top object/image/form and on-page text toolbars use smaller desktop controls and tighter padding/gaps. Action names and field labels remain visible with tooltips, accessible names, focus outlines and larger touch targets. Density preferences still offer larger controls; the PDF font size and zoom are unchanged.
+
+Validation: update-checker-test.mjs passes 61 deterministic assertions, website-updates-ui-test.mjs passes 63 source/compiled assertions, and release-version-test.mjs passes 20 assertions. Existing workspace polish (80) and on-page editing (52) checks pass. These use bounded mocked update responses, controlled DOM and native PDF processing; they do not certify browser-specific background timer policies or live layout.

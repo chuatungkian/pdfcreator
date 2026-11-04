@@ -16,12 +16,12 @@ attachments-test.mjs: 35 real-engine assertions for standard native FileAttachme
 
 PDFCreator FEATURE AUDIT
 1 November 2026 · Asia/Singapore
-Standalone HTML SHA256: f518314a0c0bd64903d89525cc7953058e110985b0525411ecfdadc40a080e00
+Standalone HTML SHA256: 76a00b0319b6ca771be7129f0ee258ed9d4e3c2a6e6e9e6cd81df25313352df0
 
 RESULT
 Form controls can be selected/deleted with individual/group options and Undo (23 native + 28 UI checks). Visual signatures have colour, stroke thickness and typed boldness with live preview; the exact requested privacy statement is in About (28 UI/pixel checks).
 OCR actions avoid workspace popups through event-driven page placement and lower stacking; ocr-control-placement-test.mjs checks 24 geometry/UI/native-state assertions.
-Website update notification: 49 controller and 48 UI assertions cover tiny version checks, throttling/visibility/offline behavior, user-controlled safe reload, draft consent, failed-save backup and tab/history recovery. Hosted copies request only the public same-origin version manifest; downloaded offline copies do not make update requests.
+Website update notification: 61 controller and 63 UI assertions cover tiny version checks, background scheduling/online behaviour, user-controlled safe reload, draft consent, failed-save backup and tab/history recovery. Hosted copies request only the public same-origin version manifest; downloaded offline copies check the official repository manifest and offer an explicit HTML download.
 Changes review follows viewport scrolling automatically; see changes-review-scroll-ui-test.mjs (45 assertions). Page numbers and original/current previews track changed and unchanged pages without moving the viewport or changing PDF bytes.
 Changes review is verified by changes-review-ui-test.mjs (54 assertions), with changed-page markers/navigation, original/current and per-edit previews, export handoff, undo/redo and recovery. Text-fit/reflow feature 4 is retained; OCR buttons use pastel red styling.
 Text boxes: in Edit > Select objects, resizing native text, added text and FreeText comments changes the container and wrapping without scaling font sizes. Boxes grow downward when needed, and Direct edit keeps the chosen width as words are added. Added text defaults to automatic growth; Fit text remains an explicit sizing choice. Mixed groups scale artwork while retaining text sizes. Growth that affects nearby content requires confirmation, and page-edge overflow requires moving or widening the box.
@@ -418,3 +418,15 @@ Text alignment is a separate control in object properties and the contextual top
 The page preview now updates periodically while a resize is held. It uses the same preparation path as the committed edit, with the latest drag geometry retained independently of the auto-fitted preview frame. Native/rich rotated text keeps the intended writing edge, and the saved frame matches the preview. Pointer cancellation restores the prior geometry. Each completed drag is one normal Undo step; local recovery retains the edited PDF. Existing overlap confirmation and page-boundary checks remain in place.
 
 Validation: resize-reflow-test.mjs passes 98 source/compiled assertions for live drag previews, wider/narrower native and rich text, Left/Centre/Right transitions, fixed font sizes/colour, native and rich rotations, imported comments, cancellation, saved alignment, on-page typing, recovery and exact Undo. Affected text-box sizing (68), native reflow/pixels (145), reflow interactions (43), selected text formatting (21), object workspace (61), contextual selection (84), workspace polish (80) and on-page text (52) checks pass. These are controlled DOM/native-engine checks, not live-browser visual certification. Existing unsupported/scanned text still needs the corresponding OCR or replacement workflow.
+
+
+Versioned background updates and compact top toolbars — 4 November 2026
+PDFCreator is now 3.0.2. The ? heading, version details, app API, embedded metadata and version.json use package.json as their single version source. Each published app commit reserves exactly one patch above the latest repository version through release-version.mjs; rebuilding that same release keeps the reserved version. See RELEASING.md in the source kit. Older manifests cannot offer a downgrade.
+
+A small manifest is checked after startup and every five minutes online, without requiring the ? panel or an active/visible tab. Focus, resume, page restoration and reconnection schedule overdue checks without bypassing the cooldown. Browsers can throttle/suspend background pages; the checker catches up on waking instead of trying to prevent suspension. Failed checks remain non-blocking and retry with backoff. No PDF data or credentials are transmitted.
+
+Hosted copies check their deployment's version.json. Downloaded file copies check only the official public repository manifest; Download update opens the official updated HTML download on explicit user action and never navigates the existing local workspace. Apply unfinished edits, replace the HTML at its existing location, then reload to retain access to the same browser projects. Hosted Update now retains verified local saving, draft consent and failure backups; neither form of detection forces a reload.
+
+Top object/image/form and on-page text toolbars use smaller desktop controls and tighter padding/gaps. Action names and field labels remain visible with tooltips, accessible names, focus outlines and larger touch targets. Density preferences still offer larger controls; the PDF font size and zoom are unchanged.
+
+Validation: update-checker-test.mjs passes 61 deterministic assertions, website-updates-ui-test.mjs passes 63 source/compiled assertions, and release-version-test.mjs passes 20 assertions. Existing workspace polish (80) and on-page editing (52) checks pass. These use bounded mocked update responses, controlled DOM and native PDF processing; they do not certify browser-specific background timer policies or live layout.
