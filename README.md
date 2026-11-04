@@ -138,3 +138,7 @@ The ? > About popup includes: All information is processed locally on your devic
 ## Workspace controls
 
 Contextual selection properties now share a top bar with direct text editing. Use the header Focus icon (Ctrl+Alt+F, Escape to exit), choose interface density in the ellipsis menu, and drag or right-click document tabs for ordering, renaming and closing. The selected eight UI improvements and targeted verification are documented in [the user guide](README.txt).
+
+## Automatic tool selection
+
+Click text or shapes for Select objects, double-click text for on-page Direct edit, and click images or fields for their editing tools. Explicit drawing/placement gestures, dragged word selections, locks and drafts are protected. Use **More document actions > Automatic tool selection** to change the preference.
