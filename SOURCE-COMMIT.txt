@@ -1,5 +1,5 @@
 Repository: https://github.com/chuatungkian/pdfcreator
-Parent release: 07ae541cce904bf926601fccd9c982afef062641
+Parent release: d41c99a02db8370af8f882856aa5322e93f9db24
 
 This rebuilt release adds direct dragging for placed PDF attachment icons with Undo,
 and retains click-to-place icons and local attachment preview/download,
@@ -30,3 +30,5 @@ This 3.0.2 revision adds single-source patch versioning, inactive/file backgroun
 This 3.0.3 revision removes duplicate labels on button clicks and renames the properties shortcut to More.
 
 This 3.0.4 revision consolidates duplicated properties into a single canonical grouped top editor, with inline More and retained original actions.
+
+This 3.0.5 revision aligns top controls on shared tracks, fills horizontal space and keeps ordered actions in a consistent right-side rail.
