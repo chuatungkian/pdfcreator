@@ -249,3 +249,8 @@ Hosted copies check their deployment's version.json. Downloaded file copies chec
 Top object/image/form and on-page text toolbars use smaller desktop controls and tighter padding/gaps. Action names and field labels remain visible with tooltips, accessible names, focus outlines and larger touch targets. Density preferences still offer larger controls; the PDF font size and zoom are unchanged.
 
 Validation: update-checker-test.mjs passes 61 deterministic assertions, website-updates-ui-test.mjs passes 63 source/compiled assertions, and release-version-test.mjs passes 20 assertions. Existing workspace polish (80) and on-page editing (52) checks pass. These use bounded mocked update responses, controlled DOM and native PDF processing; they do not certify browser-specific background timer policies or live layout.
+
+
+PDFCreator 3.0.3 — 4 November 2026
+Removed duplicate labels beneath buttons on mouse/touch focus. Keyboard hints are limited to icon-only controls and clear immediately on pointer interaction. Labelled top-toolbar actions no longer receive generated duplicate tooltips. The properties shortcut is now labelled More; its existing behaviour is unchanged.
+Validation: workspace-polish-test.mjs passes 86 source/compiled assertions, including pointer versus keyboard focus, labelled controls and hint dismissal. On-page text editing retains 52 passing source/compiled checks. These are controlled DOM/native-engine checks rather than live-browser visual certification.

@@ -1,5 +1,5 @@
 Repository: https://github.com/chuatungkian/pdfcreator
-Parent release: aa5956b0e3c8119f463b22231701a02a5799969a
+Parent release: a26ed2c718c321d9040d5a1fa0059963efc3aade
 
 This rebuilt release adds direct dragging for placed PDF attachment icons with Undo,
 and retains click-to-place icons and local attachment preview/download,
@@ -26,3 +26,5 @@ This release adds automatic content/tool selection, click/double-click routing a
 This revision adds live width-handle text reflow with retained native/rich alignment and fixed font sizes.
 
 This 3.0.2 revision adds single-source patch versioning, inactive/file background updates and compact labelled top toolbars.
+
+This 3.0.3 revision removes duplicate labels on button clicks and renames the properties shortcut to More.
