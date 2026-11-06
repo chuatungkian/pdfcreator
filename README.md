@@ -1,3 +1,7 @@
+## PDFCreator 3.0.8
+
+Per-tab drafts, document-owned background OCR/compressed exports, steady top controls, target hover/overlap selection, live snapping guides, descriptive Undo/Redo and named appearance styles. Drafts and task results are kept in session memory; apply/use them before closing or updating. See the 3.0.8 section in README.txt for controls and validation.
+
 Move attachment icons - 2 November 2026
 
 In Read & select, drag a placed paperclip icon to move it within its PDF page. A destination preview follows the pointer; release to save its new position. A short click still opens the attachment preview/download menu. Movement preserves icon size and the original embedded file, stays inside the page bounds, and is one Undo step. Escape, scrolling, zoom changes or a cancelled pointer discard the drag. Unlock icons in Objects & layers before moving them.
