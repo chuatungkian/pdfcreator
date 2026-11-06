@@ -16,7 +16,7 @@ attachments-test.mjs: 35 real-engine assertions for standard native FileAttachme
 
 PDFCreator FEATURE AUDIT
 1 November 2026 · Asia/Singapore
-Standalone HTML SHA256: e0ba94603020e1a4d0a0bbdfca52685936c711c7a004c293cfa25a89df4deb01
+Standalone HTML SHA256: 61bad07897610b78078c1186f6d5f432a8d266f1bb84296a4a345808d88880e9
 
 RESULT
 Form controls can be selected/deleted with individual/group options and Undo (23 native + 28 UI checks). Visual signatures have colour, stroke thickness and typed boldness with live preview; the exact requested privacy statement is in About (28 UI/pixel checks).
@@ -454,3 +454,8 @@ PDFCreator 3.0.6 — 5 November 2026
 Implemented all twelve UI/workflow refinements: comment/reply draft ownership and safe close; staged organiser close protection and selection-aware commands; separate local-save/PDF-download indicators and full project backup; prepared-export continuity through Changes review and settings; shared Current/Selected/All/Custom scope; explicit signature sources with image preview; complete page-grouped OCR issue navigation; searchable/filterable form-data mapping; explicit Home actions and persistent library context; common placement diagrams, unit conversion and appearance-only presets; selected-page/resolution print and image export; compact consistent dialogs/tiles. Canvas priority defaults to compact navigation/previews and can be disabled.
 Original controls, native PDF writers, Undo, local recovery and password safeguards remain. Presets exclude text, page ranges, passwords and document content. Pending redaction content is identified before print/image output. Export settings/results remain in memory only for the same document revision.
 Checks: dialog drafts 85; scope/placement 44; library state 36; signature/OCR/form workflow helpers 55; integrated Home/canvas/export/selected-print/backup 19; signature pixel/style 28; form generation 42; top properties 162; on-page editing 52. Synthetic PDFs, native rendering and controlled DOM are used; no user browser projects accessed, no live-browser visual certification claimed.
+
+
+PDFCreator 3.0.7 — 6 November 2026
+Fixed Home → Open files incorrectly treating its own click as an operation in progress. The synchronous file-picker launcher is separate from the guarded asynchronous import. Existing PDFs do not need to be saved, closed or deselected before opening additional PDFs in independent tabs. Retains edited bytes, per-tab Undo, page position, selected tool and pending redactions. Actual in-flight writes and unapplied drafts retain their existing ownership safeguards.
+Validation: open-files-ui-test.mjs passes 18 source/compiled assertions through the actual picker entry, multiple uploads, edited-tab preservation, independent editing, picker cancellation/retry, Create → Open PDF and in-flight write protection. ui-completion-test.mjs passes 19 source/compiled assertions. Controlled DOM and synthetic PDFs; no user documents or browser projects accessed.

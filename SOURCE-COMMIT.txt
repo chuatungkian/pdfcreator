@@ -1,5 +1,5 @@
 Repository: https://github.com/chuatungkian/pdfcreator
-Parent release: d0f22da77b73c16d210a240631d84e9ab4396e0e
+Parent release: f9989bb3680307ff54fa72d18ff9b45953f76f1f
 
 This rebuilt release adds direct dragging for placed PDF attachment icons with Undo,
 and retains click-to-place icons and local attachment preview/download,
@@ -34,3 +34,5 @@ This 3.0.4 revision consolidates duplicated properties into a single canonical g
 This 3.0.5 revision aligns top controls on shared tracks, fills horizontal space and keeps ordered actions in a consistent right-side rail.
 
 This 3.0.6 revision implements twelve compact workflow refinements and canvas priority.
+
+This 3.0.7 revision fixes the Open files launcher while preserving independent edited PDF tabs.
