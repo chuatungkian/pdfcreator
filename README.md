@@ -1,3 +1,7 @@
+## PDFCreator 3.0.9
+
+Local recovery for unfinished edits; responsive priority toolbars; per-page editing capability; attachment move/remove menus; and keyboard, focus and touch refinements. See the 3.0.9 section in README.txt for usage and validation.
+
 ## PDFCreator 3.0.8
 
 Per-tab drafts, document-owned background OCR/compressed exports, steady top controls, target hover/overlap selection, live snapping guides, descriptive Undo/Redo and named appearance styles. Drafts and task results are kept in session memory; apply/use them before closing or updating. See the 3.0.8 section in README.txt for controls and validation.

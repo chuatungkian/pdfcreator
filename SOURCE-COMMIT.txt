@@ -1,5 +1,5 @@
 Repository: https://github.com/chuatungkian/pdfcreator
-Parent release: ef31504a733b898e9f5d406337b4ba949859b357
+Parent release: 68241dab88477f7fca3b4982d8802817086f1834
 
 This rebuilt release adds direct dragging for placed PDF attachment icons with Undo,
 and retains click-to-place icons and local attachment preview/download,
@@ -38,3 +38,5 @@ This 3.0.6 revision implements twelve compact workflow refinements and canvas pr
 This 3.0.7 revision fixes the Open files launcher while preserving independent edited PDF tabs.
 
 This 3.0.8 revision implements the seven requested workspace and multitasking refinements.
+
+This 3.0.9 revision implements selected refinements 1, 2, 5, 7 and 8, including local draft recovery and native attachment removal.
