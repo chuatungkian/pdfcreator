@@ -40,3 +40,8 @@ This 3.0.7 revision fixes the Open files launcher while preserving independent e
 This 3.0.8 revision implements the seven requested workspace and multitasking refinements.
 
 This 3.0.9 revision implements selected refinements 1, 2, 5, 7 and 8, including local draft recovery and native attachment removal.
+
+PDFCreator 3.0.10: imported from user-supplied pdfcreator (3.0.10).html.
+Embedded build: 20261112T133033330Z-cb07c464
+Uploaded HTML SHA256: 9b12f541b23b930b7a64f782a6087522197723e7b935e5d55d92ac40fde30052
+Source ZIP reconstructed from the embedded sourceArchive; all entry sizes and CRC32 values verified.

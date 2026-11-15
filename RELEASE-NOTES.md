@@ -1,3 +1,7 @@
+## PDFCreator 3.0.10 — 12 November 2026
+
+Updated from the user-supplied standalone offline app. Build: `20261112T133033330Z-cb07c464`. The three HTML entry files are byte-identical to the uploaded app; `version.json` matches its embedded release metadata. The downloadable app source ZIP is reconstructed from its embedded source archive, with every entry verified against its recorded size and CRC32.
+
 Move attachment icons - 2 November 2026
 
 In Read & select, drag a placed paperclip icon to move it within its PDF page. A destination preview follows the pointer; release to save its new position. A short click still opens the attachment preview/download menu. Movement preserves icon size and the original embedded file, stays inside the page bounds, and is one Undo step. Escape, scrolling, zoom changes or a cancelled pointer discard the drag. Unlock icons in Objects & layers before moving them.

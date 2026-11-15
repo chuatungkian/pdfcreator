@@ -1,3 +1,7 @@
+## PDFCreator 3.0.10 — 12 November 2026
+
+Updated from the user-supplied standalone offline app. Build: `20261112T133033330Z-cb07c464`. The three HTML entry files are byte-identical to the uploaded app; `version.json` matches its embedded release metadata. The downloadable app source ZIP is reconstructed from its embedded source archive, with every entry verified against its recorded size and CRC32.
+
 ## PDFCreator 3.0.9
 
 Local recovery for unfinished edits; responsive priority toolbars; per-page editing capability; attachment move/remove menus; and keyboard, focus and touch refinements. See the 3.0.9 section in README.txt for usage and validation.
