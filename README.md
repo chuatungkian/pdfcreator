@@ -1,3 +1,7 @@
+## Page organiser filename truncation — 16 November 2026
+
+Long source filenames stay on one line and truncate with an ellipsis inside each page tile. Grid buttons and thumbnails shrink to the available tile width, preventing overlap and horizontal overflow in the compact organiser. Hover over a filename to see its full text; page buttons retain the full source filename in their accessible labels.
+
 ## PDFCreator 3.0.10 — 12 November 2026
 
 Updated from the user-supplied standalone offline app. Build: `20261112T133033330Z-cb07c464`. The three HTML entry files are byte-identical to the uploaded app; `version.json` matches its embedded release metadata. The downloadable app source ZIP is reconstructed from its embedded source archive, with every entry verified against its recorded size and CRC32.

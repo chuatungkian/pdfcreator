@@ -45,3 +45,6 @@ PDFCreator 3.0.10: imported from user-supplied pdfcreator (3.0.10).html.
 Embedded build: 20261112T133033330Z-cb07c464
 Uploaded HTML SHA256: 9b12f541b23b930b7a64f782a6087522197723e7b935e5d55d92ac40fde30052
 Source ZIP reconstructed from the embedded sourceArchive; all entry sizes and CRC32 values verified.
+
+Page organiser layout fix based on repository commit 6b2b591d61000e71072c1edef16538a814e67fd5.
+Constrain compact tile content and truncate long source filenames with ellipses; retain full filenames in tooltips and accessible labels.
