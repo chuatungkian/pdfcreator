@@ -1,3 +1,7 @@
+Local PDFCreator 3.0.12 build based on published 3.0.11 commit 7881cb63f43ce97f7418064c17e55f25de63f5b8.
+
+Earlier release provenance
+
 Repository: https://github.com/chuatungkian/pdfcreator
 Parent release: 68241dab88477f7fca3b4982d8802817086f1834
 

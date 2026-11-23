@@ -1,3 +1,9 @@
+## PDFCreator 3.0.12 — 23 November 2026
+
+On phones, the PDF uses the full workspace width. Use Pages, Tools and Search from the bottom bar. In Pages, tap Select pages, tap the pages you want, then rotate, delete, copy or move them to another open PDF. On-page text and form editing adapt to the visible keyboard area, with additional formatting under More.
+
+Desktop page dragging, keyboard selection and the optional right tool rail remain available. Background update checks can start in Chromium when PDFCreator is opened from a local HTML file.
+
 ## Page organiser filename truncation — 16 November 2026
 
 Long source filenames stay on one line and truncate with an ellipsis inside each page tile. Grid buttons and thumbnails shrink to the available tile width, preventing overlap and horizontal overflow in the compact organiser. Hover over a filename to see its full text; page buttons retain the full source filename in their accessible labels.

@@ -1,3 +1,7 @@
+Phone workspace validation — 23 November 2026
+
+Offline Chromium with touch emulation verified the full-width viewer, Tools and Search sheets, multi-page selection, rotate, delete confirmation, copy and move between named open PDFs, and applying text and form edits with a simulated keyboard. Wide Chromium and the page strip and auto-dock regression tests verified desktop navigation, keyboard selection, drag-to-tab transfer and the optional right rail. Physical phone keyboards were not tested.
+
 Attachment icon movement validation - 2 November 2026
 attachment-move-test.mjs: 65 assertions in source and rebuilt app for actual native annotation positions and file bytes, fixed icon size, rotated/cropped page bounds, pointer drag vs click, destination preview, Undo/Redo, Escape/scroll/zoom/pointer cancellation, workspace/native locks, signature consent and save/reopen. Existing attachment native (35), preview/placement UI (45), object workspace (61) and website update UI (48) checks rerun. Controlled DOM and real PDF engines; live browser layout remains unverified.
 
