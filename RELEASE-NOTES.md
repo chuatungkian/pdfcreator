@@ -1,3 +1,7 @@
+## Offline PDF repair — 24 November 2026
+
+Choose **Repair PDF** from Home or Create to rebuild a damaged PDF and download a separate repaired copy. Keep the original and review the copy for missing content. Repair requires recoverable pages, does not support encrypted PDFs, and invalidates digital signatures on the rebuilt copy.
+
 ## PDFCreator 3.0.12 — 23 November 2026
 
 On phones, the PDF uses the full workspace width. Use Pages, Tools and Search from the bottom bar. In Pages, tap Select pages, tap the pages you want, then rotate, delete, copy or move them to another open PDF. On-page text and form editing adapt to the visible keyboard area, with additional formatting under More.
