@@ -1,3 +1,7 @@
+## Phone button layout
+
+Home actions line up in two columns. The Tools sheet shows icons above readable category labels and wraps longer labels at word boundaries.
+
 ## Offline PDF repair — 24 November 2026
 
 Choose **Repair PDF** from Home or Create to rebuild a damaged PDF and download a separate repaired copy. Keep the original and review the copy for missing content. Repair requires recoverable pages, does not support encrypted PDFs, and invalidates digital signatures on the rebuilt copy.

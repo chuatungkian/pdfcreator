@@ -16,7 +16,7 @@ attachments-test.mjs: 35 real-engine assertions for standard native FileAttachme
 
 PDFCreator FEATURE AUDIT
 1 November 2026 · Asia/Singapore
-Standalone HTML SHA256: debeb6a44159801a3623777d23b1d51d37db43e98df7d37eda4a6a3be9d48d86
+Standalone HTML SHA256: ccd4e2d44669c8ff1a894864a7c5ddec8751c4c65e4edca9eaf88bcfd8116bfd
 
 RESULT
 Form controls can be selected/deleted with individual/group options and Undo (23 native + 28 UI checks). Visual signatures have colour, stroke thickness and typed boldness with live preview; the exact requested privacy statement is in About (28 UI/pixel checks).
